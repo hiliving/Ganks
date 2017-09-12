@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single" >
+        <item
+            android:id="@+id/nav_all"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="全部"/>
+        <item
+            android:id="@+id/nav_gift"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="福利"/>
+        <item
+            android:id="@+id/nav_android"
+            android:icon="@android:drawable/ic_menu_slideshow"
+            android:title="Android"/>
+        <item
+            android:id="@+id/nav_ios"
+            android:icon="@android:drawable/ic_menu_slideshow"
+            android:title="iOS"/>
+        <item
+            android:id="@+id/nav_movie"
+            android:icon="@android:drawable/ic_menu_share"
+            android:title="休息视频"/>
+        <item
+            android:id="@+id/nav_web"
+            android:icon="@android:drawable/ic_menu_send"
+            android:title="前端"/>
+        <item
+            android:id="@+id/nav_more"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="拓展资源"/>
+        <item
+            android:id="@+id/nav_app"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="App"/>
+        <item
+            android:id="@+id/nav_reco"
+            android:icon="@android:drawable/ic_menu_report_image"
+            android:title="瞎推荐"/>
+    </group>
+    <item android:title="设置中心" >
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@android:drawable/ic_menu_manage"
+                android:title="关于"/>
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@android:drawable/ic_menu_mapmode"
+                android:title="主题"/>
+        </menu>
+    </item>
+</menu>
