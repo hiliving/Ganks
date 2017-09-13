@@ -8,9 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.develop.hy.ganks.http.mvc.RequestManager;
 import com.develop.hy.ganks.theme.Theme;
 import com.develop.hy.ganks.utils.PreUtils;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by HY on 2017/9/12.
@@ -21,7 +22,6 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         onPreCreate();
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             setTranslucentStatus(true);
         }
@@ -53,7 +53,5 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //取消请求
-        RequestManager.cancelRequest(getName());
     }
 }

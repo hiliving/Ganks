@@ -1,5 +1,6 @@
 package com.develop.hy.ganks;
 
+
 /**
  * Created by HY on 2017/9/12.
  */
@@ -17,4 +18,6 @@ public class Constants {
 
     //SMS Activity
     public static String SMS_BROADCAST_FILTER = "gank.mvpdemo.recevieSMS";
+
+    public static final int PAGE_SIZE = 20;
 }

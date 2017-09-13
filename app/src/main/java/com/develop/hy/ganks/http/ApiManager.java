@@ -1,45 +1,45 @@
 package com.develop.hy.ganks.http;
 
+import com.develop.hy.ganks.http.ApiService;
+import com.develop.hy.ganks.http.HttpInterceptor;
+import com.develop.hy.ganks.http.UrlConfig;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Retrofit请求管理类
- * Created by HY on 2017/4/12.
+ * Created by HY on 2017/9/13.
  */
 
 public class ApiManager {
-    private ApiService mDailyApi;
-    private static ApiManager sApiManager;
-    public static ApiManager getInstance(){
-        if (sApiManager==null){
-            synchronized (ApiManager.class){
-                if (sApiManager==null){
-                    sApiManager = new ApiManager();
-                }
-            }
-        }
-        return sApiManager;
+    private static ApiService api;
+    protected static final Object monitor = new Object();
+    private static Retrofit retrofit;
+
+    private ApiManager() {
     }
-    /**
-     * 封装配置知乎API
-     */
-    public ApiService getDataService(){
+    static {
         OkHttpClient client = new OkHttpClient.Builder()
                 //添加应用拦截器
                 .addInterceptor(new HttpInterceptor())
                 .build();
-        if (mDailyApi==null){
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(UrlConfig.baseUrl)
-                    .client(client)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                    .build();
-            mDailyApi = retrofit.create(ApiService.class);
+        retrofit = new Retrofit.Builder()
+                .client(client)
+                .baseUrl(UrlConfig.baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+    }
+    public static ApiService getGankRetrofitInstance(){
+        if (api==null){
+            synchronized (monitor){
+                api = retrofit.create(ApiService.class);
+            }
         }
-        return mDailyApi;
+        return api;
     }
 }

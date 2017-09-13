@@ -1,17 +1,57 @@
 package com.develop.hy.ganks.presenter;
 
-import com.develop.hy.ganks.http.GankRequest;
-import com.develop.hy.ganks.presenter.CommenInterface.NewsListActivityInterface;
+
+import android.content.Context;
+
+import com.develop.hy.ganks.Constants;
+import com.develop.hy.ganks.http.ApiManager;
+import com.develop.hy.ganks.model.GankBean;
+import com.develop.hy.ganks.presenter.CommenInterface.IGanHuoView;
+
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by HY on 2017/9/12.
  */
 
-public class GankPresenter extends BasePresenter {
-    private NewsListActivityInterface listActivity;
-    private GankRequest gankRequest;
-    public GankPresenter(NewsListActivityInterface listActivity) {
-        this.listActivity = listActivity;
-        gankRequest = new GankRequest();
+public class GankPresenter extends BasePresenter<IGanHuoView> {
+    public GankPresenter(Context context, IGanHuoView iView) {
+        super(context, iView);
+    }
+
+    @Override
+    public void release() {
+        unSubcription();
+    }
+
+    public void loadGank(String type,int page){
+        iView.showProgressBar();
+        Subscription subscribe = ApiManager.getGankRetrofitInstance().getGank(type, Constants.PAGE_SIZE, page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GankBean>() {
+
+                    @Override
+                    public void onCompleted() {
+                        iView.hideProgressBar();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        iView.showErrorData();
+                    }
+                    @Override
+                    public void onNext(GankBean gankDatas) {
+                        if (gankDatas.isError()) {
+                            iView.showNoMoreData();
+                        } else {
+                            iView.showListView(gankDatas.getResults());
+                        }
+                    }
+                });
+        addSubscription(subscribe);
     }
 }

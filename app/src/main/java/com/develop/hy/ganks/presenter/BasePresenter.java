@@ -1,5 +1,9 @@
 package com.develop.hy.ganks.presenter;
 
+import android.content.Context;
+
+import com.develop.hy.ganks.presenter.CommenInterface.IBaseView;
+
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -7,7 +11,23 @@ import rx.subscriptions.CompositeSubscription;
  * Created by HY on 2017/4/12.
  */
 
-public class BasePresenter {
+public abstract class BasePresenter<T extends IBaseView> {
+
+    protected Context context;
+    protected T iView;
+
+    public BasePresenter(Context context, T iView) {
+        this.context = context;
+        this.iView = iView;
+    }
+    public void init(){
+        iView.initView();
+    }
+    public void onDestroy(){
+        iView=null;
+    }
+
+    public abstract void release();
 
     //将所有正在处理的Subcription都添加到CompositeSubscription中，统一退出的时候注销观察者
     private CompositeSubscription mCompositeSubscription;

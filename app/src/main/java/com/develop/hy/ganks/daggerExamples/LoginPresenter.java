@@ -18,7 +18,7 @@ public class LoginPresenter {
     }
 
     public void login(String username, String pwd){
-        Toast.makeText(mainActivity, "登录了", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mainActivity, "登录了", Toast.LENGTH_SHORT).show();
        // mainActivity.startActivity(new Intent(mainActivity,MainPage.class));
     }
 }

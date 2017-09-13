@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.AppBarLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="#009688"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:theme="@style/AppTheme.AppBarOverlay"
+    android:layout_height="wrap_content"
+    app:elevation="3dp"
+    >
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:id="@+id/toobar"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:background="#009688"
+        app:layout_scrollFlags="scroll|enterAlways|snap"
+        android:layout_height="70dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        />
+
+</android.support.design.widget.AppBarLayout>

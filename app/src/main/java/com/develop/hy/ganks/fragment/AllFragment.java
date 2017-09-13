@@ -23,4 +23,9 @@ public class AllFragment extends BaseFragment{
     protected void lazyFetchData() {
 
     }
+
+    @Override
+    protected void initPresenter() {
+
+    }
 }

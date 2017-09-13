@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import com.develop.hy.ganks.http.mvc.RequestManager;
+import com.develop.hy.ganks.presenter.BasePresenter;
 
 import java.util.UUID;
 
@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 /**
  * Created by dongjunkun on 2016/2/2.
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
     protected String tag = UUID.randomUUID().toString();
 
 
@@ -34,12 +34,15 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void lazyFetchData();
 
+    protected abstract void initPresenter();
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRootView = inflater.inflate(getLayoutId(), container, false);
         ButterKnife.bind(this,mRootView);
         initViews();
+        initPresenter();
         return mRootView;
     }
 
@@ -70,6 +73,6 @@ public abstract class BaseFragment extends Fragment {
         super.onDestroyView();
         hasFetchData = false;
         isViewPrepared = false;
-        RequestManager.cancelRequest(tag);
+        ButterKnife.bind(getActivity()).unbind();
     }
 }
