@@ -1,9 +1,11 @@
 package com.develop.hy.ganks.fragment;
 
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.develop.hy.ganks.R;
+import com.develop.hy.ganks.fragment.adapter.ListAdapter;
 
 import butterknife.BindView;
 
@@ -14,7 +16,8 @@ import butterknife.BindView;
 public class CommonFragment extends BaseFragment {
     @BindView(R.id.tv)
     TextView tv;
-
+    @BindView(R.id.commonlist)
+    ListView commonList;
     public static final String ARG_TYPE = "type";
     public static CommonFragment newInstance(String type) {
 
@@ -34,6 +37,7 @@ public class CommonFragment extends BaseFragment {
     @Override
     protected void initViews() {
         tv.setText(this.getArguments().get(ARG_TYPE)+"");
+        commonList.setAdapter(new ListAdapter(getContext()));
     }
 
     @Override
