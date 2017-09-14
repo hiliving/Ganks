@@ -1,5 +1,6 @@
 package com.develop.hy.ganks;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.andremion.floatingnavigationview.FloatingNavigationView;
 import com.develop.hy.ganks.daggerExamples.DaggerMainActivityComponent;
@@ -30,6 +32,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @BindView(R.id.floating_navigation_view)
     FloatingNavigationView floatView;
     private FragmentManager fragmentManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +48,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 floatView.open();
             }
         });
+        startActivity(new Intent(MainActivity.this,LoginActivity.class));
         //悬浮按钮条目监听
         floatView.setNavigationItemSelectedListener(this);
         //dagger演示代码的调用
