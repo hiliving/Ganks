@@ -20,4 +20,6 @@ public class Constants {
     public static String SMS_BROADCAST_FILTER = "gank.mvpdemo.recevieSMS";
 
     public static final int PAGE_SIZE = 20;
+
+    public static final String BOMB_APPID = "74484ee79ef10cb552ab13235abbcb70";
 }
