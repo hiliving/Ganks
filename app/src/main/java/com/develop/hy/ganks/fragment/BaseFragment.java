@@ -30,7 +30,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
     @LayoutRes
     int getLayoutId();
 
-    protected abstract void initViews();
 
     protected abstract void lazyFetchData();
 
@@ -41,7 +40,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRootView = inflater.inflate(getLayoutId(), container, false);
         ButterKnife.bind(this,mRootView);
-        initViews();
         initPresenter();
         return mRootView;
     }

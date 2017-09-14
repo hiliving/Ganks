@@ -30,9 +30,7 @@ public class WebViewActivity extends BaseActivity {
     private AgentWeb mAgentWeb;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.webview_layout);
+    protected void initView() {
         ButterKnife.bind(this);
         mAgentWeb = AgentWeb.with(this)//传入Activity or Fragment
                 .setAgentWebParent(weblayout, new LinearLayout.LayoutParams(-1, -1))//传入AgentWeb 的父控件 ，如果父控件为 RelativeLayout ， 那么第二参数需要传入 RelativeLayout.LayoutParams ,第一个参数和第二个参数应该对应。
@@ -47,6 +45,11 @@ public class WebViewActivity extends BaseActivity {
                 .createAgentWeb()//
                 .ready()
                 .go(getIntent().getStringExtra("URL"));
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.webview_layout;
     }
 
     @Override

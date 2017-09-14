@@ -1,19 +1,22 @@
-package com.develop.hy.ganks;
+package com.develop.hy.ganks.ui;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.content.Intent;
+import android.support.design.widget.TextInputEditText;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
+import com.develop.hy.ganks.BaseActivity;
+import com.develop.hy.ganks.R;
 import com.develop.hy.ganks.model.User;
 import com.develop.hy.ganks.utils.ToastUtils;
 
-import org.json.JSONObject;
-
-import cn.bmob.v3.BmobQuery;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.listener.GetCallback;
-import cn.bmob.v3.listener.GetListener;
 import cn.bmob.v3.listener.SaveListener;
 
 /**
@@ -21,24 +24,49 @@ import cn.bmob.v3.listener.SaveListener;
  */
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
-
-    private Button login;
-    private Button regist;
+    @BindView(R.id.username)
+    TextInputEditText username;
+    @BindView(R.id.password)
+    TextInputEditText password;
+    @BindView(R.id.login)
+    Button login;
+    @BindView(R.id.regist)
+    Button regist;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_layout);
-        login = (Button) findViewById(R.id.login);
-        regist = (Button) findViewById(R.id.regist);
+    protected void initView() {
+        ButterKnife.bind(this);
+
         login.setOnClickListener(this);
         regist.setOnClickListener(this);
-        BmobUser bmobUser = BmobUser.getCurrentUser(this);
-        if (bmobUser!=null){
-            ToastUtils.showShortToast("用户已登录");
-        }else {
-            ToastUtils.showShortToast("用户未登录");
-        }
+        initEvent();
+    }
+
+    private void initEvent() {
+        username.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length()>16){
+                    username.setError("请输入少于16个字符");
+                }
+                Log.d("DDDDD",s.toString());
+            }
+        });
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.login_layout;
     }
 
     private void add() {
@@ -66,6 +94,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onSuccess() {
                 ToastUtils.showShortToast("登录成功");
+                startActivity(new Intent(LoginActivity.this,UserCenter.class));
+                finish();
             }
 
             @Override

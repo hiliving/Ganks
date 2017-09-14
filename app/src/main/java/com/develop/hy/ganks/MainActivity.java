@@ -6,24 +6,26 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.andremion.floatingnavigationview.FloatingNavigationView;
 import com.develop.hy.ganks.daggerExamples.DaggerMainActivityComponent;
 import com.develop.hy.ganks.daggerExamples.LoginPresenter;
 import com.develop.hy.ganks.daggerExamples.MainActivityModule;
-import com.develop.hy.ganks.fragment.AllFragment;
 import com.develop.hy.ganks.fragment.CommonFragment;
+import com.develop.hy.ganks.ui.LoginActivity;
+import com.develop.hy.ganks.ui.UserCenter;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.bmob.v3.BmobUser;
 
 import static com.develop.hy.ganks.http.GankType.ANDROID;
 import static com.develop.hy.ganks.http.GankType.APP;
@@ -47,29 +49,40 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
 
     private FragmentManager fragmentManager;
-
+    private RelativeLayout layout;
+    private RelativeLayout rl;
+    private TextView userid;
+    private ImageView userIcon;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected void initView() {
         ButterKnife.bind(this);
         fragmentManager = getSupportFragmentManager();
         Inject();
         initToolBar();
         //悬浮按钮点击
+        layout = (RelativeLayout) floatView.getHeaderView(0);
         floatView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 floatView.open();
             }
         });
-        startActivity(new Intent(MainActivity.this,LoginActivity.class));
+        rl = (RelativeLayout) layout.findViewById(R.id.usercenter);
+        userid = (TextView) layout.findViewById(R.id.userid);
+        userIcon = (ImageView) layout.findViewById(R.id.userIcon);
+
         //悬浮按钮条目监听
         floatView.setNavigationItemSelectedListener(this);
         //dagger演示代码的调用
-        presenter.login("name","pwd");
-
+//        presenter.login("name","pwd");
+        switchFragment(ANDROID);
     }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
     protected void initToolBar(){
         setSupportActionBar(toolbar);
     }
@@ -116,6 +129,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         return false;
     }
     public void switchFragment(String name){
+        setTitle(name);
+
         if (currentFragmentTag != null && currentFragmentTag.equals(name))
             return;
 
@@ -129,7 +144,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         if (newFragment == null) {
             if (name.equals("all")){
-                newFragment = new AllFragment();
+              //  newFragment = new GirlFragment();
             }else if (name.equals("福利")){
                // newFragment = new FuLiFragment();
                 newFragment = CommonFragment.newInstance(name);
@@ -138,7 +153,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             }
         }
 
-       if (newFragment.isAdded()) {
+        if (newFragment.isAdded()) {
             ft.show(newFragment);
         } else {
             ft.add(R.id.fragment_container, newFragment, name);
@@ -147,4 +162,28 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         currentFragmentTag = name;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BmobUser bmobUser = BmobUser.getCurrentUser(this);
+        if (bmobUser!=null){
+            userid.setText(bmobUser.getUsername());
+            userIcon.setBackgroundResource(R.mipmap.ic_launcher_round);
+        }
+        if (bmobUser!=null){
+            rl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(MainActivity.this,UserCenter.class));
+                }
+            });
+        }else {
+            rl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                }
+            });
+        }
+    }
 }

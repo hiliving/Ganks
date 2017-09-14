@@ -2,23 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:id="@+id/usercenter"
-    android:focusable="true"
     android:clickable="true"
+    android:focusableInTouchMode="true"
     android:layout_height="match_parent">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="这个是标题"
-        android:layout_marginTop="40dp"
+        android:text="这个是用户名"
         android:gravity="center_horizontal"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/titles"
+        android:id="@+id/userid"
+        android:layout_below="@+id/userIcon"
         />
     <ImageView
-        android:layout_below="@+id/titles"
+        android:id="@+id/userIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:background="@mipmap/ic_launcher"
-        />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
 </RelativeLayout>

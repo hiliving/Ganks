@@ -7,13 +7,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.develop.hy.ganks.R;
-import com.develop.hy.ganks.fragment.adapter.GankAdapter;
+import com.develop.hy.ganks.fragment.adapter.MutiTypeAdapter;
 import com.develop.hy.ganks.model.GankBean;
 import com.develop.hy.ganks.presenter.GankPresenter;
 import com.develop.hy.ganks.presenter.CommenInterface.IGanHuoView;
@@ -30,7 +31,7 @@ import butterknife.BindView;
  * Created by HY on 2017/9/12.
  */
 
-public class CommonFragment extends BaseFragment<GankPresenter> implements IGanHuoView, HXRecyclerView.LoadMoreListener, SwipeRefreshLayout.OnRefreshListener, GankAdapter.OnItemClickListener {
+public class CommonFragment extends BaseFragment<GankPresenter> implements IGanHuoView, HXRecyclerView.LoadMoreListener, SwipeRefreshLayout.OnRefreshListener,  MutiTypeAdapter.OnItemClickListener {
     @BindView(R.id.recycleview)
     HXRecyclerView recycleview;
     @BindView(R.id.sw_layout)
@@ -43,7 +44,7 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
     private int page = 1;
     private boolean canLoading = true;
     private boolean isRefresh = true;
-    private GankAdapter adapter;
+    private MutiTypeAdapter adapter;
     private String type;
 
     public static CommonFragment newInstance(String type) {
@@ -69,11 +70,6 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
     }
 
     @Override
-    protected void initViews() {
-
-    }
-
-    @Override
     protected void lazyFetchData() {
 
     }
@@ -88,7 +84,8 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
     public void initView() {
 
         gankList = new ArrayList<>();
-        adapter = new GankAdapter(getContext(),gankList);
+//        adapter = new GankAdapter(getContext(),gankList);
+        adapter = new MutiTypeAdapter(getContext(),gankList,type);
         recycleview.setLayoutManager(new LinearLayoutManager(getContext()));
         recycleview.setAdapter(adapter);
         recycleview.setLoadMoreListener(this);

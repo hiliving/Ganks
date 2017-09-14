@@ -23,7 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.WebViewActivity"/>
-        <activity android:name=".LoginActivity"/>
+        <activity android:name=".ui.LoginActivity"/>
+        <activity android:name=".ui.UserCenter"/>
     </application>
 
 </manifest>
