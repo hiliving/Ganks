@@ -3,17 +3,13 @@ package com.develop.hy.ganks.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.webkit.WebView;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.develop.hy.ganks.R;
+import com.develop.hy.ganks.dagger.component.DaggerGankFrgmComponent;
+import com.develop.hy.ganks.dagger.module.GankFragmodule;
 import com.develop.hy.ganks.fragment.adapter.MutiTypeAdapter;
 import com.develop.hy.ganks.model.GankBean;
 import com.develop.hy.ganks.presenter.GankPresenter;
@@ -24,6 +20,8 @@ import com.develop.hy.ganks.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 
@@ -39,7 +37,7 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
     @BindView(R.id.frglayout)
     FrameLayout frglayout;
     public static final String ARG_TYPE = "type";
-    private GankPresenter presenter;
+    private  GankPresenter presenter;
     private ArrayList<GankBean.ResultsBean> gankList;
     private int page = 1;
     private boolean canLoading = true;
@@ -47,8 +45,8 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
     private MutiTypeAdapter adapter;
     private String type;
 
-    public static CommonFragment newInstance(String type) {
 
+    public static CommonFragment newInstance(String type) {
         Bundle args = new Bundle();
         CommonFragment fragment = new CommonFragment();
         args.putString(ARG_TYPE, type);
@@ -62,6 +60,14 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
     }
 
     @Override
+    protected void initPresenter() {
+        presenter = new GankPresenter(getActivity(),this);
+        presenter.init();
+    }
+
+
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments()!=null){
@@ -70,21 +76,8 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
     }
 
     @Override
-    protected void lazyFetchData() {
-
-    }
-
-    @Override
-    protected void initPresenter() {
-        presenter = new GankPresenter(getActivity(),this);
-        presenter.init();
-    }
-
-    @Override
     public void initView() {
-
         gankList = new ArrayList<>();
-//        adapter = new GankAdapter(getContext(),gankList);
         adapter = new MutiTypeAdapter(getContext(),gankList,type);
         recycleview.setLayoutManager(new LinearLayoutManager(getContext()));
         recycleview.setAdapter(adapter);
@@ -165,8 +158,6 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
 
     @Override
     public void onItemClick(int position) {
-
       startActivity(new Intent(getContext(), WebViewActivity.class).putExtra("URL",gankList.get(position).getUrl()));
-
     }
 }

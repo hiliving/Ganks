@@ -30,11 +30,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
     @LayoutRes
     int getLayoutId();
 
-
-    protected abstract void lazyFetchData();
-
-    protected abstract void initPresenter();
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,10 +39,11 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
         return mRootView;
     }
 
+    protected abstract void initPresenter();
+
     private void lazyFetchDataIfPrepared() {
         if (getUserVisibleHint() && !hasFetchData && isViewPrepared) {
             hasFetchData = true;
-            lazyFetchData();
         }
     }
 

@@ -1,6 +1,7 @@
 package com.develop.hy.ganks;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -14,20 +15,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.andremion.floatingnavigationview.FloatingNavigationView;
-import com.develop.hy.ganks.dagger.LoginPresenter;
-import com.develop.hy.ganks.dagger.MainPresenter;
 import com.develop.hy.ganks.dagger.component.DaggerMainActivityComponent;
 import com.develop.hy.ganks.dagger.module.MainActivityModule;
 import com.develop.hy.ganks.fragment.CommonFragment;
-import com.develop.hy.ganks.ui.LoginActivity;
-import com.develop.hy.ganks.ui.UserCenter;
+import com.develop.hy.ganks.presenter.GankPresenter;
+
+import java.io.Serializable;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.bmob.v3.BmobUser;
-
 import static com.develop.hy.ganks.http.GankType.ANDROID;
 import static com.develop.hy.ganks.http.GankType.APP;
 import static com.develop.hy.ganks.http.GankType.CASUAL;
@@ -46,8 +44,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     FloatingNavigationView floatView;
     @BindView(R.id.toobar)
     Toolbar toolbar;
+
     @Inject
-    MainPresenter presenter;
+    GankPresenter gankPresenter;
 
     private FragmentManager fragmentManager;
     private RelativeLayout layout;
@@ -144,14 +143,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         Fragment newFragment = fragmentManager.findFragmentByTag(name);
 
         if (newFragment == null) {
-            if (name.equals("all")){
-              //  newFragment = new GirlFragment();
-            }else if (name.equals("福利")){
-               // newFragment = new FuLiFragment();
                 newFragment = CommonFragment.newInstance(name);
-            }else {
-                newFragment = CommonFragment.newInstance(name);
-            }
         }
 
         if (newFragment.isAdded()) {
@@ -166,6 +158,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.initUserInfo(this,userid,userIcon,rl);
+        gankPresenter.initUserInfo(this,userid,userIcon,rl);
     }
 }
