@@ -14,9 +14,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.andremion.floatingnavigationview.FloatingNavigationView;
-import com.develop.hy.ganks.daggerExamples.DaggerMainActivityComponent;
-import com.develop.hy.ganks.daggerExamples.LoginPresenter;
-import com.develop.hy.ganks.daggerExamples.MainActivityModule;
+import com.develop.hy.ganks.dagger.LoginPresenter;
+import com.develop.hy.ganks.dagger.MainPresenter;
+import com.develop.hy.ganks.dagger.component.DaggerMainActivityComponent;
+import com.develop.hy.ganks.dagger.module.MainActivityModule;
 import com.develop.hy.ganks.fragment.CommonFragment;
 import com.develop.hy.ganks.ui.LoginActivity;
 import com.develop.hy.ganks.ui.UserCenter;
@@ -37,8 +38,7 @@ import static com.develop.hy.ganks.http.GankType.VIDEO;
 import static com.develop.hy.ganks.http.GankType.WELFARE;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
-    @Inject
-    LoginPresenter presenter;
+
 
     private String currentFragmentTag;
 
@@ -46,7 +46,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     FloatingNavigationView floatView;
     @BindView(R.id.toobar)
     Toolbar toolbar;
-
+    @Inject
+    MainPresenter presenter;
 
     private FragmentManager fragmentManager;
     private RelativeLayout layout;
@@ -56,8 +57,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        initInject();
         fragmentManager = getSupportFragmentManager();
-        Inject();
         initToolBar();
         //悬浮按钮点击
         layout = (RelativeLayout) floatView.getHeaderView(0);
@@ -73,9 +74,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         //悬浮按钮条目监听
         floatView.setNavigationItemSelectedListener(this);
-        //dagger演示代码的调用
-//        presenter.login("name","pwd");
+        //默认加载一个页面
         switchFragment(ANDROID);
+    }
+
+    private void initInject() {
+        DaggerMainActivityComponent component = (DaggerMainActivityComponent) DaggerMainActivityComponent.builder()
+                .mainActivityModule(new MainActivityModule(this))
+                .build();
+        component.in(this);
     }
 
     @Override
@@ -86,13 +93,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     protected void initToolBar(){
         setSupportActionBar(toolbar);
     }
-    private void Inject() {
-        //dagger演示代码
-        DaggerMainActivityComponent component = (DaggerMainActivityComponent) DaggerMainActivityComponent.builder()
-                .mainActivityModule(new MainActivityModule(this))
-                .build();
-        component.in(this);
-    }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -165,25 +166,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onResume() {
         super.onResume();
-        BmobUser bmobUser = BmobUser.getCurrentUser(this);
-        if (bmobUser!=null){
-            userid.setText(bmobUser.getUsername());
-            userIcon.setBackgroundResource(R.mipmap.ic_launcher_round);
-        }
-        if (bmobUser!=null){
-            rl.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(MainActivity.this,UserCenter.class));
-                }
-            });
-        }else {
-            rl.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
-                }
-            });
-        }
+        presenter.initUserInfo(this,userid,userIcon,rl);
     }
 }

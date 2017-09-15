@@ -1,6 +1,9 @@
-package com.develop.hy.ganks.daggerExamples;
+package com.develop.hy.ganks.dagger.component;
 
 import com.develop.hy.ganks.MainActivity;
+import com.develop.hy.ganks.dagger.module.LoginActivityModule;
+import com.develop.hy.ganks.dagger.module.MainActivityModule;
+import com.develop.hy.ganks.ui.LoginActivity;
 
 import dagger.Component;
 
