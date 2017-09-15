@@ -70,8 +70,11 @@ public class GankPresenter<T> extends BasePresenter<IGanHuoView> implements Seri
     public void initUserInfo(final MainActivity activity, TextView userid, ImageView userIcon, RelativeLayout rl) {
         BmobUser bmobUser = BmobUser.getCurrentUser(activity);
         if (bmobUser!=null){
-            userid.setText(bmobUser.getUsername());
-            userIcon.setBackgroundResource(R.mipmap.ic_launcher_round);
+            userid.setText(bmobUser.getUsername()+"|已登录");
+            userIcon.setBackgroundResource(R.mipmap.have_login);
+        }else {
+            userid.setText("个人中心|未登录");
+            userIcon.setBackgroundResource(R.mipmap.haveno_login);
         }
         if (bmobUser!=null){
             rl.setOnClickListener(new View.OnClickListener() {

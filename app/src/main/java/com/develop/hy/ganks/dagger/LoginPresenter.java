@@ -38,21 +38,35 @@ public class LoginPresenter {
             }
         });
     }
-    public void regist(String username,String pwd){
+    public void regist(String username,String pwd,String email){
         User p2 = new User();
         p2.setUsername(username);
         p2.setPassword(pwd);
-        p2.setEmail("1195996300@qq.com");
+        p2.setEmail(email);
         p2.signUp(loginActivity, new SaveListener() {
             @Override
             public void onSuccess() {
                 ToastUtils.showShortToast("注册成功");
+                if (listener!=null){
+                    listener.OnFinish();
+                }
             }
 
             @Override
             public void onFailure(int i, String s) {
-                ToastUtils.showShortToast("注册失败");
+                ToastUtils.showShortToast("注册失败"+s);
+                if (listener!=null){
+                    listener.OnFail(s);
+                }
             }
         });
+    }
+    private OnRegistListener listener;
+    public void SetOnRegistListener(OnRegistListener listener){
+        this.listener = listener;
+    }
+    public interface OnRegistListener{
+        void OnFinish();
+        void OnFail(String s);
     }
 }

@@ -44,6 +44,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     FloatingNavigationView floatView;
     @BindView(R.id.toobar)
     Toolbar toolbar;
+    @BindView(R.id.heder_pic)
+    ImageView heder_pic;
 
     @Inject
     GankPresenter gankPresenter;
@@ -75,6 +77,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         floatView.setNavigationItemSelectedListener(this);
         //默认加载一个页面
         switchFragment(ANDROID);
+        //
+        heder_pic.setImageResource(R.mipmap.e);
     }
 
     private void initInject() {
@@ -130,7 +134,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
     public void switchFragment(String name){
         setTitle(name);
-
         if (currentFragmentTag != null && currentFragmentTag.equals(name))
             return;
 

@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="这个是用户名"
+        android:text="个人中心"
         android:gravity="center_horizontal"
         android:id="@+id/userid"
         android:layout_below="@+id/userIcon"
@@ -17,7 +17,7 @@
         android:id="@+id/userIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@mipmap/ic_launcher"
+        android:background="@mipmap/haveno_login"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />
 </RelativeLayout>

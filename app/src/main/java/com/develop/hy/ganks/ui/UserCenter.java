@@ -2,6 +2,7 @@ package com.develop.hy.ganks.ui;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.develop.hy.ganks.BaseActivity;
 import com.develop.hy.ganks.R;
@@ -23,11 +24,15 @@ public class UserCenter extends BaseActivity implements View.OnClickListener {
     Button collect;
     @BindView(R.id.bt_clear_cache)
     Button clear;
+    @BindView(R.id.tv_username)
+    TextView username;
 
     @Override
     protected void initView() {
         ButterKnife.bind(this);
         initEvent();
+        BmobUser bmobUser = BmobUser.getCurrentUser(this);
+        username.setText("昵称:"+bmobUser.getUsername());
     }
 
     private void initEvent() {

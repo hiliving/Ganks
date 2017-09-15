@@ -3,21 +3,37 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="#009688"
+    app:contentScrim="@color/colorPrimary"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    android:theme="@style/AppTheme.AppBarOverlay"
     android:layout_height="wrap_content"
-    app:elevation="3dp"
     >
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:id="@+id/toobar"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        android:background="#009688"
-        app:layout_scrollFlags="scroll|enterAlways|snap"
-        android:layout_height="?attr/actionBarSize"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        />
+    <android.support.design.widget.CollapsingToolbarLayout
+        android:id="@+id/collapsedlayout"
+        android:layout_width="wrap_content"
+        android:fitsSystemWindows="true"
+        android:layout_height="wrap_content"
+        app:contentScrim="@color/colorPrimary"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed|snap|enterAlwaysCollapsed"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:id="@+id/heder_pic"
+            android:scaleType="centerCrop"
+            android:fitsSystemWindows="true"
+            app:layout_collapseMode="parallax"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            />
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:id="@+id/toobar"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:layout_collapseMode="pin"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            />
+    </android.support.design.widget.CollapsingToolbarLayout>
 
 </android.support.design.widget.AppBarLayout>

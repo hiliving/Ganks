@@ -8,8 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.widget.FrameLayout;
 
 import com.develop.hy.ganks.R;
-import com.develop.hy.ganks.dagger.component.DaggerGankFrgmComponent;
-import com.develop.hy.ganks.dagger.module.GankFragmodule;
 import com.develop.hy.ganks.fragment.adapter.MutiTypeAdapter;
 import com.develop.hy.ganks.model.GankBean;
 import com.develop.hy.ganks.presenter.GankPresenter;
@@ -20,8 +18,6 @@ import com.develop.hy.ganks.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 
