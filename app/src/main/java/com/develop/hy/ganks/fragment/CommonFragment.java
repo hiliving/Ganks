@@ -7,6 +7,9 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.widget.FrameLayout;
 
+import com.SuperKotlin.pictureviewer.ImagePagerActivity;
+import com.SuperKotlin.pictureviewer.PictureConfig;
+import com.develop.hy.ganks.MainActivity;
 import com.develop.hy.ganks.R;
 import com.develop.hy.ganks.fragment.adapter.MutiTypeAdapter;
 import com.develop.hy.ganks.model.GankBean;
@@ -40,6 +43,7 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
     private boolean isRefresh = true;
     private MutiTypeAdapter adapter;
     private String type;
+    private ArrayList<String> list;
 
 
     public static CommonFragment newInstance(String type) {
@@ -72,8 +76,9 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
     }
 
     @Override
-    public void initView() {
+    public void initViews() {
         gankList = new ArrayList<>();
+        list = new ArrayList<>();
         adapter = new MutiTypeAdapter(getContext(),gankList,type);
         recycleview.setLayoutManager(new LinearLayoutManager(getContext()));
         recycleview.setAdapter(adapter);
@@ -153,7 +158,21 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
     }
 
     @Override
-    public void onItemClick(int position) {
-      startActivity(new Intent(getContext(), WebViewActivity.class).putExtra("URL",gankList.get(position).getUrl()));
+    public void onItemClick(int position,boolean isGirl) {
+        list.clear();
+      if (isGirl){
+              list.add(gankList.get(position).getUrl()+"");
+          PictureConfig config = new PictureConfig.Builder()
+                  .setListData(list)	//图片数据List<String> list
+                  .setmIsLoaclPicture(false)//是否是本地图片
+                  .setPosition(0)	//图片下标（从第position张图片开始浏览）
+                  .setDownloadPath("pictureviewer")	//图片下载文件夹地址
+                  .needDownload(true)	//是否支持图片下载
+                  .setPlacrHolder(R.mipmap.categorypage_search)	//占位符图片（图片加载完成前显示的资源图片，来源drawable或者mipmap）
+                  .build();
+          ImagePagerActivity.startActivity(getContext(), config);
+      } else {
+          startActivity(new Intent(getContext(), WebViewActivity.class).putExtra("URL",gankList.get(position).getUrl()));
+      }
     }
 }

@@ -2,15 +2,23 @@ package com.develop.hy.ganks;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,6 +27,10 @@ import com.develop.hy.ganks.dagger.component.DaggerMainActivityComponent;
 import com.develop.hy.ganks.dagger.module.MainActivityModule;
 import com.develop.hy.ganks.fragment.CommonFragment;
 import com.develop.hy.ganks.presenter.GankPresenter;
+import com.develop.hy.ganks.ui.SearchActivity;
+import com.develop.hy.ganks.ui.SettingActivity;
+import com.develop.hy.ganks.utils.ToastUtils;
+import com.just.library.LogUtils;
 
 import java.io.Serializable;
 
@@ -26,6 +38,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.develop.hy.ganks.R.id.collapsedlayout;
 import static com.develop.hy.ganks.http.GankType.ANDROID;
 import static com.develop.hy.ganks.http.GankType.APP;
 import static com.develop.hy.ganks.http.GankType.CASUAL;
@@ -35,7 +49,7 @@ import static com.develop.hy.ganks.http.GankType.IOS;
 import static com.develop.hy.ganks.http.GankType.VIDEO;
 import static com.develop.hy.ganks.http.GankType.WELFARE;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
 
     private String currentFragmentTag;
@@ -44,8 +58,18 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     FloatingNavigationView floatView;
     @BindView(R.id.toobar)
     Toolbar toolbar;
+    @BindView(R.id.titleText)
+    TextView titleText;
+    @BindView(R.id.ll_search)
+    LinearLayout ll_search;
+    @BindView(R.id.edit_search)
+    TextView edit_search;
+    @BindView(R.id.appBarlayout)
+    AppBarLayout appBarlayout;
     @BindView(R.id.heder_pic)
     ImageView heder_pic;
+    @BindView(R.id.collapsedlayout)
+    CollapsingToolbarLayout collapsedlayout;
 
     @Inject
     GankPresenter gankPresenter;
@@ -75,6 +99,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         //悬浮按钮条目监听
         floatView.setNavigationItemSelectedListener(this);
+        edit_search.setOnClickListener(this);
         //默认加载一个页面
         switchFragment(ANDROID);
         //
@@ -95,16 +120,37 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     protected void initToolBar(){
         setSupportActionBar(toolbar);
+        appBarlayout.addOnOffsetChangedListener(new MyOffsetChangedListener());
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.edit_search:
+                startActivity(new Intent(this, SearchActivity.class));
+                break;
+        }
+    }
+
+    private class MyOffsetChangedListener implements AppBarLayout.OnOffsetChangedListener{
+
+        @Override
+        public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+            if (Math.abs(verticalOffset)>=500){
+                ll_search.setVisibility(View.VISIBLE);
+                titleText.setVisibility(View.GONE);
+            }else {
+                ll_search.setVisibility(View.VISIBLE);
+                titleText.setVisibility(View.VISIBLE);
+                titleText.setText(currentFragmentTag+"专题");
+            }
+        }
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         floatView.close();
        switch (item.getItemId()){
-           case R.id.nav_all:
-               switchFragment("all");
-               break;
            case R.id.nav_gift:
                switchFragment(WELFARE);
                break;
@@ -128,12 +174,17 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                break;
            case R.id.nav_reco:
                switchFragment(CASUAL);
+           case R.id.nav_setting:
+//               startActivity(new Intent(this, SettingActivity.class));
+               ToastUtils.showShortToast("功能正在开发中");
                break;
        }
         return false;
     }
+
     public void switchFragment(String name){
         setTitle(name);
+        Log.d("Title",name);
         if (currentFragmentTag != null && currentFragmentTag.equals(name))
             return;
 

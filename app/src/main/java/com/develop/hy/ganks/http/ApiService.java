@@ -13,8 +13,9 @@ import rx.Observable;
 public interface ApiService {
 
 
-//    @GET("data/{category}/{pageCount}/{page}")
-//    Observable<GankData> getGank(@Path("category") String category, @Path("pageCount") int pageCount, @Path("page") int page);
     @GET("data/{category}/{pageCount}/{page}")
     Observable<GankBean> getGank(@Path("category") String category, @Path("pageCount") int pageCount, @Path("page") int page);
+
+    @GET("search/query/{queryText}/category/all/count/{count}/page/{page}")
+    Observable<GankBean> queryGank(@Path("queryText") String queryText, @Path("count") int count, @Path("page") int page);
 }

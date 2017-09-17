@@ -20,6 +20,7 @@ public class GirlViewHolder extends BaseViewHolder<List<GankBean.ResultsBean>> {
     TextView tv_list_author;
     TextView tv_list_content;
     Context context;
+    private MutiTypeAdapter.OnItemClickListener listener;
     ImageView pic;
     public GirlViewHolder(MutiTypeAdapter.OnItemClickListener listener, Context context, View itemView) {
         super(itemView);
@@ -27,10 +28,11 @@ public class GirlViewHolder extends BaseViewHolder<List<GankBean.ResultsBean>> {
         tv_list_author = (TextView) itemView.findViewById(R.id.tv_list_author);
         tv_list_content = (TextView) itemView.findViewById(R.id.tv_list_content);
         pic = (ImageView) itemView.findViewById(R.id.pic);
+        this.listener = listener;
     }
 
     @Override
-    public void bindViewData(List<GankBean.ResultsBean> resultsBeen, int position) {
+    public void bindViewData(List<GankBean.ResultsBean> resultsBeen, final int position) {
         tv_list_content.setText(resultsBeen.get(position).getDesc());
         tv_list_author.setText(resultsBeen.get(position).getWho());
         pic.setImageResource(R.mipmap.ic_launcher_round);
@@ -38,6 +40,14 @@ public class GirlViewHolder extends BaseViewHolder<List<GankBean.ResultsBean>> {
                 .load(resultsBeen.get(position).getUrl()+"")
                 .crossFade()
                 .into(pic);
+        pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener!=null){
+                    listener.onItemClick(position,true);
+                }
+            }
+        });
     }
 
 }

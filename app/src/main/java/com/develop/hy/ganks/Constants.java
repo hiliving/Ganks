@@ -1,6 +1,8 @@
 package com.develop.hy.ganks;
 
 
+import java.util.ArrayList;
+
 /**
  * Created by HY on 2017/9/12.
  */
@@ -22,4 +24,6 @@ public class Constants {
     public static final int PAGE_SIZE = 20;
 
     public static final String BOMB_APPID = "74484ee79ef10cb552ab13235abbcb70";
+
+    public static ArrayList<String> searchHistory=new ArrayList<>();//保存最近搜索记录
 }

@@ -21,7 +21,7 @@ public abstract class BasePresenter<T extends IBaseView> {
         this.iView = iView;
     }
     public void init(){
-        iView.initView();
+        iView.initViews();
     }
     public void onDestroy(){
         iView=null;

@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
     <com.develop.hy.ganks.ui.HXRecyclerView
         android:id="@+id/recycleview"
+        android:background="#fff"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </android.support.v4.widget.SwipeRefreshLayout>

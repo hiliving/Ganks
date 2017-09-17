@@ -6,7 +6,7 @@ package com.develop.hy.ganks.presenter.CommenInterface;
 
 public interface IBaseView {
     //
-    void initView();
+    void initViews();
     void showProgressBar();
     void hideProgressBar();
     void showErrorData();

@@ -1,117 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-
-    <FrameLayout
-        android:id="@+id/anim_head"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignParentTop="true"
-        android:background="@color/colorAccent">
-
-        <com.develop.hy.ganks.ui.view.WavePageView
-            android:id="@+id/wave_view"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:id="@+id/anim_head"
             android:layout_width="match_parent"
-            android:layout_height="15dp"
-            android:layout_gravity="bottom" />
+            android:layout_height="200dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorAccent">
 
-        <ImageView
-            android:id="@+id/anim_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="bottom|center"
-            android:layout_marginBottom="30dp"
-            android:scaleType="fitXY"
-            android:background="@mipmap/haveno_login" />
+            <com.develop.hy.ganks.ui.view.WavePageView
+                android:id="@+id/wave_view"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:layout_gravity="bottom" />
 
-    </FrameLayout>
+            <ImageView
+                android:id="@+id/anim_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="30dp"
+                android:scaleType="fitXY"
+                android:background="@mipmap/haveno_login" />
+
+        </FrameLayout>
 
 
-   <android.support.design.widget.TextInputLayout
-       android:id="@+id/username_input"
-       android:layout_centerHorizontal="true"
-       android:layout_marginTop="20dp"
-       android:layout_below="@+id/anim_head"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content">
-       <android.support.design.widget.TextInputEditText
-           android:layout_width="300dp"
-           android:id="@+id/username"
-           android:textColor="@color/colorPrimary"
-           android:hint="请输入用户名"
-           android:layout_height="wrap_content" />
-   </android.support.design.widget.TextInputLayout>
-   <android.support.design.widget.TextInputLayout
-       android:layout_width="wrap_content"
-       android:layout_below="@+id/username_input"
-       android:layout_centerHorizontal="true"
-       android:id="@+id/userpwd_input"
-       android:layout_height="wrap_content">
-       <android.support.design.widget.TextInputEditText
-           android:layout_width="300dp"
-           android:hint="请输入密码"
-           android:textColor="@color/colorPrimary"
-           android:id="@+id/password"
-           android:layout_height="wrap_content" />
-   </android.support.design.widget.TextInputLayout>
-   <android.support.design.widget.TextInputLayout
-       android:layout_width="wrap_content"
-       android:layout_below="@+id/userpwd_input"
-       android:layout_centerHorizontal="true"
-       android:id="@+id/email_input"
-       android:visibility="gone"
-       android:layout_height="wrap_content">
-       <android.support.design.widget.TextInputEditText
-           android:layout_width="300dp"
-           android:hint="请输入邮箱"
-           android:textColor="@color/colorPrimary"
-           android:id="@+id/email_inputs"
-           android:layout_height="wrap_content" />
-   </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/username_input"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/anim_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="300dp"
+                android:id="@+id/username"
+                android:textColor="@color/colorPrimary"
+                android:hint="请输入用户名"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/username_input"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/userpwd_input"
+            android:layout_height="wrap_content">
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="300dp"
+                android:hint="请输入密码"
+                android:textColor="@color/colorPrimary"
+                android:id="@+id/password"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/userpwd_input"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/email_input"
+            android:visibility="gone"
+            android:layout_height="wrap_content">
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="300dp"
+                android:hint="请输入邮箱"
+                android:textColor="@color/colorPrimary"
+                android:id="@+id/email_inputs"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:layout_height="wrap_content"
-        android:text="登       录"
-        android:textColor="@color/colorPrimary"
-        android:layout_width="300dp"
-        android:textSize="20sp"
-        android:layout_marginTop="31dp"
-        android:background="@drawable/bt_bg"
-        android:id="@+id/login"
-        android:layout_below="@+id/userpwd_input"
-        android:layout_alignStart="@+id/userpwd_input" />
-    <Button
-        android:layout_height="wrap_content"
-        android:text="注       册"
-        android:textColor="@color/colorPrimary"
-        android:layout_width="300dp"
-        android:textSize="20sp"
-        android:layout_marginTop="31dp"
-        android:background="@drawable/bt_bg"
-        android:id="@+id/bt_regist"
-        android:visibility="gone"
-        android:layout_below="@+id/email_input"
-        android:layout_alignStart="@+id/userpwd_input" />
-    <Button
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:text="立即注册"
-        android:textColor="@color/colorPrimary"
-        android:background="@android:color/transparent"
-        android:id="@+id/regist"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/login" />
-    <Button
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text="忘记密码？"
-        android:textColor="@color/colorPrimary"
-        android:background="@android:color/transparent"
-        android:id="@+id/reset"
-        android:layout_alignBaseline="@+id/regist"
-        android:layout_alignBottom="@+id/regist"
-        android:layout_toStartOf="@+id/regist" />
-</RelativeLayout>
+        <Button
+            android:layout_height="wrap_content"
+            android:text="登       录"
+            android:textColor="@color/colorPrimary"
+            android:layout_width="300dp"
+            android:textSize="20sp"
+            android:layout_marginTop="31dp"
+            android:background="@drawable/bt_bg"
+            android:id="@+id/login"
+            android:layout_below="@+id/userpwd_input"
+            android:layout_alignStart="@+id/userpwd_input" />
+        <Button
+            android:layout_height="wrap_content"
+            android:text="注       册"
+            android:textColor="@color/colorPrimary"
+            android:layout_width="300dp"
+            android:textSize="20sp"
+            android:layout_marginTop="31dp"
+            android:background="@drawable/bt_bg"
+            android:id="@+id/bt_regist"
+            android:visibility="gone"
+            android:layout_below="@+id/email_input"
+            android:layout_alignStart="@+id/userpwd_input" />
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="立即注册"
+            android:textColor="@color/colorPrimary"
+            android:background="@android:color/transparent"
+            android:id="@+id/regist"
+            android:layout_alignParentBottom="true"
+            android:layout_alignEnd="@+id/login" />
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="忘记密码？"
+            android:textColor="@color/colorPrimary"
+            android:background="@android:color/transparent"
+            android:id="@+id/reset"
+            android:layout_alignBaseline="@+id/regist"
+            android:layout_alignBottom="@+id/regist"
+            android:layout_toStartOf="@+id/regist" />
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

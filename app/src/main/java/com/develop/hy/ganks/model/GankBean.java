@@ -1,6 +1,7 @@
 package com.develop.hy.ganks.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -56,7 +57,7 @@ public class GankBean implements Serializable{
         private String url;
         private boolean used;
         private String who;
-        private List<String> images;
+        private ArrayList<String> images;
 
         public String get_id() {
             return _id;
@@ -130,11 +131,11 @@ public class GankBean implements Serializable{
             this.who = who;
         }
 
-        public List<String> getImages() {
+        public ArrayList<String> getImages() {
             return images;
         }
 
-        public void setImages(List<String> images) {
+        public void setImages(ArrayList<String> images) {
             this.images = images;
         }
     }

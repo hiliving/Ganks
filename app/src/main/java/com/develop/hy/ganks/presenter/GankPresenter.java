@@ -38,10 +38,38 @@ public class GankPresenter<T> extends BasePresenter<IGanHuoView> implements Seri
     public void release() {
         unSubcription();
     }
-
+    //获取数据
     public void loadGank(String type,int page){
         iView.showProgressBar();
         Subscription subscribe = ApiManager.getGankRetrofitInstance().getGank(type, Constants.PAGE_SIZE, page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GankBean>() {
+
+                    @Override
+                    public void onCompleted() {
+                        iView.hideProgressBar();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        iView.showErrorData();
+                    }
+                    @Override
+                    public void onNext(GankBean gankDatas) {
+                        if (gankDatas.isError()) {
+                            iView.showNoMoreData();
+                        } else {
+                            iView.showListView(gankDatas.getResults());
+                        }
+                    }
+                });
+        addSubscription(subscribe);
+    }
+    //搜索
+    public void queryGank(String keywords,int page){
+        iView.showProgressBar();
+        Subscription subscribe = ApiManager.getGankRetrofitInstance().queryGank(keywords, Constants.PAGE_SIZE, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GankBean>() {

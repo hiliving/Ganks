@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:id="@+id/ll_search"
+    android:background="@android:color/transparent"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/edit_search"
+        android:layout_margin="10dp"
+        android:gravity="center_vertical"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
+        android:drawableLeft="@mipmap/categorypage_search"
+        android:paddingStart="10dp"
+        android:textSize="14sp"
+        android:drawablePadding="20dp"
+        android:hint="搜索/项目/文章/妹子"
+        android:textColorHint="@color/editcolorhint"
+        android:paddingLeft="20dp"
+        android:background="@drawable/edit_bg"
+        />
+</LinearLayout>

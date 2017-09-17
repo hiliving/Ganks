@@ -55,7 +55,7 @@ public class MutiTypeAdapter extends RecyclerView.Adapter<BaseViewHolder<List<Ga
     }
     private MutiTypeAdapter.OnItemClickListener listener;
     public interface OnItemClickListener{
-        void onItemClick(int position);
+        void onItemClick(int position,boolean isGirl);
     }
 
 }

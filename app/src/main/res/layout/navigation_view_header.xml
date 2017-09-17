@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="个人中心"
+        android:layout_marginTop="15dp"
         android:gravity="center_horizontal"
         android:id="@+id/userid"
         android:layout_below="@+id/userIcon"

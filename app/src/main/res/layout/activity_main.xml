@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/coorlayout"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
     tools:context="com.develop.hy.ganks.MainActivity">
     <include layout="@layout/toobar_layout" />

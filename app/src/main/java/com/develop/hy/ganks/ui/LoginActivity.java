@@ -1,8 +1,10 @@
 package com.develop.hy.ganks.ui;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -69,7 +71,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         component.in(this);
     }
     private void initEvent() {
-
         final FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(-2,-2);
         lp.gravity = Gravity.BOTTOM|Gravity.CENTER;
         waveview.setOnWaveAnimationListener(new WavePageView.OnWaveAnimationListener() {

@@ -40,7 +40,7 @@ public class CommonViewHolder  extends BaseViewHolder<List<GankBean.ResultsBean>
             @Override
             public void onClick(View v) {
                 if (listener!=null){
-                    listener.onItemClick(position);
+                    listener.onItemClick(position,false);
                 }
             }
         });
