@@ -5,7 +5,8 @@
 # Ganks
 ## 干货集中营的客户端，采用RxJava+Retrofit+Dagger2+MVP开发
 ### 数据来源：[干货集中营](http://gank.io)
-效果图如下：
+### 效果图如下：
+
 <img src="https://github.com/hiliving/Ganks/blob/master/screenshot/Screenshot_2017-09-17-23-43-04.png" width = "240" height = "400" alt="图片名称" align=center />
 <img src="https://github.com/hiliving/Ganks/blob/master/screenshot/Screenshot_2017-09-17-23-43-16.png" width = "240" height = "400" alt="图片名称" align=center />
 <img src="https://github.com/hiliving/Ganks/blob/master/screenshot/Screenshot_2017-09-17-23-43-34.png" width = "240" height = "400" alt="图片名称" align=center />
