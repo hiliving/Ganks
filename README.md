@@ -1,3 +1,6 @@
+[![CircleCI](https://img.shields.io/circleci/project/github/RedSparr0w/node-csgo-parser.svg)]()
+[![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)]()
+[![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)]()
 # Ganks
 干货集中营的客户端，采用RxJava+Retrofit+Dagger2+MVP开发
 ##功能持续完善中
