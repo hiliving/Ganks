@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_marginBottom="100dp"
-        app:backgroundTint="#009688"
+        app:backgroundTint="@color/colorPrimary"
         android:layout_gravity="bottom|right"
         app:headerLayout="@layout/navigation_view_header"
         app:menu="@menu/menu_navigation_view" />
