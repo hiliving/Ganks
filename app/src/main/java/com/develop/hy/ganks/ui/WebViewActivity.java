@@ -64,7 +64,7 @@ public class WebViewActivity extends BaseActivity {
         fab_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShareUtil.share(WebViewActivity.this, R.string.string_share_text);
+                ShareUtil.share(WebViewActivity.this,"["+getIntent().getStringExtra("Title")+"]"+getIntent().getStringExtra("URL")+"[分享自Ganks-by huangyong]");
             }
         });
     }

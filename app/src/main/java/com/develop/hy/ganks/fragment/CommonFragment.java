@@ -173,7 +173,8 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
                   .build();
           ImagePagerActivity.startActivity(getContext(), config);
       } else {
-          startActivity(new Intent(getContext(), WebViewActivity.class).putExtra("URL",gankList.get(position).getUrl()));
+          startActivity(new Intent(getContext(), WebViewActivity.class).putExtra("URL",gankList
+                  .get(position).getUrl()).putExtra("Title",gankList.get(position).getDesc()));
       }
     }
 }
