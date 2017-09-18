@@ -29,6 +29,9 @@
         <activity android:name=".ui.UserCenter" />
         <activity android:name=".ui.SearchActivity" />
         <activity android:name=".ui.SettingActivity" />
+        <activity
+            android:name=".ui.AboutUsActivity"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

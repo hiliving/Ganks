@@ -27,6 +27,7 @@ import com.develop.hy.ganks.dagger.component.DaggerMainActivityComponent;
 import com.develop.hy.ganks.dagger.module.MainActivityModule;
 import com.develop.hy.ganks.fragment.CommonFragment;
 import com.develop.hy.ganks.presenter.GankPresenter;
+import com.develop.hy.ganks.ui.AboutUsActivity;
 import com.develop.hy.ganks.ui.SearchActivity;
 import com.develop.hy.ganks.ui.SettingActivity;
 import com.develop.hy.ganks.utils.ToastUtils;
@@ -175,8 +176,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
            case R.id.nav_reco:
                switchFragment(CASUAL);
            case R.id.nav_setting:
-//               startActivity(new Intent(this, SettingActivity.class));
-               ToastUtils.showShortToast("功能正在开发中");
+               startActivity(new Intent(this, AboutUsActivity.class));
+//               ToastUtils.showShortToast("功能正在开发中");
                break;
        }
         return false;
