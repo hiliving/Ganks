@@ -19,6 +19,6 @@
         android:layout_gravity="bottom|right"
         app:headerLayout="@layout/navigation_view_header"
         app:menu="@menu/menu_navigation_view" />
-   <include
-       layout="@layout/fragment_content"/>
+
+    <include layout="@layout/fragment_content" />
 </android.support.design.widget.CoordinatorLayout>

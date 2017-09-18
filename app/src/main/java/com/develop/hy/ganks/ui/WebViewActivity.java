@@ -3,19 +3,33 @@ package com.develop.hy.ganks.ui;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toolbar;
 
 import com.develop.hy.ganks.BaseActivity;
 import com.develop.hy.ganks.R;
+import com.develop.hy.ganks.utils.ShareUtil;
+import com.fangxu.allangleexpandablebutton.AllAngleExpandableButton;
+import com.fangxu.allangleexpandablebutton.ButtonData;
+import com.fangxu.allangleexpandablebutton.ButtonEventListener;
 import com.just.library.AgentWeb;
 import com.just.library.ChromeClientCallbackManager;
+import com.just.library.LogUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.develop.hy.ganks.utils.Utils.context;
 
 /**
  * Created by HY on 2017/9/13.
@@ -25,8 +39,10 @@ public class WebViewActivity extends BaseActivity {
 
     @BindView(R.id.webview)
     WebView webView;
-    @BindView(R.id.weblayout)
-    LinearLayout weblayout;
+    @BindView(R.id.rootlayout)
+    RelativeLayout weblayout;
+    @BindView(R.id.fab_add)
+    FloatingActionButton fab_add;
     private AgentWeb mAgentWeb;
 
     @Override
@@ -45,6 +61,12 @@ public class WebViewActivity extends BaseActivity {
                 .createAgentWeb()//
                 .ready()
                 .go(getIntent().getStringExtra("URL"));
+        fab_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShareUtil.share(WebViewActivity.this, R.string.string_share_text);
+            }
+        });
     }
 
     @Override

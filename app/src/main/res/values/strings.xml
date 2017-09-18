@@ -6,7 +6,16 @@
         "非官方版的干货客户端.\n\n"
         "数据来源:gank.io\n\n"
 
-        "when a user tries to pick up one of cards.\n\n"
+        "用到的框架：\n\n"
+            "rxandroid\n\n"
+            "rxjava2\n\n"
+            "retrofit2\n\n"
+            "glide\n\n"
+            "cardview\n\n"
+            "agentweb\n\n"
+            "PictureViewer\n\n"
     </string>
     <string name="action_settings">Settings</string>
+    <string name="action_share">分享</string>
+    <string name="string_share_text">发现了一个Retrofit+RxJava+Mvp架构的App，里面有大量IT干货，每天提供安卓，IOS等最新资讯，大力推荐哦~：https://github.com/hiliving[分享自Ganks]</string>
 </resources>

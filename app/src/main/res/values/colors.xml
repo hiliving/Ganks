@@ -6,9 +6,17 @@
     <color name="blue">#4099ff</color>
     <color name="white">#e9e9e9</color>
     <color name="headerbg">#009688</color>
-    <color name="editcolor">#a3e6e6e6</color>
+    <color name="editcolor">#a3fafafa</color>
     <color name="editcolorhint">#fd646464</color>
     <color name="confirm">#fd5e5e5e</color>
     <color name="pagebag">#fdf7f7f7</color>
     <color name="tagcolor">#fde1e1e1</color>
+
+
+    <color name="black">#000000</color>
+    <color name="orange">#ff7f00</color>
+    <color name="pink">#f08080</color>
+    <color name="red">#db3434</color>
+    <color name="green">#11b900</color>
+    <color name="yellow">#ffff00</color>
 </resources>

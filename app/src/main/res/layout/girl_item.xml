@@ -5,22 +5,43 @@
     android:id="@+id/carview"
     android:layout_margin="5dp"
     android:layout_height="80dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_list_item_title"
-        android:text="测试条目"
-        android:layout_margin="10dp"
-        android:textSize="15sp"
-        android:maxLines="2"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="内容"
-        android:layout_gravity="left|bottom"
-        android:id="@+id/tv_list_item_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
-        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_list_item_title"
+            android:text="测试条目"
+            android:layout_margin="10dp"
+            android:layout_alignParentTop="true"
+            android:textSize="15sp"
+            android:maxLines="2"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/tv_list_item_content"
+            android:layout_alignBottom="@+id/tv_list_item_content"
+            android:textSize="8sp"
+            android:id="@+id/creattime"
+            android:layout_marginBottom="1dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="内容"
+            android:layout_gravity="left|bottom"
+            android:id="@+id/tv_list_item_content"
+            android:layout_below="@+id/tv_list_item_title"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            />
+    </RelativeLayout>
+
+
+
 </android.support.v7.widget.CardView>

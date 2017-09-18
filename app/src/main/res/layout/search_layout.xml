@@ -43,6 +43,7 @@
             android:background="@mipmap/icon_clear"
             android:layout_toLeftOf="@+id/search_now"
             android:layout_marginRight="15dp"
+            android:id="@+id/clear_et"
             android:layout_centerVertical="true"
             android:layout_height="15dp" />
     </RelativeLayout>

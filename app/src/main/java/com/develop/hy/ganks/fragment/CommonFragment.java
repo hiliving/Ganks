@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 
 import com.SuperKotlin.pictureviewer.ImagePagerActivity;
 import com.SuperKotlin.pictureviewer.PictureConfig;
+import com.develop.hy.ganks.Constants;
 import com.develop.hy.ganks.MainActivity;
 import com.develop.hy.ganks.R;
 import com.develop.hy.ganks.fragment.adapter.MutiTypeAdapter;
@@ -90,7 +91,7 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
             @Override
             public void run() {
                 swipeRefreshLayout.setRefreshing(true);
-                presenter.loadGank(type,page);
+                presenter.loadGank(type, Constants.PAGE_SIZE,page);
             }
         });
     }
@@ -145,7 +146,7 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
     @Override
     public void loadMore() {
         if (canLoading){
-            presenter.loadGank(type,page);
+            presenter.loadGank(type,Constants.PAGE_SIZE,page);
             canLoading = false;
         }
     }
@@ -154,7 +155,7 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
     public void onRefresh() {
         isRefresh = true;
         page = 1;
-        presenter.loadGank(type,page);
+        presenter.loadGank(type,Constants.PAGE_SIZE,page);
     }
 
     @Override

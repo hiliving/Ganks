@@ -22,14 +22,22 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:id="@+id/heder_pic"
+            android:visibility="gone"
             android:scaleType="centerCrop"
             android:fitsSystemWindows="true"
             app:layout_collapseMode="parallax"
             />
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:fitsSystemWindows="true"
+            app:layout_collapseMode="parallax"
+            android:layout_height="250dp"/>
         <TextView
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="10dp"
             android:textSize="15sp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:paddingLeft="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="测试标题"

@@ -39,6 +39,8 @@ public class SearchActivity extends BaseActivity implements IGanHuoView, HXRecyc
     GankPresenter presenter;
     @BindView(R.id.recycleview)
     HXRecyclerView recyclerView;
+    @BindView(R.id.clear_et)
+    Button clear_et;
     @BindView(R.id.sw_layout)
     SwipeRefreshLayout refreshLayout;
     @BindView(R.id.et_search)
@@ -75,6 +77,12 @@ public class SearchActivity extends BaseActivity implements IGanHuoView, HXRecyc
                 //这里关键词才发挥本身的作用
                 presenter.queryGank(et_search.getText().toString(),page);
                 searchHistory.add(et_search.getText().toString());
+            }
+        });
+        clear_et.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                et_search.setText("");
             }
         });
     }

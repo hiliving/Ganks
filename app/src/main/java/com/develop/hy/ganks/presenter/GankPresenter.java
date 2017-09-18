@@ -3,6 +3,8 @@ package com.develop.hy.ganks.presenter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -16,6 +18,7 @@ import com.develop.hy.ganks.model.GankBean;
 import com.develop.hy.ganks.presenter.CommenInterface.IGanHuoView;
 import com.develop.hy.ganks.ui.LoginActivity;
 import com.develop.hy.ganks.ui.UserCenter;
+import com.develop.hy.ganks.utils.Utils;
 
 import java.io.Serializable;
 
@@ -39,9 +42,9 @@ public class GankPresenter<T> extends BasePresenter<IGanHuoView> implements Seri
         unSubcription();
     }
     //获取数据
-    public void loadGank(String type,int page){
+    public void loadGank(String type,int PageSize,int page){
         iView.showProgressBar();
-        Subscription subscribe = ApiManager.getGankRetrofitInstance().getGank(type, Constants.PAGE_SIZE, page)
+        Subscription subscribe = ApiManager.getGankRetrofitInstance().getGank(type, PageSize, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GankBean>() {
@@ -94,15 +97,51 @@ public class GankPresenter<T> extends BasePresenter<IGanHuoView> implements Seri
                 });
         addSubscription(subscribe);
     }
+    //随机数据
+    public void getRandom(String category,int count){
+        iView.showProgressBar();
+        Subscription subscribe = ApiManager.getGankRetrofitInstance().queryRandom(category, count)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<GankBean>() {
+
+                    @Override
+                    public void onCompleted() {
+                        iView.hideProgressBar();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        iView.showErrorData();
+                    }
+                    @Override
+                    public void onNext(GankBean gankDatas) {
+                        if (gankDatas.isError()) {
+                            iView.showNoMoreData();
+                        } else {
+                            iView.showListView(gankDatas.getResults());
+                        }
+                    }
+                });
+        addSubscription(subscribe);
+    }
+
+
+
+
+
 
     public void initUserInfo(final MainActivity activity, TextView userid, ImageView userIcon, RelativeLayout rl) {
+        Bitmap bitmap = BitmapFactory.decodeResource(activity.getResources(),R.mipmap.haveno_login);
+        Bitmap roundIcon = Utils.GetRoundedCornerBitmap(bitmap);
         BmobUser bmobUser = BmobUser.getCurrentUser(activity);
         if (bmobUser!=null){
             userid.setText(bmobUser.getUsername()+"|已登录");
-            userIcon.setBackgroundResource(R.mipmap.have_login);
+            userIcon.setImageBitmap(roundIcon);
         }else {
             userid.setText("个人中心|未登录");
-            userIcon.setBackgroundResource(R.mipmap.haveno_login);
+
+            userIcon.setImageBitmap(roundIcon);
         }
         if (bmobUser!=null){
             rl.setOnClickListener(new View.OnClickListener() {
@@ -120,4 +159,6 @@ public class GankPresenter<T> extends BasePresenter<IGanHuoView> implements Seri
             });
         }
     }
+
+
 }

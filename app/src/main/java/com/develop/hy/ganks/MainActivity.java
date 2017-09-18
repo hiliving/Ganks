@@ -7,10 +7,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -21,11 +24,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.andremion.floatingnavigationview.FloatingNavigationView;
 import com.develop.hy.ganks.dagger.component.DaggerMainActivityComponent;
 import com.develop.hy.ganks.dagger.module.MainActivityModule;
 import com.develop.hy.ganks.fragment.CommonFragment;
+import com.develop.hy.ganks.fragment.adapter.ViewPageAdapter;
+import com.develop.hy.ganks.http.GankType;
+import com.develop.hy.ganks.model.GankBean;
+import com.develop.hy.ganks.presenter.CommenInterface.IGanHuoView;
 import com.develop.hy.ganks.presenter.GankPresenter;
 import com.develop.hy.ganks.ui.AboutUsActivity;
 import com.develop.hy.ganks.ui.SearchActivity;
@@ -34,6 +42,8 @@ import com.develop.hy.ganks.utils.ToastUtils;
 import com.just.library.LogUtils;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -50,13 +60,16 @@ import static com.develop.hy.ganks.http.GankType.IOS;
 import static com.develop.hy.ganks.http.GankType.VIDEO;
 import static com.develop.hy.ganks.http.GankType.WELFARE;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener ,IGanHuoView{
 
 
     private String currentFragmentTag;
 
     @BindView(R.id.floating_navigation_view)
     FloatingNavigationView floatView;
+
+    @BindView(R.id.coorlayout)
+    CoordinatorLayout coorlayout;
     @BindView(R.id.toobar)
     Toolbar toolbar;
     @BindView(R.id.titleText)
@@ -69,6 +82,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     AppBarLayout appBarlayout;
     @BindView(R.id.heder_pic)
     ImageView heder_pic;
+    @BindView(R.id.viewpager)
+    ViewPager viewpager;
     @BindView(R.id.collapsedlayout)
     CollapsingToolbarLayout collapsedlayout;
 
@@ -80,6 +95,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private RelativeLayout rl;
     private TextView userid;
     private ImageView userIcon;
+    private ArrayList<String> imgList;
+    private ViewPageAdapter viewPageAdapter;
+    private List<GankBean.ResultsBean> resultList;
+
     @Override
     protected void initView() {
         ButterKnife.bind(this);
@@ -103,15 +122,20 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         edit_search.setOnClickListener(this);
         //默认加载一个页面
         switchFragment(ANDROID);
-        //
-        heder_pic.setImageResource(R.mipmap.e);
+    }
+
+    private void initPagerView() {
+        resultList = new ArrayList<>();
+        viewPageAdapter = new ViewPageAdapter(this, resultList);
+        viewpager.setAdapter(viewPageAdapter);
     }
 
     private void initInject() {
         DaggerMainActivityComponent component = (DaggerMainActivityComponent) DaggerMainActivityComponent.builder()
-                .mainActivityModule(new MainActivityModule(this))
+                .mainActivityModule(new MainActivityModule(this,this))
                 .build();
         component.in(this);
+        gankPresenter.init();
     }
 
     @Override
@@ -131,6 +155,39 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 startActivity(new Intent(this, SearchActivity.class));
                 break;
         }
+    }
+
+    @Override
+    public void initViews() {
+        gankPresenter.getRandom(GankType.WELFARE,10);
+        initPagerView();
+
+    }
+
+    @Override
+    public void showProgressBar() {
+
+    }
+
+    @Override
+    public void hideProgressBar() {
+
+    }
+
+    @Override
+    public void showErrorData() {
+
+    }
+
+    @Override
+    public void showNoMoreData() {
+
+    }
+
+    @Override
+    public void showListView(List<GankBean.ResultsBean> results) {
+        resultList.addAll(results);
+        viewPageAdapter.notifyDataSetChanged();
     }
 
     private class MyOffsetChangedListener implements AppBarLayout.OnOffsetChangedListener{
@@ -177,7 +234,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                switchFragment(CASUAL);
            case R.id.nav_setting:
                startActivity(new Intent(this, AboutUsActivity.class));
-//               ToastUtils.showShortToast("功能正在开发中");
                break;
        }
         return false;
@@ -214,5 +270,22 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     protected void onResume() {
         super.onResume();
         gankPresenter.initUserInfo(this,userid,userIcon,rl);
+    }
+
+    /**
+     * 再按一次退出
+     */
+    private long mExitTime = 0;
+    @Override
+    public void onBackPressed() {
+        if (floatView.isShown()){
+            floatView.close();
+        }
+        if ((System.currentTimeMillis() - mExitTime) > 2000) {
+            Snackbar.make(coorlayout, "再按一次退出噢~", Toast.LENGTH_SHORT).show();
+            mExitTime = System.currentTimeMillis();
+        } else {
+            finish();
+        }
     }
 }

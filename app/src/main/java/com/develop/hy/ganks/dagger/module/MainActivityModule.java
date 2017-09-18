@@ -14,8 +14,9 @@ import dagger.Provides;
 public class MainActivityModule {
     MainActivity mainActivity;
     private IGanHuoView view;
-    public MainActivityModule(MainActivity loginActivity) {
+    public MainActivityModule(MainActivity loginActivity,IGanHuoView view) {
         this.mainActivity = loginActivity;
+        this.view = view;
     }
     @Provides
     GankPresenter provideGankPresenter(){

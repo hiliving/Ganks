@@ -14,15 +14,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.develop.hy.ganks.R;
+import com.develop.hy.ganks.utils.ShareUtil;
 import com.just.library.AgentWeb;
 import com.just.library.ChromeClientCallbackManager;
 
 public class AboutUsActivity extends AppCompatActivity {
 
     private TextView textView;
-    private Button mygithub;
+    private TextView mygithub;
     private AgentWeb mAgentWeb;
     private CoordinatorLayout cor_root;
+    private TextView mycsdn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,8 @@ public class AboutUsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about_us);
         textView = (TextView) findViewById(R.id.title_aboutus);
         cor_root = (CoordinatorLayout) findViewById(R.id.content_root);
-        mygithub = (Button) findViewById(R.id.mygithub);
+        mygithub = (TextView) findViewById(R.id.mygithub);
+        mycsdn = (TextView) findViewById(R.id.mycsdn);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setVisibility(View.INVISIBLE);
         setSupportActionBar(toolbar);
@@ -38,7 +41,7 @@ public class AboutUsActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AboutUsActivity.this,WebViewActivity.class).putExtra("URL","https://github.com/hiliving"));
+                ShareUtil.share(AboutUsActivity.this, R.string.string_share_text);
             }
         });
         mygithub.setOnClickListener(new View.OnClickListener() {
@@ -47,5 +50,12 @@ public class AboutUsActivity extends AppCompatActivity {
                startActivity(new Intent(AboutUsActivity.this,WebViewActivity.class).putExtra("URL","https://github.com/hiliving"));
             }
         });
+        mycsdn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               startActivity(new Intent(AboutUsActivity.this,WebViewActivity.class).putExtra("URL","http://blog.csdn.net/huang_yong_"));
+            }
+        });
+
     }
 }

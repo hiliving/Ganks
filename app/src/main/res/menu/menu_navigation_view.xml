@@ -39,5 +39,5 @@
     <item
         android:id="@+id/nav_setting"
         android:icon="@android:drawable/ic_menu_mapmode"
-        android:title="设置中心"/>
+        android:title="关于"/>
 </menu>

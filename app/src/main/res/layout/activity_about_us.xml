@@ -41,7 +41,7 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_about_us" />
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -50,23 +50,43 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
-    <Button
-        android:id="@+id/mygithub"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@drawable/bt_bg"
-        android:textColor="@color/colorPrimary"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="我的github"
+        app:srcCompat="@android:drawable/ic_menu_share" />
+    <include layout="@layout/content_about_us"
         />
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:orientation="horizontal"
+        android:gravity="center_vertical|right"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="bottom"
 
-    </FrameLayout>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/mygithub"
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginLeft="20dp"
+            android:text="我的Github"
+            />
+        <TextView
+            android:id="@+id/mycsdn"
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:text="我的CSDN"
+
+            />
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

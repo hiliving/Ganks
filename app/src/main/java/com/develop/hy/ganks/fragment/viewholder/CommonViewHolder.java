@@ -22,6 +22,8 @@ public class CommonViewHolder  extends BaseViewHolder<List<GankBean.ResultsBean>
     private final TextView tvContent;
     private final CardView carview;
     private MutiTypeAdapter.OnItemClickListener listener;
+    private final TextView creattime;
+
     public CommonViewHolder(MutiTypeAdapter.OnItemClickListener listener, Context context, View itemView) {
         super(itemView);
         this.context = context;
@@ -29,6 +31,7 @@ public class CommonViewHolder  extends BaseViewHolder<List<GankBean.ResultsBean>
         tvtitle = (TextView) itemView.findViewById(R.id.tv_list_item_title);
         tvContent = (TextView) itemView.findViewById(R.id.tv_list_item_content);
         carview = (CardView) itemView.findViewById(R.id.carview);
+        creattime = (TextView) itemView.findViewById(R.id.creattime);
 
     }
 
@@ -36,6 +39,7 @@ public class CommonViewHolder  extends BaseViewHolder<List<GankBean.ResultsBean>
     public void bindViewData(List<GankBean.ResultsBean> resultsBeen, final int position) {
         tvtitle.setText(resultsBeen.get(position).getDesc());
         tvContent.setText(resultsBeen.get(position).getWho());
+        creattime.setText(resultsBeen.get(position).getPublishedAt());
         carview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
