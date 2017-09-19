@@ -12,6 +12,7 @@ import com.develop.hy.ganks.fragment.adapter.MutiTypeAdapter;
 import com.develop.hy.ganks.model.GankBean;
 import com.develop.hy.ganks.presenter.CommenInterface.OnItemClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,7 +46,15 @@ public class CommonViewHolder  extends BaseViewHolder<List<GankBean.ResultsBean>
         tvtitle.setText(resultsBeen.get(position).getDesc());
         tvContent.setText(resultsBeen.get(position).getWho());
         creattime.setText(resultsBeen.get(position).getPublishedAt());
-        Glide.with(context).load(R.mipmap.haveno_login).into(itemImg);
+        ArrayList<String> images = resultsBeen.get(position).getImages();
+        if (images!=null){
+            Glide.with(context).load(images.get(images.size()-1))
+                    .placeholder(R.mipmap.haveno_login)
+                    .into(itemImg);
+        }else {
+            Glide.with(context).load(R.mipmap.haveno_login).into(itemImg);
+        }
+
         carview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

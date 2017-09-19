@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.widget.FrameLayout;
 
 import com.SuperKotlin.pictureviewer.ImagePagerActivity;
@@ -12,6 +13,7 @@ import com.SuperKotlin.pictureviewer.PictureConfig;
 import com.develop.hy.ganks.Constants;
 import com.develop.hy.ganks.R;
 import com.develop.hy.ganks.fragment.adapter.MutiTypeAdapter;
+import com.develop.hy.ganks.http.GankType;
 import com.develop.hy.ganks.model.GankBean;
 import com.develop.hy.ganks.presenter.CommenInterface.OnItemClickListener;
 import com.develop.hy.ganks.presenter.GankPresenter;
@@ -169,7 +171,7 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
                   .setPosition(0)	//图片下标（从第position张图片开始浏览）
                   .setDownloadPath("pictureviewer")	//图片下载文件夹地址
                   .needDownload(true)	//是否支持图片下载
-                  .setPlacrHolder(R.mipmap.categorypage_search)	//占位符图片（图片加载完成前显示的资源图片，来源drawable或者mipmap）
+                  .setPlacrHolder(R.mipmap.haveno_login)	//占位符图片（图片加载完成前显示的资源图片，来源drawable或者mipmap）
                   .build();
           ImagePagerActivity.startActivity(getContext(), config);
       } else {

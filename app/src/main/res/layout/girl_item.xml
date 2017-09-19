@@ -11,8 +11,8 @@
         android:layout_height="80dp">
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_centerVertical="true"
             android:id="@+id/item_img"
             android:layout_marginLeft="16dp"

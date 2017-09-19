@@ -34,9 +34,8 @@ public class GirlViewHolder extends BaseViewHolder<List<GankBean.ResultsBean>> {
 
     @Override
     public void bindViewData(List<GankBean.ResultsBean> resultsBeen, final int position) {
-        tv_list_content.setText(resultsBeen.get(position).getDesc());
+        tv_list_content.setText(resultsBeen.get(position).getCreatedAt());
         tv_list_author.setText(resultsBeen.get(position).getWho());
-        pic.setImageResource(R.mipmap.ic_launcher_round);
         Glide.with(context)
                 .load(resultsBeen.get(position).getUrl()+"")
                 .crossFade()
