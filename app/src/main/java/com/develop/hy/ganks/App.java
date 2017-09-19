@@ -11,6 +11,7 @@ import com.orhanobut.logger.Logger;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobConfig;
+import top.wefor.circularanim.CircularAnim;
 
 /**
  * Created by HY on 2017/9/12.
@@ -25,6 +26,8 @@ public class App extends Application {
         Utils.init(this);
 
         sMyApplication = this;
+
+        CircularAnim.init(700, 500, R.color.colorPrimary);
 
         Logger.init("hhh")
                 .methodOffset(2)

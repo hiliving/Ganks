@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.a.a.V;
 import com.develop.hy.ganks.BaseActivity;
@@ -26,6 +27,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import top.wefor.circularanim.CircularAnim;
 
 /**
  * Created by Helloworld on 2017/9/14.
@@ -43,6 +45,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     TextInputLayout emailLayout;
     @BindView(R.id.login)
     Button login;
+    @BindView(R.id.progressbar)
+    ProgressBar progressbar;
+    @BindView(R.id.progressbar_regist)
+    ProgressBar progressbar_regist;
     @BindView(R.id.regist)
     Button regist;
     @BindView(R.id.bt_regist)
@@ -87,13 +93,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         presenter.SetOnRegistListener(new LoginPresenter.OnRegistListener() {
             @Override
             public void OnFinish() {
-                startActivity(new Intent(LoginActivity.this,UserCenter.class));
-                finish();
+                CircularAnim.fullActivity(LoginActivity.this, progressbar_regist)
+                        .go(new CircularAnim.OnAnimationEndListener() {
+                            @Override
+                            public void onAnimationEnd() {
+                                startActivity(new Intent(LoginActivity.this, UserCenter.class));
+                                finish();
+                            }
+                        });
             }
 
             @Override
             public void OnFail(String s) {
-
+                progressbar_regist.setVisibility(View.INVISIBLE);
+                regist.setVisibility(View.VISIBLE);
             }
         });
         username.addTextChangedListener(new TextWatcher() {
@@ -165,31 +178,32 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.login:
-
-                presenter.login(userStr,pwdStr);
+                login.setVisibility(View.INVISIBLE);
+               presenter.login(userStr,pwdStr,login,progressbar);
                 break;
             case R.id.regist:
                 toggle();
                 break;
             case R.id.bt_regist:
-                presenter.regist(userStr,pwdStr,emails);
+                btRegist.setVisibility(View.INVISIBLE);
+                presenter.regist(userStr,pwdStr,emails,progressbar_regist);
                 break;
         }
     }
 
     private void toggle() {
-        if (VISBLE){
+        if (!VISBLE){
             regist.setText("立即注册");
             btRegist.setVisibility(View.INVISIBLE);
             login.setVisibility(View.VISIBLE);
             emailLayout.setVisibility(View.INVISIBLE);
-            VISBLE=false;
+            VISBLE=true;
         }else {
             regist.setText("立即登录");
             emailLayout.setVisibility(View.VISIBLE);
             btRegist.setVisibility(View.VISIBLE);
             login.setVisibility(View.INVISIBLE);
-            VISBLE=true;
+            VISBLE=false;
         }
     }
 }

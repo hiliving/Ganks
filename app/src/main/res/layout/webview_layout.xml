@@ -17,11 +17,12 @@
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_menu_share"
+        app:srcCompat="@mipmap/plus"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="30dp"
         android:id="@+id/fab_add"
         />
+
 </RelativeLayout>

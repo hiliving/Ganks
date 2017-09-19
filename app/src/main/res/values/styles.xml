@@ -15,4 +15,9 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="popwin_anim_style" parent="AppTheme">
+        <item name="android:windowEnterAnimation">@anim/alpha_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/alpha_fade_out</item>
+    </style>
 </resources>
