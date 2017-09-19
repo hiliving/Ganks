@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -64,6 +65,7 @@ public class GankPresenter<T> extends BasePresenter<IGanHuoView> implements Seri
                             iView.showNoMoreData();
                         } else {
                             iView.showListView(gankDatas.getResults());
+                           // Log.d("LOG",gankDatas.getResults().get(0).getImages().toString());
                         }
                     }
                 });

@@ -3,6 +3,7 @@ package com.develop.hy.ganks.ui;
 import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -113,7 +114,9 @@ public class SearchActivity extends BaseActivity implements IGanHuoView, HXRecyc
     }
     @Override
     public void showErrorData() {
-        ToastUtils.showShortToast("加载出错");
+        if (TextUtils.isEmpty(et_search.getText())){
+            ToastUtils.showShortToast("请输入搜索数据");
+        }
         refreshLayout.setRefreshing(false);
         canLoading = false;
     }

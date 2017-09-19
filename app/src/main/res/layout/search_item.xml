@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp"
     android:id="@+id/favor_cardview"
-    android:layout_height="100dp">
+    android:layout_height="130dp">
     <TextView
         android:layout_margin="10dp"
         android:layout_width="match_parent"
@@ -20,16 +20,17 @@
         android:text="作者，来源"
         android:id="@+id/favorite_author"
         android:textSize="14sp"
-        android:layout_margin="10dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="20dp"
+        android:maxLines="1"
         android:layout_gravity="bottom"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/favorite_time"
         android:text="收藏时间:2017/6/5"
         android:layout_gravity="right|bottom"
-        android:layout_margin="10dp"
+        android:layout_marginBottom="20dp"
         android:textSize="12sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

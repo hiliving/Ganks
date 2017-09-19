@@ -8,9 +8,18 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_gravity="bottom"
-        android:layout_height="wrap_content">
+        android:layout_height="80dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/item_img"
+            android:layout_marginLeft="16dp"
+            />
         <TextView
             android:layout_width="wrap_content"
+            android:layout_toRightOf="@+id/item_img"
             android:layout_height="wrap_content"
             android:id="@+id/tv_list_item_title"
             android:text="测试条目"
@@ -34,11 +43,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="内容"
+            android:gravity="bottom"
+            android:layout_toRightOf="@+id/item_img"
             android:layout_gravity="left|bottom"
             android:id="@+id/tv_list_item_content"
-            android:layout_below="@+id/tv_list_item_title"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
+            android:layout_alignParentBottom="true"
             />
     </RelativeLayout>
 

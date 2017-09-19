@@ -19,19 +19,13 @@ import com.develop.hy.ganks.databinding.WebviewLayoutBinding;
 import com.develop.hy.ganks.model.Favorite;
 import com.develop.hy.ganks.model.User;
 import com.develop.hy.ganks.utils.ShareUtil;
-import com.develop.hy.ganks.utils.ToastUtils;
 import com.just.library.AgentWeb;
 import com.just.library.ChromeClientCallbackManager;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 
 /**
@@ -44,7 +38,11 @@ public class WebViewActivity extends BaseActivity {
     @BindView(R.id.webview)
     WebView webView;
     @BindView(R.id.rootlayout)
-    RelativeLayout weblayout;
+    RelativeLayout webrootview;
+    @BindView(R.id.weblayout)
+    RelativeLayout rootview;
+
+
     @BindView(R.id.fab_add)
     FloatingActionButton fab_add;
     private AgentWeb mAgentWeb;
@@ -55,7 +53,7 @@ public class WebViewActivity extends BaseActivity {
     protected void initView() {
         ButterKnife.bind(this);
 
-        binding = DataBindingUtil.setContentView(this, R.layout.webview_layout);
+        binding = DataBindingUtil.setContentView(WebViewActivity.this, R.layout.webview_layout);
         binding.setFabHandler(new FabHandler());
         getAnimations();
 
@@ -72,7 +70,6 @@ public class WebViewActivity extends BaseActivity {
                 .createAgentWeb()//
                 .ready()
                 .go(getIntent().getStringExtra("URL"));
-
     }
 
 
@@ -104,7 +101,7 @@ public class WebViewActivity extends BaseActivity {
                 expandFabMenu();
         }
 
-        public void onFavoriteFabClick(View view) {
+        public void onFavoriteFabClick(final View view) {
 
             User user =BmobUser.getCurrentUser(User.class);
             Favorite favorite = new Favorite();
@@ -115,7 +112,7 @@ public class WebViewActivity extends BaseActivity {
             favorite.save(new SaveListener<String>() {
                               @Override
                               public void done(String s, BmobException e) {
-                                  Snackbar.make(weblayout, "添加收藏成功~", Toast.LENGTH_SHORT).show();
+                                  Snackbar.make(view, "添加收藏成功~", Toast.LENGTH_SHORT).show();
                               }
                           }
             );
