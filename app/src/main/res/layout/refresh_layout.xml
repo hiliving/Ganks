@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_height="match_parent">
-    <com.develop.hy.ganks.ui.HXRecyclerView
+    <com.develop.hy.ganks.ui.view.HXRecyclerView
         android:id="@+id/recycleview"
         android:background="#fff"
         android:layout_width="match_parent"

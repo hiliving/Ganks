@@ -21,6 +21,19 @@ android {
         }
     }
 
+    dataBinding {
+        enabled = true
+    }
+    //删除META-INF信息
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+        exclude 'META-INF/maven/com.squareup.okhttp3/okhttp/pom.xml'
+        exclude 'META-INF/maven/com.squareup.okhttp3/okhttp/pom.properties'
+        exclude 'META-INF/maven/com.squareup.okio/okio/pom.xml'
+        exclude 'META-INF/maven/com.squareup.okio/okio/pom.properties'
+        exclude 'META-INF/maven/com.google.code.gson/gson/pom.xml'
+        exclude 'META-INF/maven/com.google.code.gson/gson/pom.properties'
+    }
 }
 
 dependencies {
@@ -64,7 +77,8 @@ dependencies {
     //网页加载器
     compile 'com.just.agentweb:agentweb:2.0.1'
     //登录注册用的是bomb后端云
-    compile 'cn.bmob.android:bmob-sdk:3.4.7-aar'
+    //bmob-sdk
+    compile 'cn.bmob.android:bmob-sdk:3.5.7'
     //图片查看器
     compile 'com.github.SuperKotlin:PictureViewer:1.0.2'
     //可扩展的按钮
@@ -72,5 +86,5 @@ dependencies {
     //动画库
     compile 'com.github.XunMengWinter:CircularAnim:0.3.4'
 
-    compile 'me.wangyuwei:FlipShare:1.0.2'
+    compile 'com.nightonke:boommenu:2.1.1'
 }

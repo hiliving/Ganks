@@ -17,7 +17,7 @@ import com.develop.hy.ganks.http.ApiManager;
 import com.develop.hy.ganks.model.GankBean;
 import com.develop.hy.ganks.presenter.CommenInterface.IGanHuoView;
 import com.develop.hy.ganks.ui.LoginActivity;
-import com.develop.hy.ganks.ui.UserCenter;
+import com.develop.hy.ganks.ui.UserCenterActivity;
 import com.develop.hy.ganks.utils.Utils;
 
 import java.io.Serializable;
@@ -134,7 +134,7 @@ public class GankPresenter<T> extends BasePresenter<IGanHuoView> implements Seri
     public void initUserInfo(final MainActivity activity, TextView userid, ImageView userIcon, RelativeLayout rl) {
         Bitmap bitmap = BitmapFactory.decodeResource(activity.getResources(),R.mipmap.haveno_login);
         Bitmap roundIcon = Utils.GetRoundedCornerBitmap(bitmap);
-        BmobUser bmobUser = BmobUser.getCurrentUser(activity);
+        BmobUser bmobUser = BmobUser.getCurrentUser();
         if (bmobUser!=null){
             userid.setText(bmobUser.getUsername()+"|已登录");
             userIcon.setImageBitmap(roundIcon);
@@ -147,7 +147,7 @@ public class GankPresenter<T> extends BasePresenter<IGanHuoView> implements Seri
             rl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    activity.startActivity(new Intent(activity,UserCenter.class));
+                    activity.startActivity(new Intent(activity,UserCenterActivity.class));
                 }
             });
         }else {

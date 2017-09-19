@@ -1,15 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:paddingLeft="20dp"
-    android:layout_height="wrap_content">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    android:id="@+id/favor_cardview"
+    android:layout_height="100dp">
     <TextView
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="开源项目"
-        android:id="@+id/tv_content"
-        android:textColor="#f5bebebe"
-        android:textSize="14sp"
+        android:text="开源项目，同时这个又是描述标题"
+        android:id="@+id/favorite_content"
+        android:maxLines="2"
+        android:textColor="#f5484848"
+        android:textSize="16sp"
+        android:layout_gravity="top"
         />
-</LinearLayout>
+    <TextView
+        android:text="作者，来源"
+        android:id="@+id/favorite_author"
+        android:textSize="14sp"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/favorite_time"
+        android:text="收藏时间:2017/6/5"
+        android:layout_gravity="right|bottom"
+        android:layout_margin="10dp"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="@color/delete"
+        android:buttonTint="@color/delete"
+        android:background="@drawable/check_box"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         />
+</android.support.v7.widget.CardView>

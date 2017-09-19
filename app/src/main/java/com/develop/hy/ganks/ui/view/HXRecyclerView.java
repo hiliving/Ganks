@@ -1,4 +1,4 @@
-package com.develop.hy.ganks.ui;
+package com.develop.hy.ganks.ui.view;
 
 import android.content.Context;
 import android.support.annotation.Nullable;

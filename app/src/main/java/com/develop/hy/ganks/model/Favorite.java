@@ -1,23 +1,25 @@
 package com.develop.hy.ganks.model;
 
+import java.io.Serializable;
+
 import cn.bmob.v3.BmobObject;
 
 /**
  * Created by Helloworld on 2017/9/19.
  */
 
-public class Favorite extends BmobObject {
-    private String userId;
+public class Favorite extends BmobObject implements Serializable{
+    private User userId;
     private String time;
     private String title;
-    private String Url;
+    private String url;
     private String author;
 
-    public String getUserId() {
+    public User getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
 
@@ -38,11 +40,11 @@ public class Favorite extends BmobObject {
     }
 
     public String getUrl() {
-        return Url;
+        return url;
     }
 
     public void setUrl(String url) {
-        Url = url;
+        this.url = url;
     }
 
     public String getAuthor() {

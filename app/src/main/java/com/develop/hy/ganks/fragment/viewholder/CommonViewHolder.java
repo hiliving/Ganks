@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.develop.hy.ganks.R;
 import com.develop.hy.ganks.fragment.adapter.MutiTypeAdapter;
 import com.develop.hy.ganks.model.GankBean;
+import com.develop.hy.ganks.presenter.CommenInterface.OnItemClickListener;
 
 import java.util.List;
 
@@ -21,10 +22,10 @@ public class CommonViewHolder  extends BaseViewHolder<List<GankBean.ResultsBean>
     private final TextView tvtitle;
     private final TextView tvContent;
     private final CardView carview;
-    private MutiTypeAdapter.OnItemClickListener listener;
+    private OnItemClickListener listener;
     private final TextView creattime;
 
-    public CommonViewHolder(MutiTypeAdapter.OnItemClickListener listener, Context context, View itemView) {
+    public CommonViewHolder(OnItemClickListener listener, Context context, View itemView) {
         super(itemView);
         this.context = context;
         this.listener = listener;

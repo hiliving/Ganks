@@ -15,7 +15,9 @@ import com.develop.hy.ganks.dagger.module.SearchActivityModule;
 import com.develop.hy.ganks.fragment.adapter.MutiTypeAdapter;
 import com.develop.hy.ganks.model.GankBean;
 import com.develop.hy.ganks.presenter.CommenInterface.IGanHuoView;
+import com.develop.hy.ganks.presenter.CommenInterface.OnItemClickListener;
 import com.develop.hy.ganks.presenter.GankPresenter;
+import com.develop.hy.ganks.ui.view.HXRecyclerView;
 import com.develop.hy.ganks.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ import static com.develop.hy.ganks.Constants.searchHistory;
  * Created by Helloworld on 2017/9/17.
  */
 
-public class SearchActivity extends BaseActivity implements IGanHuoView, HXRecyclerView.LoadMoreListener, SwipeRefreshLayout.OnRefreshListener,  MutiTypeAdapter.OnItemClickListener{
+public class SearchActivity extends BaseActivity implements IGanHuoView, HXRecyclerView.LoadMoreListener, SwipeRefreshLayout.OnRefreshListener, OnItemClickListener {
 
     private int page = 1;
     @Inject
@@ -173,7 +175,15 @@ public class SearchActivity extends BaseActivity implements IGanHuoView, HXRecyc
 
     @Override
     public void onItemClick(int position, boolean isGirl) {
-            startActivity(new Intent(this, WebViewActivity.class).putExtra("URL",gankList.get(position).getUrl()));
+            startActivity(new Intent(this, WebViewActivity.class)
+                    .putExtra("URL",gankList.get(position).getUrl())
+                    .putExtra("Title",gankList.get(position).getDesc())
+                    .putExtra("Author",gankList.get(position).getWho()));
+    }
+
+    @Override
+    public void onDeleteItem(int position) {
+
     }
 
     @Override

@@ -11,6 +11,7 @@ import com.develop.hy.ganks.fragment.viewholder.CommonViewHolder;
 import com.develop.hy.ganks.fragment.viewholder.GirlViewHolder;
 import com.develop.hy.ganks.http.GankType;
 import com.develop.hy.ganks.model.GankBean;
+import com.develop.hy.ganks.presenter.CommenInterface.OnItemClickListener;
 
 import java.util.List;
 
@@ -50,12 +51,9 @@ public class MutiTypeAdapter extends RecyclerView.Adapter<BaseViewHolder<List<Ga
     public int getItemCount() {
         return resultsBeen.size();
     }
-    public void setOnItemtClickListener(MutiTypeAdapter.OnItemClickListener listener){
+    public void setOnItemtClickListener(OnItemClickListener listener){
         this.listener= listener;
     }
-    private MutiTypeAdapter.OnItemClickListener listener;
-    public interface OnItemClickListener{
-        void onItemClick(int position,boolean isGirl);
-    }
+    private OnItemClickListener listener;
 
 }

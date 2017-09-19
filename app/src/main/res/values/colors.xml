@@ -19,4 +19,7 @@
     <color name="red">#db3434</color>
     <color name="green">#11b900</color>
     <color name="yellow">#ffff00</color>
+    <color name="delete">#fa000d</color>
+
+    <color name="colorLabelFab">#000000</color>
 </resources>

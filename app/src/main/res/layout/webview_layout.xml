@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <data>
+        <variable
+            name="FabHandler"
+            type="com.develop.hy.ganks.ui.WebViewActivity.FabHandler" />
+    </data>
+
+<RelativeLayout
     android:orientation="vertical"
     android:id="@+id/weblayout"
     android:layout_width="match_parent"
@@ -19,10 +28,92 @@
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/plus"
         android:layout_alignParentRight="true"
+        android:onClick="@{FabHandler::onBaseFabClick}"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="30dp"
         android:id="@+id/fab_add"
         />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_above="@+id/fab_add"
+        android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:id="@+id/shareLayout"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:visibility="invisible"
+           >
+
+            <TextView
+                android:id="@+id/shareLabelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/shape_fab_label"
+                android:elevation="2dp"
+                android:fontFamily="sans-serif"
+                android:padding="5dip"
+                android:text="分享"
+                android:textColor="@android:color/white"
+                android:typeface="normal" />
+
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/shareFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:onClick="@{FabHandler::onShareFabClick}"
+                android:tint="@android:color/white"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/ic_share_black_24dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/createLayout"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:visibility="invisible"
+          >
+
+            <TextView
+                android:id="@+id/createLabelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_fab_label"
+                android:elevation="2dp"
+                android:fontFamily="sans-serif"
+                android:padding="5dip"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="收藏"
+                android:textColor="@android:color/white"
+                android:typeface="normal" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/createFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:onClick="@{FabHandler::onFavoriteFabClick}"
+                android:tint="@android:color/white"
+                app:fabSize="mini"
+                app:srcCompat="@mipmap/like" />
+
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>
+</layout>

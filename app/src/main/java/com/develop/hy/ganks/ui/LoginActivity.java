@@ -1,10 +1,8 @@
 package com.develop.hy.ganks.ui;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -15,7 +13,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.a.a.V;
 import com.develop.hy.ganks.BaseActivity;
 import com.develop.hy.ganks.R;
 import com.develop.hy.ganks.dagger.component.DaggerLoginActivityComponent;
@@ -97,7 +94,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         .go(new CircularAnim.OnAnimationEndListener() {
                             @Override
                             public void onAnimationEnd() {
-                                startActivity(new Intent(LoginActivity.this, UserCenter.class));
+                                startActivity(new Intent(LoginActivity.this, UserCenterActivity.class));
                                 finish();
                             }
                         });

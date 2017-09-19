@@ -1,19 +1,17 @@
 package com.develop.hy.ganks.dagger;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
-import com.develop.hy.ganks.MainActivity;
-import com.develop.hy.ganks.R;
 import com.develop.hy.ganks.model.User;
 import com.develop.hy.ganks.ui.LoginActivity;
-import com.develop.hy.ganks.ui.UserCenter;
+import com.develop.hy.ganks.ui.UserCenterActivity;
 import com.develop.hy.ganks.utils.ToastUtils;
 
+import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 import top.wefor.circularanim.CircularAnim;
 
@@ -36,7 +34,7 @@ public class LoginPresenter {
             ToastUtils.showShortToast("用户名或密码不能为空");
             return;
         }
-        p3.login(loginActivity, new SaveListener() {
+       /* p3.login(loginActivity, new SaveListener() {
             @Override
             public void onSuccess() {
                 progressbar.setVisibility(View.VISIBLE);
@@ -49,7 +47,20 @@ public class LoginPresenter {
                 progressbar.setVisibility(View.INVISIBLE);
                 login.setVisibility(View.VISIBLE);
             }
-        });
+        });*/
+       p3.login(new SaveListener<User>() {
+           @Override
+           public void done(User user, BmobException e) {
+               if (user!=null){
+                   progressbar.setVisibility(View.VISIBLE);
+                   startToUserCenter(login,progressbar);
+               }else {
+                   ToastUtils.showShortToast("登录失败"+e.getMessage());
+                   progressbar.setVisibility(View.INVISIBLE);
+                   login.setVisibility(View.VISIBLE);
+               }
+           }
+       });
     }
 
    public void startToUserCenter(Button login, final ProgressBar progressbar){
@@ -61,7 +72,7 @@ public class LoginPresenter {
                        .go(new CircularAnim.OnAnimationEndListener() {
                            @Override
                            public void onAnimationEnd() {
-                               loginActivity.startActivity(new Intent(loginActivity, UserCenter.class));
+                               loginActivity.startActivity(new Intent(loginActivity, UserCenterActivity.class));
                                loginActivity.finish();
                            }
                        });
@@ -82,7 +93,7 @@ public class LoginPresenter {
         p2.setUsername(username);
         p2.setPassword(pwd);
         p2.setEmail(email);
-        p2.signUp(loginActivity, new SaveListener() {
+      /*  p2.signUp(loginActivity, new SaveListener() {
             @Override
             public void onSuccess() {
                 ToastUtils.showShortToast("注册成功");
@@ -107,6 +118,28 @@ public class LoginPresenter {
                 ToastUtils.showShortToast("注册失败"+s);
                 if (listener!=null){
                     listener.OnFail(s);
+                }
+            }
+        });*/
+        p2.signUp(new SaveListener<User>() {
+            @Override
+            public void done(User user, BmobException e) {
+                if (user!=null){
+                    ToastUtils.showShortToast("注册成功");
+                    progressbar.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            CircularAnim.fullActivity(loginActivity, progressbar)
+                                    .go(new CircularAnim.OnAnimationEndListener() {
+                                        @Override
+                                        public void onAnimationEnd() {
+                                            if (listener!=null){
+                                                listener.OnFinish();
+                                            }
+                                        }
+                                    });
+                        }
+                    }, 2000);
                 }
             }
         });

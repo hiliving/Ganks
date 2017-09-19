@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide;
 import com.develop.hy.ganks.R;
 import com.develop.hy.ganks.fragment.adapter.MutiTypeAdapter;
 import com.develop.hy.ganks.model.GankBean;
+import com.develop.hy.ganks.presenter.CommenInterface.OnItemClickListener;
 
 import java.util.List;
 
@@ -20,9 +21,9 @@ public class GirlViewHolder extends BaseViewHolder<List<GankBean.ResultsBean>> {
     TextView tv_list_author;
     TextView tv_list_content;
     Context context;
-    private MutiTypeAdapter.OnItemClickListener listener;
+    private OnItemClickListener listener;
     ImageView pic;
-    public GirlViewHolder(MutiTypeAdapter.OnItemClickListener listener, Context context, View itemView) {
+    public GirlViewHolder(OnItemClickListener listener, Context context, View itemView) {
         super(itemView);
         this.context = context;
         tv_list_author = (TextView) itemView.findViewById(R.id.tv_list_author);

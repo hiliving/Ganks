@@ -10,13 +10,13 @@ import android.widget.FrameLayout;
 import com.SuperKotlin.pictureviewer.ImagePagerActivity;
 import com.SuperKotlin.pictureviewer.PictureConfig;
 import com.develop.hy.ganks.Constants;
-import com.develop.hy.ganks.MainActivity;
 import com.develop.hy.ganks.R;
 import com.develop.hy.ganks.fragment.adapter.MutiTypeAdapter;
 import com.develop.hy.ganks.model.GankBean;
+import com.develop.hy.ganks.presenter.CommenInterface.OnItemClickListener;
 import com.develop.hy.ganks.presenter.GankPresenter;
 import com.develop.hy.ganks.presenter.CommenInterface.IGanHuoView;
-import com.develop.hy.ganks.ui.HXRecyclerView;
+import com.develop.hy.ganks.ui.view.HXRecyclerView;
 import com.develop.hy.ganks.ui.WebViewActivity;
 import com.develop.hy.ganks.utils.ToastUtils;
 
@@ -29,7 +29,7 @@ import butterknife.BindView;
  * Created by HY on 2017/9/12.
  */
 
-public class CommonFragment extends BaseFragment<GankPresenter> implements IGanHuoView, HXRecyclerView.LoadMoreListener, SwipeRefreshLayout.OnRefreshListener,  MutiTypeAdapter.OnItemClickListener {
+public class CommonFragment extends BaseFragment<GankPresenter> implements IGanHuoView, HXRecyclerView.LoadMoreListener, SwipeRefreshLayout.OnRefreshListener, OnItemClickListener {
     @BindView(R.id.recycleview)
     HXRecyclerView recycleview;
     @BindView(R.id.sw_layout)
@@ -174,7 +174,14 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
           ImagePagerActivity.startActivity(getContext(), config);
       } else {
           startActivity(new Intent(getContext(), WebViewActivity.class).putExtra("URL",gankList
-                  .get(position).getUrl()).putExtra("Title",gankList.get(position).getDesc()));
+                  .get(position).getUrl())
+                  .putExtra("Title",gankList.get(position).getDesc())
+                    .putExtra("Author",gankList.get(position).getWho()));
       }
+    }
+
+    @Override
+    public void onDeleteItem(int position) {
+
     }
 }

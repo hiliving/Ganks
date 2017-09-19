@@ -9,31 +9,32 @@
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:background="#fff"
-        android:layout_height="120dp">
+        android:layout_height="250dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="用户名"
             android:id="@+id/tv_username"
-            android:textColor="#1d1d1d"
-            android:layout_marginLeft="20dp"
-            android:layout_centerVertical="true"
+            android:textColor="#363636"
             android:textSize="25sp"
+            android:layout_below="@+id/user_header"
+            android:layout_centerHorizontal="true"
             />
         <TextView
             android:layout_below="@+id/tv_username"
-            android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="虽然没赚到钱，但是我学到了很多知识"
+            android:layout_centerHorizontal="true"
+            android:text="好好学习，天天向上"
             />
         <ImageView
-            android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_width="80dp"
+            android:id="@+id/user_header"
+            android:layout_height="80dp"
             android:layout_centerVertical="true"
             android:layout_marginRight="40dp"
-            android:background="@mipmap/have_login"
+            android:background="@mipmap/haveno_login"
             />
     </RelativeLayout>
    <LinearLayout
