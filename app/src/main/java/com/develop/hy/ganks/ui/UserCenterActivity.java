@@ -29,9 +29,9 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
     @BindView(R.id.bt_logout)
     Button logout;
     @BindView(R.id.bt_collect)
-    Button collect;
+    TextView collect;
     @BindView(R.id.bt_clear_cache)
-    Button clear;
+    TextView clear;
     @BindView(R.id.tv_username)
     TextView username;
     private UserCenterPresenter presenter;
