@@ -1,15 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="1dp"
+        >
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:id="@+id/login_toobar"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:layout_height="?attr/actionBarSize">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="用户登录"
+                app:paddingStart="0dp"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                />
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
     <RelativeLayout
+        android:layout_marginTop="?attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <FrameLayout
             android:id="@+id/anim_head"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:layout_alignParentTop="true"
             android:background="@color/colorAccent">
 
@@ -81,7 +108,6 @@
             android:textColor="@color/colorPrimary"
             android:layout_width="300dp"
             android:textSize="20sp"
-
             android:layout_marginTop="31dp"
             android:background="@drawable/bt_bg"
             android:id="@+id/login"
@@ -134,6 +160,38 @@
             android:layout_alignBaseline="@+id/regist"
             android:layout_alignBottom="@+id/regist"
             android:layout_toStartOf="@+id/regist" />
+       <LinearLayout
+           android:id="@+id/third_login"
+           android:layout_width="wrap_content"
+           android:layout_alignParentBottom="true"
+           android:orientation="horizontal"
+           android:layout_centerHorizontal="true"
+           android:layout_marginBottom="60dp"
+           android:layout_height="wrap_content">
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/share_weixin"
+               android:layout_marginRight="30dp"
+               />
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/share_qq_on"
+               android:layout_marginRight="30dp"
+               />
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/share_sina"
+               />
+       </LinearLayout>
+       <include layout="@layout/tip_title_view"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_above="@+id/third_login"
+           android:layout_marginBottom="10dp"
+           />
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

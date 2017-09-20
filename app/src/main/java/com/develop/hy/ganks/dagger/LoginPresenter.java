@@ -34,25 +34,10 @@ public class LoginPresenter {
             ToastUtils.showShortToast("用户名或密码不能为空");
             return;
         }
-       /* p3.login(loginActivity, new SaveListener() {
-            @Override
-            public void onSuccess() {
-                progressbar.setVisibility(View.VISIBLE);
-                startToUserCenter(login,progressbar);
-            }
-
-            @Override
-            public void onFailure(int i, String s) {
-                ToastUtils.showShortToast("登录失败");
-                progressbar.setVisibility(View.INVISIBLE);
-                login.setVisibility(View.VISIBLE);
-            }
-        });*/
        p3.login(new SaveListener<User>() {
            @Override
            public void done(User user, BmobException e) {
                if (user!=null){
-                   progressbar.setVisibility(View.VISIBLE);
                    startToUserCenter(login,progressbar);
                }else {
                    ToastUtils.showShortToast("登录失败"+e.getMessage());

@@ -7,4 +7,14 @@
         android:layout_width="match_parent"
         android:id="@+id/favorite_recycleview"
         android:layout_height="match_parent"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="收藏夹空空如也"
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/favorite_nodata"
+        android:drawableTop="@drawable/nodata"
+        />
 </RelativeLayout>

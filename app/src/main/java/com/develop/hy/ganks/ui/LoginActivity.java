@@ -3,6 +3,7 @@ package com.develop.hy.ganks.ui;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -54,6 +55,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     WavePageView waveview;
     @BindView(R.id.anim_image)
     ImageView animImage;
+    @BindView(R.id.login_toobar)
+    Toolbar loginToolbar;
     @Inject
     LoginPresenter presenter;
     private String userStr;
@@ -63,6 +66,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        setTitle("");
+        setSupportActionBar(loginToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Inject();
         initEvent();
     }
@@ -83,7 +89,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 animImage.setLayoutParams(lp);
             }
         });
-
+        loginToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         login.setOnClickListener(this);
         regist.setOnClickListener(this);
         btRegist.setOnClickListener(this);
@@ -176,7 +187,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         switch (v.getId()){
             case R.id.login:
                 login.setVisibility(View.INVISIBLE);
-               presenter.login(userStr,pwdStr,login,progressbar);
+                progressbar.setVisibility(View.VISIBLE);
+                presenter.login(userStr,pwdStr,login,progressbar);
                 break;
             case R.id.regist:
                 toggle();

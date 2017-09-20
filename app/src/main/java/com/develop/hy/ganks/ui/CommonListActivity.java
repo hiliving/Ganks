@@ -5,16 +5,17 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.develop.hy.ganks.BaseActivity;
 import com.develop.hy.ganks.R;
-import com.develop.hy.ganks.dagger.UserCenterPresenter;
 import com.develop.hy.ganks.fragment.adapter.FavoriteAdapter;
 import com.develop.hy.ganks.model.Favorite;
+import com.develop.hy.ganks.presenter.CommenInterface.IFavoriteView;
 import com.develop.hy.ganks.presenter.CommenInterface.OnItemClickListener;
+import com.develop.hy.ganks.presenter.FavoritePresenter;
 
 import java.util.List;
 
@@ -25,20 +26,23 @@ import butterknife.ButterKnife;
  * Created by HY on 2017/9/19.
  */
 
-public class CommonListActivity extends BaseActivity implements OnItemClickListener{
+public class CommonListActivity extends BaseActivity implements OnItemClickListener,IFavoriteView{
     @BindView(R.id.favorite_recycleview)
     RecyclerView favoriteRecycleview;
     @BindView(R.id.root_favorite)
     RelativeLayout rootFavorite;
+    @BindView(R.id.favorite_nodata)
+    TextView favoriteNodata;
     private FavoriteAdapter favoriteAdapter;
     private List<Favorite> favorites;
-    private UserCenterPresenter presenter;
+    private FavoritePresenter presenter;
 
 
     @Override
     protected void initView() {
         ButterKnife.bind(this);
-        presenter = new UserCenterPresenter(this);
+        presenter = new FavoritePresenter(this,this);
+        presenter.init();
         Bundle bundle = getIntent().getBundleExtra("Data");
         favorites = (List<Favorite>) bundle.getSerializable("Favorite");
         favoriteRecycleview.setLayoutManager(new LinearLayoutManager(this));
@@ -68,5 +72,38 @@ public class CommonListActivity extends BaseActivity implements OnItemClickListe
                         favoriteAdapter.notifyItemChanged(position);
                     }
                 }).show();
+        if (favorites.size()==0){
+            favoriteNodata.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void showProgressBar() {
+
+    }
+
+    @Override
+    public void hideProgressBar() {
+
+    }
+
+    @Override
+    public void showErrorData() {
+
+    }
+
+    @Override
+    public void showNoMoreData() {
+
+    }
+
+    @Override
+    public void initData(List<Favorite> favorites) {
+
     }
 }

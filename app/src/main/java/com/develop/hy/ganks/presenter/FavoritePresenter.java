@@ -1,18 +1,15 @@
-package com.develop.hy.ganks.dagger;
+package com.develop.hy.ganks.presenter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
+import android.util.Log;
 
 import com.develop.hy.ganks.model.Favorite;
 import com.develop.hy.ganks.model.User;
-import com.develop.hy.ganks.ui.CommonListActivity;
-import com.develop.hy.ganks.ui.UserCenterActivity;
+import com.develop.hy.ganks.presenter.CommenInterface.IFavoriteView;
 import com.develop.hy.ganks.utils.ToastUtils;
 
-import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
@@ -21,16 +18,19 @@ import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 /**
- * Created by HY on 2017/9/19.
+ * Created by Helloworld on 2017/9/20.
  */
 
-public class UserCenterPresenter {
-    private Context userCenterActivity;
+public class FavoritePresenter extends BasePresenter<IFavoriteView> {
 
-    public UserCenterPresenter(Context userCenterActivity) {
-        this.userCenterActivity = userCenterActivity;
+    public FavoritePresenter(Context context, IFavoriteView iView) {
+        super(context, iView);
     }
 
+    @Override
+    public void release() {
+        unSubcription();
+    }
 
     public void getFavorite() {
         User user = BmobUser.getCurrentUser(User.class);
@@ -42,10 +42,7 @@ public class UserCenterPresenter {
             @Override
             public void done(List<Favorite> list, BmobException e) {
                 if (list!=null){
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("Favorite", (Serializable) list);
-                    userCenterActivity.startActivity(new Intent(userCenterActivity, CommonListActivity.class)
-                    .putExtra("Data",bundle));
+                    iView.initData(list);
                 }else {
                 }
             }
@@ -58,7 +55,9 @@ public class UserCenterPresenter {
         favorite.delete(new UpdateListener() {
             @Override
             public void done(BmobException e) {
-                ToastUtils.showShortToast("刪除成功");
+                ToastUtils.showShortToast("刪除收藏成功");
+                Log.d("AAAAAAAAAA",e.toString());
+
             }
         });
     }
