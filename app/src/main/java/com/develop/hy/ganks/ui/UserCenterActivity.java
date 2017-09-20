@@ -179,11 +179,7 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
                     Log.i(TAG, s);
                     path.add(s);
                 }
-                if (IS_USER_BG){
-                    presenter.pushUserBgImg(path);//上传头像
-                }else {
                     presenter.pushImage(path);//上传头像
-                }
 
             }
 
@@ -206,7 +202,6 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
     }
 
     private void checkPermissions() {
-/*
         if (Build.VERSION.SDK_INT >= 23) {
             int checkCallPhonePermission = ContextCompat.checkSelfPermission(UserCenterActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
             if(checkCallPhonePermission != PackageManager.PERMISSION_GRANTED){
@@ -220,11 +215,11 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
         } else {
             //直接往下走
             GalleryPick.getInstance().setGalleryConfig(galleryConfig).open(UserCenterActivity.this);
-        }*/
+        }
 
 
 
-        if (ContextCompat.checkSelfPermission(UserCenterActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+       /* if (ContextCompat.checkSelfPermission(UserCenterActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             Log.i(TAG, "需要授权 ");
             if (ActivityCompat.shouldShowRequestPermissionRationale(UserCenterActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 Log.i(TAG, "拒绝过了");
@@ -238,7 +233,7 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
             Log.i(TAG, "不需要授权 ");
             // 进行正常操作
             GalleryPick.getInstance().setGalleryConfig(galleryConfig).open(UserCenterActivity.this);
-        }
+        }*/
     }
 
     @Override

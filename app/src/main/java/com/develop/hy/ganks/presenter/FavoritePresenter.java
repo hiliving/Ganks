@@ -37,6 +37,7 @@ import rx.functions.Func1;
 public class FavoritePresenter extends BasePresenter<IFavoriteView> {
     private String TAG = "FavoritePresenter";
     private final User user;
+    private UserFile userFile;
 
     public FavoritePresenter(Context context, IFavoriteView iView) {
         super(context, iView);
@@ -126,27 +127,13 @@ public class FavoritePresenter extends BasePresenter<IFavoriteView> {
         }).concatMap(new Func1<Void, Observable<String>>() {//将bmobFile保存到movie表中
             @Override
             public Observable<String> call(Void aVoid) {
-                UserFile userFile = new UserFile();
+                userFile = new UserFile();
                 userFile.setUserId(user);
                 userFile.setUsername(user.getUsername());
                 userFile.setBgimg(bmobFile.getUrl());
                 return saveObservable(userFile);
             }
-        });
-        /*
-        这个是下载文件用，这里用不到，我们用Glide会自动做缓存
-        .concatMap(new Func1<String, Observable<String>>() {//下载文件
-            @Override
-            public Observable<String> call(String s) {
-                return bmobFile.downloadObservable(new ProgressCallback() {
-                    @Override
-                    public void onProgress(Integer value, long total) {
-                        log("download-->onProgress:"+value+","+total);
-                    }
-                });
-            }
-        })
-            .subscribe(new Subscriber<String>() {
+        }).subscribe(new Subscriber<String>() {
             @Override
             public void onCompleted() {
                 log("--onCompleted--");
@@ -163,7 +150,21 @@ public class FavoritePresenter extends BasePresenter<IFavoriteView> {
                 dialog.dismiss();
                 log("download的文件地址：");
             }
-        });*/
+        });;
+        /*
+        这个是下载文件用，这里用不到，我们用Glide会自动做缓存
+        .concatMap(new Func1<String, Observable<String>>() {//下载文件
+            @Override
+            public Observable<String> call(String s) {
+                return bmobFile.downloadObservable(new ProgressCallback() {
+                    @Override
+                    public void onProgress(Integer value, long total) {
+                        log("download-->onProgress:"+value+","+total);
+                    }
+                });
+            }
+        })
+            */
 
     }
 
