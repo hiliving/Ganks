@@ -9,84 +9,171 @@
     tools:context="com.develop.hy.ganks.ui.AboutUsActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
-        android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
+        android:id="@+id/app_bar"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="1dp"
+        >
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/us_toolbar"
+            android:layout_gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" >
             <TextView
-                android:id="@+id/title_aboutus"
-                android:layout_gravity="bottom"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="关于"
+                android:layout_gravity="center"
                 android:textSize="20sp"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"/>
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay" >
-            </android.support.v7.widget.Toolbar>
+                android:textColor="@color/white"
 
-        </android.support.design.widget.CollapsingToolbarLayout>
+                />
+        </android.support.v7.widget.Toolbar>
+
     </android.support.design.widget.AppBarLayout>
 
-
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_menu_share" />
-    <include layout="@layout/content_about_us"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="160dp"
+        android:gravity="center_horizontal"
+        android:text="v2.02"
+        android:drawableTop="@mipmap/ic_launcher"
         />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:gravity="center_vertical|right"
-        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginBottom="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center_vertical|right"
+        android:orientation="vertical"
 
-        android:layout_height="wrap_content">
+        android:padding="4dp">
 
-        <TextView
-            android:id="@+id/mygithub"
-            android:layout_alignParentBottom="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:clickable="true"
-            android:focusableInTouchMode="true"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginLeft="20dp"
-            android:text="我的Github"
-            />
-        <TextView
-            android:id="@+id/mycsdn"
-            android:layout_alignParentBottom="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:clickable="true"
-            android:focusableInTouchMode="true"
-            android:textColor="@color/colorPrimary"
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="4dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="20dp"
-            android:text="我的CSDN"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="10dp">
 
+            <TextView
+                android:id="@+id/us_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="10dp"
+                android:clickable="true"
+                android:focusableInTouchMode="true"
+                android:text="作者：hiliving"
+                android:textColor="@color/colorPrimary" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:cardCornerRadius="10dp">
+
+            <TextView
+                android:id="@+id/mygithub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="10dp"
+                android:clickable="true"
+                android:focusableInTouchMode="true"
+                android:text="我的Github：https://github.com/hiliving"
+                android:textColor="@color/colorPrimary" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:cardCornerRadius="10dp">
+
+            <TextView
+                android:id="@+id/mycsdn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:clickable="true"
+                android:focusableInTouchMode="true"
+                android:text="我的CSDN：blog.csdn.net/huang_yong_"
+                android:textColor="@color/colorPrimary" />
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:cardCornerRadius="10dp">
+
+            <TextView
+                android:id="@+id/myemail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:clickable="true"
+                android:focusableInTouchMode="true"
+                android:text="我的Email：yongdev@163.com"
+                android:textColor="@color/colorPrimary" />
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="bottom"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="意见反馈"
+            android:id="@+id/suggest"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="打赏鼓励"
+            android:id="@+id/encourage"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:textColor="@color/colorPrimary"
             />
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

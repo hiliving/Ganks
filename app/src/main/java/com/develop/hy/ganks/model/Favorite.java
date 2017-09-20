@@ -14,6 +14,15 @@ public class Favorite extends BmobObject implements Serializable{
     private String title;
     private String url;
     private String author;
+    private String imgs;
+
+    public String getImgs() {
+        return imgs;
+    }
+
+    public void setImgs(String imgs) {
+        this.imgs = imgs;
+    }
 
     public User getUserId() {
         return userId;

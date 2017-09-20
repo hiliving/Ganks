@@ -34,8 +34,11 @@ import rx.schedulers.Schedulers;
  */
 
 public class GankPresenter<T> extends BasePresenter<IGanHuoView> implements Serializable{
+    private Context context;
+
     public GankPresenter(T context, IGanHuoView iView) {
         super((Context) context, iView);
+        this.context = (Context) context;
     }
 
     @Override
@@ -149,14 +152,14 @@ public class GankPresenter<T> extends BasePresenter<IGanHuoView> implements Seri
             rl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    activity.startActivity(new Intent(activity,UserCenterActivity.class));
+                    context.startActivity(new Intent(context,UserCenterActivity.class));
                 }
             });
         }else {
             rl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    activity.startActivity(new Intent(activity,LoginActivity.class));
+                    context.startActivity(new Intent(context,LoginActivity.class));
                 }
             });
         }

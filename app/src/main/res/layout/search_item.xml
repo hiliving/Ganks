@@ -4,46 +4,60 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp"
     android:id="@+id/favor_cardview"
-    android:layout_height="130dp">
-    <TextView
-        android:layout_margin="10dp"
+    android:layout_height="110dp">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="开源项目，同时这个又是描述标题"
-        android:id="@+id/favorite_content"
-        android:maxLines="2"
-        android:textColor="#f5484848"
-        android:textSize="16sp"
-        android:layout_gravity="top"
-        />
-    <TextView
-        android:text="作者，来源"
-        android:id="@+id/favorite_author"
-        android:textSize="14sp"
-        android:layout_marginBottom="25dp"
-        android:layout_marginLeft="20dp"
-        android:maxLines="1"
-        android:layout_gravity="bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/favorite_time"
-        android:text="收藏时间:2017/6/5"
-        android:layout_gravity="right|bottom"
-        android:layout_marginBottom="20dp"
-        android:textSize="12sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_gravity="right|center_vertical"
-        android:layout_marginRight="20dp"
-        android:backgroundTint="@color/delete"
-        android:buttonTint="@color/delete"
-        android:background="@drawable/check_box"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-         />
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/favor_pic"
+            android:layout_gravity="left"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            />
+        <TextView
+            android:layout_margin="10dp"
+            android:layout_toRightOf="@+id/favor_pic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="开源项目，同时这个又是描述标题"
+            android:id="@+id/favorite_content"
+            android:maxLines="2"
+            android:textColor="#f5484848"
+            android:layout_marginLeft="4dp"
+            android:textSize="16sp"
+            android:layout_gravity="top"
+            />
+        <TextView
+            android:text="作者，来源"
+            android:id="@+id/favorite_author"
+            android:textSize="14sp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="4dp"
+            android:maxLines="1"
+            android:layout_toRightOf="@+id/favor_pic"
+            android:layout_alignParentBottom="true"
+
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+
+        <TextView
+            android:id="@+id/favorite_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginBottom="20dp"
+            android:text="收藏时间:2017/6/5"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+
+            android:layout_marginRight="20dp"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
 </android.support.v7.widget.CardView>

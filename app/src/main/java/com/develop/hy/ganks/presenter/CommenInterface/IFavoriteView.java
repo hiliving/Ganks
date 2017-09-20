@@ -1,6 +1,7 @@
 package com.develop.hy.ganks.presenter.CommenInterface;
 
 import com.develop.hy.ganks.model.Favorite;
+import com.develop.hy.ganks.model.UserFile;
 
 import java.util.List;
 
@@ -10,4 +11,5 @@ import java.util.List;
 
 public interface IFavoriteView extends IBaseView {
     void initData(List<Favorite> favorites);
+    void initUserInfo(List<UserFile> favorites);
 }

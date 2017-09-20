@@ -1,16 +1,20 @@
 package com.develop.hy.ganks.fragment.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.develop.hy.ganks.R;
 import com.develop.hy.ganks.model.Favorite;
 import com.develop.hy.ganks.presenter.CommenInterface.OnItemClickListener;
+import com.develop.hy.ganks.ui.CommonListActivity;
 
 import java.util.List;
 
@@ -20,9 +24,10 @@ import java.util.List;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyHolder> {
     private List<Favorite> favorites;
-
-    public FavoriteAdapter(List<Favorite> favorites) {
+    private Context context;
+    public FavoriteAdapter(List<Favorite> favorites, CommonListActivity commonListActivity) {
         this.favorites = favorites;
+        this.context = commonListActivity;
     }
 
     @Override
@@ -44,6 +49,10 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyHold
                 }
             }
         });
+        String imgs = favorites.get(position).getImgs();
+        Glide.with(context).load(imgs)
+                .placeholder(R.mipmap.haveno_login)
+                .into(holder.favorPic);
         holder.favorCard.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -66,7 +75,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyHold
         private TextView favoriteAuthor;
         private TextView favoriteTime;
         private final CardView favorCard;
-        private final CheckBox checkBox;
+        private final ImageView favorPic;
 
         public MyHolder(View itemView) {
             super(itemView);
@@ -78,7 +87,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyHold
             favoriteTime = (TextView) itemView.findViewById(R.id.favorite_time);
 
             favorCard = (CardView) itemView.findViewById(R.id.favor_cardview);
-            checkBox = (CheckBox) itemView.findViewById(R.id.checkBox);
+
+            favorPic = (ImageView) itemView.findViewById(R.id.favor_pic);
 
         }
     }

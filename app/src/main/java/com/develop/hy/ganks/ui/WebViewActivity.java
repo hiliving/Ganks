@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -108,6 +109,7 @@ public class WebViewActivity extends BaseActivity {
             favorite.setTitle(getIntent().getStringExtra("Title"));
             favorite.setUrl(getIntent().getStringExtra("URL"));
             favorite.setUserId(user);
+            favorite.setImgs(getIntent().getStringExtra("Imgs"));
             favorite.setAuthor(getIntent().getStringExtra("Author"));
             favorite.save(new SaveListener<String>() {
                               @Override

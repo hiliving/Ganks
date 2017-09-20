@@ -13,6 +13,7 @@ import com.develop.hy.ganks.BaseActivity;
 import com.develop.hy.ganks.R;
 import com.develop.hy.ganks.fragment.adapter.FavoriteAdapter;
 import com.develop.hy.ganks.model.Favorite;
+import com.develop.hy.ganks.model.UserFile;
 import com.develop.hy.ganks.presenter.CommenInterface.IFavoriteView;
 import com.develop.hy.ganks.presenter.CommenInterface.OnItemClickListener;
 import com.develop.hy.ganks.presenter.FavoritePresenter;
@@ -46,7 +47,7 @@ public class CommonListActivity extends BaseActivity implements OnItemClickListe
         Bundle bundle = getIntent().getBundleExtra("Data");
         favorites = (List<Favorite>) bundle.getSerializable("Favorite");
         favoriteRecycleview.setLayoutManager(new LinearLayoutManager(this));
-        favoriteAdapter = new FavoriteAdapter(favorites);
+        favoriteAdapter = new FavoriteAdapter(favorites,this);
         favoriteRecycleview.setAdapter(favoriteAdapter);
         favoriteAdapter.setOnItemtClickListener(this);
     }
@@ -59,7 +60,9 @@ public class CommonListActivity extends BaseActivity implements OnItemClickListe
     @Override
     public void onItemClick(int position, boolean isGirl) {
         startActivity(new Intent(CommonListActivity.this, WebViewActivity.class).putExtra("URL",favorites
-                .get(position).getUrl()).putExtra("Title",favorites.get(position).getTitle()));
+                .get(position).getUrl()).putExtra("Title",favorites.get(position).getTitle())
+                .putExtra("Imgs",favorites.get(position).getImgs())
+        );
     }
 
     @Override
@@ -104,6 +107,11 @@ public class CommonListActivity extends BaseActivity implements OnItemClickListe
 
     @Override
     public void initData(List<Favorite> favorites) {
+
+    }
+
+    @Override
+    public void initUserInfo(List<UserFile> favorites) {
 
     }
 }

@@ -42,7 +42,9 @@ public class ViewPageAdapter extends PagerAdapter {
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.pager_layout,null,false);
         ImageView imageView = (ImageView) view.findViewById(R.id.page_img);
         TextView textView = (TextView) view.findViewById(R.id.pager_title);
-        Glide.with(context).load(resultBean.get(position).getUrl()).into(imageView);
+        Glide.with(context).load(resultBean.get(position).getUrl())
+                .placeholder(R.mipmap.e)
+                .into(imageView);
         textView.setText(resultBean.get(position).getWho()+"@"+resultBean.get(position).getPublishedAt());
         container.addView(view);
         return view;

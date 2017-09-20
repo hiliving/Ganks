@@ -87,4 +87,7 @@ dependencies {
     compile 'com.github.XunMengWinter:CircularAnim:0.3.4'
 
     compile 'com.nightonke:boommenu:2.1.1'
+
+    //图片选择器
+    compile 'com.github.YancyYe:GalleryPick:1.2.1'
 }

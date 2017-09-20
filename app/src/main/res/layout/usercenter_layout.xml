@@ -27,6 +27,13 @@
         android:background="@color/colorPrimary"
         android:layout_marginTop="?attr/actionBarSize"
         android:layout_height="200dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/user_bg"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            />
        <!-- <com.develop.hy.ganks.ui.view.WavePageView
             android:id="@+id/wave_view"
             android:layout_width="match_parent"
@@ -55,6 +62,8 @@
             android:layout_centerHorizontal="true"
             android:layout_width="80dp"
             android:id="@+id/user_header"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
             android:layout_marginTop="20dp"
             android:layout_height="80dp"
             android:layout_marginRight="40dp"

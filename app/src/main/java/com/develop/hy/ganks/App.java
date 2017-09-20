@@ -1,13 +1,21 @@
 package com.develop.hy.ganks;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.widget.Toast;
 
+import com.develop.hy.ganks.ui.UserCenterActivity;
 import com.develop.hy.ganks.utils.Utils;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
+import com.yancy.gallerypick.config.GalleryPick;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobConfig;
@@ -19,7 +27,7 @@ import top.wefor.circularanim.CircularAnim;
 
 public class App extends Application {
     private static App sMyApplication;
-
+    private String TAG = "Application";
     @Override
     public void onCreate() {
         super.onCreate();
@@ -70,4 +78,5 @@ public class App extends Application {
         }
         return 1;
     }
+
 }
