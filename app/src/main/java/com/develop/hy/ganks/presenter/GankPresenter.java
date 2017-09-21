@@ -162,6 +162,7 @@ public class GankPresenter<T> extends BasePresenter<IGanHuoView> implements Seri
                 }
             });
         }
+
     }
 
 

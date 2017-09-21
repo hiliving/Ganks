@@ -9,11 +9,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -61,7 +58,7 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
     TextView username;
     @BindView(R.id.user_header)
     ImageView userHeader;
-    @BindView(R.id.user_bg)
+    @BindView(R.id.image)
     ImageView user_bg;
     private FavoritePresenter presenter;
     private ArrayList<Favorite> list= new ArrayList<>();;
@@ -70,7 +67,6 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
     private IHandlerCallBack iHandlerCallBack;
     private PhotoAdapter photoAdapter;
     private GalleryConfig galleryConfig;//头像裁剪配置
-    private GalleryConfig backgroundConfig;//背景图裁剪配置
     private IHandlerCallBack iHandlerCallBack2;
 
     @Override
@@ -83,20 +79,6 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
         presenter = new FavoritePresenter(this,this);
         presenter.init();
         initGallery();
-        initBackground();
-        backgroundConfig = new GalleryConfig.Builder()
-                .imageLoader(new GlideImageLoader())    // ImageLoader 加载框架（必填）
-                .iHandlerCallBack(iHandlerCallBack2)     // 监听接口（必填）
-                .provider("com.yancy.gallerypickdemo.fileprovider")   // provider(必填)
-                .pathList(path)                         // 记录已选的图片
-                .multiSelect(false)                      // 是否多选   默认：false
-                .multiSelect(false, 1)                   // 配置是否多选的同时 配置多选数量   默认：false ， 9
-                .maxSize(1)                             // 配置多选时 的多选数量。    默认：9
-                .crop(true)                             // 快捷开启裁剪功能，仅当单选 或直接开启相机时有效
-                .crop(true, 16, 9, 840, 480)             // 配置裁剪功能的参数，   默认裁剪比例 1:1
-                .isShowCamera(true)                     // 是否现实相机按钮  默认：false
-                .filePath("/Gallery/Pictures")          // 图片存放路径
-                .build();
 
         galleryConfig = new GalleryConfig.Builder()
                 .imageLoader(new GlideImageLoader())    // ImageLoader 加载框架（必填）
@@ -145,7 +127,7 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
             case R.id.bt_clear_cache:
                 ToastUtils.showShortToast("功能正在开发中");
                 break;
-            case R.id.user_bg:
+            case R.id.image:
                 IS_USER_BG = true;
                 pushImage();
                 break;
@@ -176,43 +158,11 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
                     Log.i(TAG, s);
                     path.add(s);
                 }
-                presenter.pushImage(path,true);//上传头像
-            }
-
-            @Override
-            public void onCancel() {
-                Log.i(TAG, "onCancel: 取消");
-            }
-
-            @Override
-            public void onFinish() {
-                Log.i(TAG, "onFinish: 结束");
-            }
-
-            @Override
-            public void onError() {
-                Log.i(TAG, "onError: 出错");
-            }
-        };
-
-    }
-    private void initBackground() {
-        //上传背景图
-        iHandlerCallBack2 = new IHandlerCallBack() {
-            @Override
-            public void onStart() {
-                Log.i(TAG, "onStart: 开启");
-            }
-
-            @Override
-            public void onSuccess(List<String> photoList) {
-                Log.i(TAG, "onSuccess: 返回数据");
-                path.clear();
-                for (String s : photoList) {
-                    Log.i(TAG, s);
-                    path.add(s);
+                if (IS_USER_BG){
+                    presenter.pushImage(path,true);//上传背景图
+                }else {
+                    presenter.pushImage(path,false);//上传头像
                 }
-                presenter.pushImage(path,false);//上传背景图
             }
 
             @Override
@@ -232,6 +182,7 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
         };
 
     }
+
     private void checkPermissions() {
         int checkCode = ContextCompat.checkSelfPermission(UserCenterActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int checkRead = ContextCompat.checkSelfPermission(UserCenterActivity.this,Manifest.permission.READ_EXTERNAL_STORAGE);
@@ -245,13 +196,8 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
                 ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},101);
             }
         }else if (checkCode==PackageManager.PERMISSION_GRANTED){
-            if (IS_USER_BG){
-                Log.d(TAG,IS_USER_BG+"");
-                GalleryPick.getInstance().setGalleryConfig(backgroundConfig).open(UserCenterActivity.this);
-            }else {
                 Log.d(TAG,IS_USER_BG+"");
                 GalleryPick.getInstance().setGalleryConfig(galleryConfig).open(UserCenterActivity.this);
-            }
 
         }
     }
@@ -262,11 +208,7 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Log.i(TAG, "同意授权");
                     // 进行正常操作
-                    if (IS_USER_BG){
-                        GalleryPick.getInstance().setGalleryConfig(backgroundConfig).open(UserCenterActivity.this);
-                    }else {
                         GalleryPick.getInstance().setGalleryConfig(galleryConfig).open(UserCenterActivity.this);
-                    }
                 } else {
                     Log.i(TAG, "拒绝授权");
                 }
@@ -287,7 +229,7 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void initViews() {
-
+        presenter.getUserBgAndHeadImg();
     }
 
     @Override
@@ -333,7 +275,6 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
     protected void onResume() {
         super.onResume();
         presenter.getFavorite();
-        presenter.getUserBgAndHeadImg();
     }
 
 }

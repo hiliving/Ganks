@@ -21,7 +21,6 @@ import com.develop.hy.ganks.utils.ToastUtils;
 
 import java.io.File;
 import java.util.List;
-import java.util.logging.Logger;
 
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.BmobQuery;
@@ -30,9 +29,7 @@ import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.ProgressCallback;
-import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
-import cn.bmob.v3.listener.UploadFileListener;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Action1;
@@ -167,7 +164,7 @@ public class FavoritePresenter extends BasePresenter<IFavoriteView> {
         User user = BmobUser.getCurrentUser(User.class);
         UserFile userFile = new UserFile();
         userFile.setUsername(user.getUsername());
-           if (isHeadImg){
+           if (!isHeadImg){
                userFile.setHeadImg(url);
            }else {
                userFile.setBgimg(url);
@@ -176,6 +173,7 @@ public class FavoritePresenter extends BasePresenter<IFavoriteView> {
             @Override
             public void done(BmobException e) {
                 log("更新数据成功");
+                iView.initViews();
             }
         });
 
@@ -193,45 +191,6 @@ public class FavoritePresenter extends BasePresenter<IFavoriteView> {
     private Observable saveObservable(BmobObject obj){
 
         return obj.updateObservable();
-//        return obj.saveObservable();
     }
 
-    public void pushUserBgImg(List<String> path) {
-       /* final ProgressDialog  dialog = new ProgressDialog(context);
-        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        dialog.setTitle("上传中...");
-        dialog.setIndeterminate(false);
-        dialog.setCancelable(true);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
-
-        final User user = BmobUser.getCurrentUser(User.class);
-
-
-        File file = new File(path.get(0));
-        final BmobFile bmobFile = new BmobFile(file);
-
-        bmobFile.uploadObservable(new ProgressCallback() {//上传文件操作
-            @Override
-            public void onProgress(Integer value, long total) {
-                log("uploadMovoieFile-->onProgress:"+value);
-                dialog.setProgress(value);
-            }
-        }).doOnNext(new Action1<Void>() {
-            @Override
-            public void call(Void aVoid) {
-                String url = bmobFile.getUrl();
-                log("上传成功："+url+","+bmobFile.getFilename());
-                dialog.dismiss();
-            }
-        }).concatMap(new Func1<Void, Observable<String>>() {//将bmobFile保存到movie表中
-            @Override
-            public Observable<String> call(Void aVoid) {
-                UserFile userFile = new UserFile();
-                userFile.setUserId(user);
-                userFile.setBgimg(bmobFile.getUrl());
-                return saveObservable(userFile);
-            }
-        });*/
-    }
 }

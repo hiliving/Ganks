@@ -1,6 +1,7 @@
 package com.develop.hy.ganks;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -22,13 +23,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.andremion.floatingnavigationview.FloatingNavigationView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.develop.hy.ganks.dagger.component.DaggerMainActivityComponent;
 import com.develop.hy.ganks.dagger.module.MainActivityModule;
 import com.develop.hy.ganks.fragment.CommonFragment;
 import com.develop.hy.ganks.fragment.adapter.ViewPageAdapter;
 import com.develop.hy.ganks.http.GankType;
+import com.develop.hy.ganks.model.Favorite;
 import com.develop.hy.ganks.model.GankBean;
+import com.develop.hy.ganks.model.UserFile;
+import com.develop.hy.ganks.presenter.CommenInterface.IFavoriteView;
 import com.develop.hy.ganks.presenter.CommenInterface.IGanHuoView;
+import com.develop.hy.ganks.presenter.FavoritePresenter;
 import com.develop.hy.ganks.presenter.GankPresenter;
 import com.develop.hy.ganks.ui.AboutUsActivity;
 import com.develop.hy.ganks.ui.SearchActivity;
@@ -48,6 +56,7 @@ import static com.develop.hy.ganks.http.GankType.FRONTEND;
 import static com.develop.hy.ganks.http.GankType.IOS;
 import static com.develop.hy.ganks.http.GankType.VIDEO;
 import static com.develop.hy.ganks.http.GankType.WELFARE;
+import static com.develop.hy.ganks.utils.Utils.GetRoundedCornerBitmap;
 
 /**
  *
@@ -71,7 +80,7 @@ import static com.develop.hy.ganks.http.GankType.WELFARE;
  *        神兽保佑
  *        代码无BUG!
  */
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener ,IGanHuoView{
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener ,IGanHuoView,IFavoriteView{
 
 
     private String currentFragmentTag;
@@ -109,6 +118,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private ArrayList<String> imgList;
     private ViewPageAdapter viewPageAdapter;
     private List<GankBean.ResultsBean> resultList;
+    private FavoritePresenter favoritePresenter;
 
     @Override
     protected void initView() {
@@ -172,6 +182,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public void initViews() {
         gankPresenter.getRandom(GankType.WELFARE,10);
         initPagerView();
+        favoritePresenter = new FavoritePresenter(this,this);
+        favoritePresenter.getUserBgAndHeadImg();
 
     }
 
@@ -199,6 +211,23 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public void showListView(List<GankBean.ResultsBean> results) {
         resultList.addAll(results);
         viewPageAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void initData(List<Favorite> favorites) {
+
+    }
+
+    @Override
+    public void initUserInfo(List<UserFile> favorites) {
+        Glide.with(this).load(favorites.get(0).getHeadImg()).asBitmap()
+                .placeholder(R.mipmap.haveno_login)
+                .into(new SimpleTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                userIcon.setImageBitmap(GetRoundedCornerBitmap(resource,120));
+            }
+        });
     }
 
     private class MyOffsetChangedListener implements AppBarLayout.OnOffsetChangedListener{
