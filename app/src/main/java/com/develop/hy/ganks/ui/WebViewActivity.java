@@ -1,5 +1,6 @@
 package com.develop.hy.ganks.ui;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,6 +21,7 @@ import com.develop.hy.ganks.databinding.WebviewLayoutBinding;
 import com.develop.hy.ganks.model.Favorite;
 import com.develop.hy.ganks.model.User;
 import com.develop.hy.ganks.utils.ShareUtil;
+import com.develop.hy.ganks.utils.ToastUtils;
 import com.just.library.AgentWeb;
 import com.just.library.ChromeClientCallbackManager;
 
@@ -83,6 +85,7 @@ public class WebViewActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.bind(this).unbind();
+        Log.d("AAAAAAAAAAAAAAAAA","销毁了");
     }
 
     private void getAnimations() {
@@ -105,19 +108,23 @@ public class WebViewActivity extends BaseActivity {
         public void onFavoriteFabClick(final View view) {
 
             User user =BmobUser.getCurrentUser(User.class);
-            Favorite favorite = new Favorite();
-            favorite.setTitle(getIntent().getStringExtra("Title"));
-            favorite.setUrl(getIntent().getStringExtra("URL"));
-            favorite.setUserId(user);
-            favorite.setImgs(getIntent().getStringExtra("Imgs"));
-            favorite.setAuthor(getIntent().getStringExtra("Author"));
-            favorite.save(new SaveListener<String>() {
-                              @Override
-                              public void done(String s, BmobException e) {
-                                  Snackbar.make(view, "添加收藏成功~", Toast.LENGTH_SHORT).show();
+            if (user==null){
+                startActivity(new Intent(WebViewActivity.this,LoginActivity.class));
+            }else {
+                Favorite favorite = new Favorite();
+                favorite.setTitle(getIntent().getStringExtra("Title"));
+                favorite.setUrl(getIntent().getStringExtra("URL"));
+                favorite.setUserId(user);
+                favorite.setImgs(getIntent().getStringExtra("Imgs"));
+                favorite.setAuthor(getIntent().getStringExtra("Author"));
+                favorite.save(new SaveListener<String>() {
+                                  @Override
+                                  public void done(String s, BmobException e) {
+                                      Snackbar.make(view, "添加收藏成功~", Toast.LENGTH_SHORT).show();
+                                  }
                               }
-                          }
-            );
+                );
+            }
         }
 
         public void onShareFabClick(View view) {
@@ -144,4 +151,5 @@ public class WebViewActivity extends BaseActivity {
 
 
     }
+
 }

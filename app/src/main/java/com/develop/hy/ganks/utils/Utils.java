@@ -35,7 +35,7 @@ public class Utils {
         Utils.context = context.getApplicationContext();
     }
 
-    public static Bitmap GetRoundedCornerBitmap(Bitmap bitmap) {
+    public static Bitmap GetRoundedCornerBitmap(Bitmap bitmap, int radius) {
         try {
             Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
                     bitmap.getHeight(), Bitmap.Config.ARGB_8888);
@@ -45,10 +45,12 @@ public class Utils {
                     bitmap.getHeight());
             final RectF rectF = new RectF(new Rect(0, 0, bitmap.getWidth(),
                     bitmap.getHeight()));
-            final float roundPx = 84;
+            final float roundPx = radius;
             paint.setAntiAlias(true);
+            paint.setStrokeCap(Paint.Cap.ROUND);
+            paint.setStrokeWidth(18);
             canvas.drawARGB(0, 0, 0, 0);
-            paint.setColor(Color.BLACK);
+            paint.setColor(Color.WHITE);
             canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
             paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
 

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -138,7 +137,7 @@ public class GankPresenter<T> extends BasePresenter<IGanHuoView> implements Seri
 
     public void initUserInfo(final MainActivity activity, TextView userid, ImageView userIcon, RelativeLayout rl) {
         Bitmap bitmap = BitmapFactory.decodeResource(activity.getResources(),R.mipmap.haveno_login);
-        Bitmap roundIcon = Utils.GetRoundedCornerBitmap(bitmap);
+        Bitmap roundIcon = Utils.GetRoundedCornerBitmap(bitmap, 20);
         BmobUser bmobUser = BmobUser.getCurrentUser();
         if (bmobUser!=null){
             userid.setText(bmobUser.getUsername()+"|已登录");

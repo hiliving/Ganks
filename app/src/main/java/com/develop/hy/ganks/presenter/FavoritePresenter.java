@@ -2,7 +2,15 @@ package com.develop.hy.ganks.presenter;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Movie;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.util.Log;
 
 import com.develop.hy.ganks.model.Favorite;
@@ -38,6 +46,8 @@ public class FavoritePresenter extends BasePresenter<IFavoriteView> {
     private String TAG = "FavoritePresenter";
     private final User user;
     private UserFile userFile;
+    private String url;
+    private BmobFile bmobFile;
 
     public FavoritePresenter(Context context, IFavoriteView iView) {
         super(context, iView);
@@ -51,7 +61,7 @@ public class FavoritePresenter extends BasePresenter<IFavoriteView> {
     public void  getUserBgAndHeadImg(){
 
         BmobQuery<UserFile> query = new BmobQuery<>();
-        query.addWhereEqualTo("userId",user);
+        query.addWhereEqualTo("username",user.getUsername());
         query.order("-updateAt");
         query.include("userId");//希望查询头像的同时也把用户背景图也查询出来
         query.findObjects(new FindListener<UserFile>() {
@@ -65,7 +75,6 @@ public class FavoritePresenter extends BasePresenter<IFavoriteView> {
             }
         });
     }
-
 
     public void getFavorite() {
         BmobQuery<Favorite> query = new BmobQuery<>();
@@ -95,7 +104,7 @@ public class FavoritePresenter extends BasePresenter<IFavoriteView> {
         });
     }
 
-    public void pushImage(List<String> path) {
+    public void pushImage(List<String> path, final boolean isHeadImg) {
 
         final ProgressDialog  dialog = new ProgressDialog(context);
         dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -109,7 +118,7 @@ public class FavoritePresenter extends BasePresenter<IFavoriteView> {
 
 
         File file = new File(path.get(0));
-        final BmobFile bmobFile = new BmobFile(file);
+        bmobFile = new BmobFile(file);
 
         bmobFile.uploadObservable(new ProgressCallback() {//上传文件操作
             @Override
@@ -120,17 +129,18 @@ public class FavoritePresenter extends BasePresenter<IFavoriteView> {
         }).doOnNext(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-               String url = bmobFile.getUrl();
-                log("上传成功："+url+","+bmobFile.getFilename());
+                url = bmobFile.getUrl();
+                log("上传成功："+ url +","+ bmobFile.getFilename());
                 dialog.dismiss();
             }
-        }).concatMap(new Func1<Void, Observable<String>>() {//将bmobFile保存到movie表中
+        }).concatMap(new Func1<Void, Observable<String>>() {//将bmobFile保存到UserFile表中
             @Override
             public Observable<String> call(Void aVoid) {
                 userFile = new UserFile();
                 userFile.setUserId(user);
                 userFile.setUsername(user.getUsername());
                 userFile.setBgimg(bmobFile.getUrl());
+                updateData(userFile.getObjectId(),isHeadImg);
                 return saveObservable(userFile);
             }
         }).subscribe(new Subscriber<String>() {
@@ -150,21 +160,24 @@ public class FavoritePresenter extends BasePresenter<IFavoriteView> {
                 dialog.dismiss();
                 log("download的文件地址：");
             }
-        });;
-        /*
-        这个是下载文件用，这里用不到，我们用Glide会自动做缓存
-        .concatMap(new Func1<String, Observable<String>>() {//下载文件
+        });
+    }
+
+    private void updateData(String objectId, boolean isHeadImg) {
+        User user = BmobUser.getCurrentUser(User.class);
+        UserFile userFile = new UserFile();
+        userFile.setUsername(user.getUsername());
+           if (isHeadImg){
+               userFile.setHeadImg(url);
+           }else {
+               userFile.setBgimg(url);
+           }
+        userFile.update(user.getUserInfoId(), new UpdateListener() {
             @Override
-            public Observable<String> call(String s) {
-                return bmobFile.downloadObservable(new ProgressCallback() {
-                    @Override
-                    public void onProgress(Integer value, long total) {
-                        log("download-->onProgress:"+value+","+total);
-                    }
-                });
+            public void done(BmobException e) {
+                log("更新数据成功");
             }
-        })
-            */
+        });
 
     }
 
@@ -177,8 +190,10 @@ public class FavoritePresenter extends BasePresenter<IFavoriteView> {
      * @param obj
      * @return
      */
-    private Observable<String> saveObservable(BmobObject obj){
-        return obj.saveObservable();
+    private Observable saveObservable(BmobObject obj){
+
+        return obj.updateObservable();
+//        return obj.saveObservable();
     }
 
     public void pushUserBgImg(List<String> path) {

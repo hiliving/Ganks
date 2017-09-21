@@ -26,7 +26,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void initView();
 
     protected abstract int getLayoutId();
-    private void onPreCreate() {
+    protected void onPreCreate() {
         Theme theme = PreUtils.getCurrentTheme(this);
         switch (theme) {
 

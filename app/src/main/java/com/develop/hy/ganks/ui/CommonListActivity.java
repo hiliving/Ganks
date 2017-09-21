@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import com.develop.hy.ganks.model.UserFile;
 import com.develop.hy.ganks.presenter.CommenInterface.IFavoriteView;
 import com.develop.hy.ganks.presenter.CommenInterface.OnItemClickListener;
 import com.develop.hy.ganks.presenter.FavoritePresenter;
+import com.develop.hy.ganks.utils.ToastUtils;
 
 import java.util.List;
 
@@ -73,11 +75,12 @@ public class CommonListActivity extends BaseActivity implements OnItemClickListe
                         presenter.deleteFavorite(position,favorites);
                         favorites.remove(position);
                         favoriteAdapter.notifyItemChanged(position);
+                        Log.d("USERCENTER",favorites.size()+"");
+                        if (favorites.size()==0){
+                            favoriteNodata.setVisibility(View.VISIBLE);
+                        }
                     }
                 }).show();
-        if (favorites.size()==0){
-            favoriteNodata.setVisibility(View.VISIBLE);
-        }
     }
 
     @Override

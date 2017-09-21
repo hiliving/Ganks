@@ -3,79 +3,91 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#f4f4f4"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent">
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:elevation="1dp"
-        >
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/user_toolbar"
+        android:fitsSystemWindows="true"
+        android:layout_height="250dp">
+        <RelativeLayout
+            android:id="@+id/ll_header"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" >
-        </android.support.v7.widget.Toolbar>
-
+            android:orientation="horizontal"
+            android:layout_height="250dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:id="@+id/user_bg"
+                android:scaleType="centerCrop"
+                android:clickable="true"
+                />
+            <!-- <com.develop.hy.ganks.ui.view.WavePageView
+                 android:id="@+id/wave_view"
+                 android:layout_width="match_parent"
+                 android:layout_height="15dp"
+                 android:layout_alignParentBottom="true"
+                 android:layout_gravity="bottom" />-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="用户名"
+                android:id="@+id/tv_username"
+                android:textColor="#f2f2f2"
+                android:textSize="25sp"
+                android:layout_below="@+id/user_header"
+                android:layout_centerHorizontal="true"
+                />
+            <TextView
+                android:layout_below="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:text="好好学习，天天向上"
+                />
+            <ImageView
+                android:layout_centerHorizontal="true"
+                android:layout_width="80dp"
+                android:id="@+id/user_header"
+                android:clickable="true"
+                android:layout_marginTop="60dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="40dp"
+                android:background="@mipmap/haveno_login"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="积分：999"
+                    android:gravity="center"
+                    android:background="#3e000000"
+                    android:textColor="@color/white"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="收藏：29"
+                    android:gravity="center"
+                    android:background="#3e000000"
+                    android:textColor="@color/white"
+                    />
+            </LinearLayout>
+        </RelativeLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
-        android:id="@+id/ll_header"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:background="@color/colorPrimary"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:layout_height="200dp">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/user_bg"
-            android:clickable="true"
-            android:focusableInTouchMode="true"
-            />
-       <!-- <com.develop.hy.ganks.ui.view.WavePageView
-            android:id="@+id/wave_view"
-            android:layout_width="match_parent"
-            android:layout_height="15dp"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom" />-->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="用户名"
-            android:id="@+id/tv_username"
-            android:textColor="#f2f2f2"
-            android:textSize="25sp"
-            android:layout_below="@+id/user_header"
-            android:layout_centerHorizontal="true"
-            />
-        <TextView
-            android:layout_below="@+id/tv_username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_centerHorizontal="true"
-            android:text="好好学习，天天向上"
-            />
-        <ImageView
-            android:layout_centerHorizontal="true"
-            android:layout_width="80dp"
-            android:id="@+id/user_header"
-            android:clickable="true"
-            android:focusableInTouchMode="true"
-            android:layout_marginTop="20dp"
-            android:layout_height="80dp"
-            android:layout_marginRight="40dp"
-            android:background="@mipmap/haveno_login"
-            />
-    </RelativeLayout>
    <LinearLayout
        android:layout_width="match_parent"
        android:orientation="vertical"
-       android:layout_gravity="center"
+       android:layout_gravity="top"
        android:layout_below="@+id/ll_header"
-       android:layout_marginTop="150dp"
+       android:layout_marginTop="230dp"
        android:layout_height="wrap_content">
        <TextView
            android:layout_width="match_parent"
@@ -83,11 +95,13 @@
            android:gravity="left|center_vertical"
            android:paddingLeft="20dp"
            android:clickable="true"
+           android:drawableLeft="@drawable/mine_starlight"
+           android:drawablePadding="10dp"
            android:focusableInTouchMode="true"
            android:textColor="@color/black"
            android:layout_height="50dp"
            android:id="@+id/bt_collect"
-           android:text="收藏"
+           android:text="我的收藏"
            />
        <TextView
            android:layout_width="match_parent"
@@ -98,6 +112,8 @@
            android:id="@+id/bt_search_history"
            android:clickable="true"
            android:focusableInTouchMode="true"
+           android:drawableLeft="@drawable/mine_watch"
+           android:drawablePadding="10dp"
            android:layout_marginTop="1dp"
            android:layout_height="50dp"
            android:text="搜索历史"
@@ -109,20 +125,37 @@
            android:paddingLeft="20dp"
            android:layout_height="50dp"
            android:clickable="true"
+           android:drawableLeft="@drawable/mine_task"
+           android:drawablePadding="10dp"
            android:focusableInTouchMode="true"
            android:textColor="@color/black"
            android:layout_marginTop="1dp"
            android:id="@+id/bt_clear_cache"
-           android:text="清除缓存"
+           android:text="我的任务"
+           />
+       <TextView
+           android:layout_width="match_parent"
+           android:background="#ffffff"
+           android:gravity="left|center_vertical"
+           android:paddingLeft="20dp"
+           android:layout_height="50dp"
+           android:clickable="true"
+           android:drawableLeft="@drawable/mine_level"
+           android:drawablePadding="10dp"
+           android:focusableInTouchMode="true"
+           android:textColor="@color/black"
+           android:layout_marginTop="1dp"
+           android:id="@+id/bt_shop"
+           android:text="积分商城"
            />
    </LinearLayout>
-    <Button
+    <TextView
         android:layout_width="match_parent"
-        android:background="@drawable/bt_bg"
-        android:layout_margin="20dp"
         android:layout_height="50dp"
         android:elevation="1dp"
         android:id="@+id/bt_logout"
+        android:gravity="center"
+        android:clickable="true"
         android:layout_marginTop="110dp"
         android:text="退出登录"
         android:layout_gravity="bottom"

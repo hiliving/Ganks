@@ -291,6 +291,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public void onBackPressed() {
         if (floatView.isShown()){
             floatView.close();
+            return;
         }
         if ((System.currentTimeMillis() - mExitTime) > 2000) {
             Snackbar.make(coorlayout, "再按一次退出噢~", Toast.LENGTH_SHORT).show();

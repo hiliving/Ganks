@@ -8,5 +8,13 @@ import cn.bmob.v3.BmobUser;
  */
 
 public class User extends BmobUser {
+    public String getUserInfoId() {
+        return userInfoId;
+    }
 
+    public void setUserInfoId(String userInfoId) {
+        this.userInfoId = userInfoId;
+    }
+
+    private String userInfoId;
 }
