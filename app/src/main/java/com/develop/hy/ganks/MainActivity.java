@@ -318,7 +318,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private long mExitTime = 0;
     @Override
     public void onBackPressed() {
-        if (floatView.isShown()){
+        if (floatView.isOpened()){
             floatView.close();
             return;
         }
