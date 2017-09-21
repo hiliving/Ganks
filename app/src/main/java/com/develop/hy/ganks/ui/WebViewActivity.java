@@ -110,6 +110,7 @@ public class WebViewActivity extends BaseActivity {
             User user =BmobUser.getCurrentUser(User.class);
             if (user==null){
                 startActivity(new Intent(WebViewActivity.this,LoginActivity.class));
+                overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
             }else {
                 Favorite favorite = new Favorite();
                 favorite.setTitle(getIntent().getStringExtra("Title"));
@@ -148,8 +149,11 @@ public class WebViewActivity extends BaseActivity {
         binding.createFab.setClickable(true);
         binding.shareFab.setClickable(true);
         isFabMenuOpen = true;
-
-
     }
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
+    }
 }

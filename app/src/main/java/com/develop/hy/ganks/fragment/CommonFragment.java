@@ -1,5 +1,6 @@
 package com.develop.hy.ganks.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import com.develop.hy.ganks.R;
 import com.develop.hy.ganks.fragment.adapter.MutiTypeAdapter;
 import com.develop.hy.ganks.http.GankType;
 import com.develop.hy.ganks.model.GankBean;
+import com.develop.hy.ganks.model.UserFile;
 import com.develop.hy.ganks.presenter.CommenInterface.OnItemClickListener;
 import com.develop.hy.ganks.presenter.GankPresenter;
 import com.develop.hy.ganks.presenter.CommenInterface.IGanHuoView;
@@ -140,6 +142,11 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
     }
 
     @Override
+    public void initOthers(List<UserFile> list) {
+
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         presenter.release();
@@ -174,13 +181,16 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
                   .setPlacrHolder(R.mipmap.haveno_login)	//占位符图片（图片加载完成前显示的资源图片，来源drawable或者mipmap）
                   .build();
           ImagePagerActivity.startActivity(getContext(), config);
+
       } else {
           startActivity(new Intent(getContext(), WebViewActivity.class).putExtra("URL",gankList
                   .get(position).getUrl())
                   .putExtra("Title",gankList.get(position).getDesc())
                     .putExtra("Author",gankList.get(position).getWho())
-                    .putExtra("Imgs",gankList.get(position).getImages()==null?"":gankList.get(position).getImages().get(0).toString())
+                    .putExtra("Imgs",gankList.get(position).
+                            getImages()==null?"":gankList.get(position).getImages().get(0).toString())
           );
+          getActivity().overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
       }
     }
 

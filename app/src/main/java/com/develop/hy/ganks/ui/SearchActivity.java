@@ -1,5 +1,6 @@
 package com.develop.hy.ganks.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import com.develop.hy.ganks.dagger.component.DaggerSearchActivityComponent;
 import com.develop.hy.ganks.dagger.module.SearchActivityModule;
 import com.develop.hy.ganks.fragment.adapter.MutiTypeAdapter;
 import com.develop.hy.ganks.model.GankBean;
+import com.develop.hy.ganks.model.UserFile;
 import com.develop.hy.ganks.presenter.CommenInterface.IGanHuoView;
 import com.develop.hy.ganks.presenter.CommenInterface.OnItemClickListener;
 import com.develop.hy.ganks.presenter.GankPresenter;
@@ -169,6 +171,11 @@ public class SearchActivity extends BaseActivity implements IGanHuoView, HXRecyc
     }
 
     @Override
+    public void initOthers(List<UserFile> list) {
+
+    }
+
+    @Override
     public void loadMore() {
         if (canLoading){
             presenter.queryGank(et_search.getText().toString(),page);
@@ -195,5 +202,12 @@ public class SearchActivity extends BaseActivity implements IGanHuoView, HXRecyc
     protected void onDestroy() {
         super.onDestroy();
         presenter.release();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
     }
 }

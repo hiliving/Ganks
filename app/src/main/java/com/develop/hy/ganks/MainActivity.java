@@ -80,14 +80,12 @@ import static com.develop.hy.ganks.utils.Utils.GetRoundedCornerBitmap;
  *        神兽保佑
  *        代码无BUG!
  */
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener ,IGanHuoView,IFavoriteView{
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener ,IGanHuoView{
 
 
     private String currentFragmentTag;
-
     @BindView(R.id.floating_navigation_view)
     FloatingNavigationView floatView;
-
     @BindView(R.id.coorlayout)
     CoordinatorLayout coorlayout;
     @BindView(R.id.toobar)
@@ -118,8 +116,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private ArrayList<String> imgList;
     private ViewPageAdapter viewPageAdapter;
     private List<GankBean.ResultsBean> resultList;
-    private FavoritePresenter favoritePresenter;
-
     @Override
     protected void initView() {
         ButterKnife.bind(this);
@@ -174,6 +170,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         switch (v.getId()){
             case R.id.edit_search:
                 startActivity(new Intent(this, SearchActivity.class));
+                overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
                 break;
         }
     }
@@ -182,9 +179,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public void initViews() {
         gankPresenter.getRandom(GankType.WELFARE,10);
         initPagerView();
-        favoritePresenter = new FavoritePresenter(this,this);
-        favoritePresenter.getUserBgAndHeadImg();
-
     }
 
     @Override
@@ -214,32 +208,33 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     @Override
-    public void initData(List<Favorite> favorites) {
+    public void initOthers(List<UserFile> list) {
 
-    }
-
-    @Override
-    public void initUserInfo(List<UserFile> favorites) {
-        Glide.with(this).load(favorites.get(0).getHeadImg()).asBitmap()
+        Glide.with(this).load(list.get(0).getHeadImg()).asBitmap()
                 .placeholder(R.mipmap.haveno_login)
                 .into(new SimpleTarget<Bitmap>() {
-            @Override
-            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                userIcon.setImageBitmap(GetRoundedCornerBitmap(resource,120));
-            }
-        });
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        userIcon.setImageBitmap(GetRoundedCornerBitmap(resource,120));
+                    }
+                });
     }
+
 
     private class MyOffsetChangedListener implements AppBarLayout.OnOffsetChangedListener{
 
         @Override
         public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-            if (Math.abs(verticalOffset)>=500){
+            float progress = Math.abs(verticalOffset)*1.0f/appBarLayout.getTotalScrollRange();
+            if (progress>=0.4){
                 ll_search.setVisibility(View.VISIBLE);
-                titleText.setVisibility(View.GONE);
+                ll_search.setAlpha(progress);
+                titleText.setAlpha(1-progress);
+                ll_search.setAlpha(progress);
             }else {
                 ll_search.setVisibility(View.VISIBLE);
-                titleText.setVisibility(View.VISIBLE);
+                ll_search.setAlpha(0.4f);
+                titleText.setAlpha(1);
                 titleText.setText(currentFragmentTag+"专题");
             }
         }
@@ -274,14 +269,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                switchFragment(CASUAL);
            case R.id.nav_setting:
                startActivity(new Intent(this, AboutUsActivity.class));
+               overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
                break;
        }
         return false;
     }
 
     public void switchFragment(String name){
-        setTitle(name);
-        Log.d("Title",name);
         if (currentFragmentTag != null && currentFragmentTag.equals(name))
             return;
 
@@ -316,6 +310,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      * 再按一次退出
      */
     private long mExitTime = 0;
+
     @Override
     public void onBackPressed() {
         if (floatView.isOpened()){
@@ -327,6 +322,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             mExitTime = System.currentTimeMillis();
         } else {
             finish();
+            overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
         }
     }
 }

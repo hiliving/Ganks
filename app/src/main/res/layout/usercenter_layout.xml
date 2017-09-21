@@ -22,12 +22,6 @@
                 android:scaleType="centerCrop"
                 android:clickable="true"
                 />
-            <!-- <com.develop.hy.ganks.ui.view.WavePageView
-                 android:id="@+id/wave_view"
-                 android:layout_width="match_parent"
-                 android:layout_height="15dp"
-                 android:layout_alignParentBottom="true"
-                 android:layout_gravity="bottom" />-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -84,6 +78,25 @@
                     android:textColor="@color/white"
                     />
             </LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:id="@+id/ucenter_setting"
+                android:layout_alignParentRight="true"
+                android:layout_margin="20dp"
+                android:backgroundTint="@color/white"
+                android:background="@drawable/mine_setting"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:id="@+id/ucenter_back"
+                android:layout_margin="18dp"
+                android:backgroundTint="@color/white"
+                android:background="@drawable/ic_back_dark"
+                />
         </RelativeLayout>
     </android.support.design.widget.AppBarLayout>
 
@@ -99,6 +112,8 @@
            android:background="#ffffff"
            android:gravity="left|center_vertical"
            android:paddingLeft="20dp"
+           android:drawableRight="@drawable/ic_triangle"
+           android:paddingRight="12dp"
            android:clickable="true"
            android:drawableLeft="@drawable/mine_starlight"
            android:drawablePadding="10dp"
@@ -116,6 +131,8 @@
            android:paddingLeft="20dp"
            android:id="@+id/bt_search_history"
            android:clickable="true"
+           android:drawableRight="@drawable/ic_triangle"
+           android:paddingRight="12dp"
            android:focusableInTouchMode="true"
            android:drawableLeft="@drawable/mine_watch"
            android:drawablePadding="10dp"
@@ -130,6 +147,8 @@
            android:paddingLeft="20dp"
            android:layout_height="50dp"
            android:clickable="true"
+           android:drawableRight="@drawable/ic_triangle"
+           android:paddingRight="12dp"
            android:drawableLeft="@drawable/mine_task"
            android:drawablePadding="10dp"
            android:focusableInTouchMode="true"
@@ -145,6 +164,8 @@
            android:paddingLeft="20dp"
            android:layout_height="50dp"
            android:clickable="true"
+           android:drawableRight="@drawable/ic_triangle"
+           android:paddingRight="12dp"
            android:drawableLeft="@drawable/mine_level"
            android:drawablePadding="10dp"
            android:focusableInTouchMode="true"

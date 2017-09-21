@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+        android:id="@+id/playerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/splash_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/splash_exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:padding="30px"
+        />
+    <com.github.lzyzsd.circleprogress.DonutProgress
+        android:id="@+id/donut_progress"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_width="40dp"
+        custom:donut_text_size="15sp"
+        custom:donut_show_text="false"
+        custom:donut_background_color="@color/editcolor"
+        custom:donut_text_color="@color/colorAccent"
+        custom:donut_finished_color="@color/colorPrimaryDark"
+        custom:donut_finished_stroke_width="2dp"
+        custom:donut_unfinished_stroke_width="2dp"
+        custom:donut_unfinished_color="#313131"
+        android:layout_height="40dp"
+        custom:donut_progress="0"
+        />
+    <TextView
+        android:id="@+id/time_delay"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:text="4"
+        android:gravity="center"
+        android:layout_gravity="right|top"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        />
+</RelativeLayout>

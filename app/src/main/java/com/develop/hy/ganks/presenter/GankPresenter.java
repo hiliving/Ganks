@@ -1,6 +1,7 @@
 package com.develop.hy.ganks.presenter;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,14 +16,20 @@ import com.develop.hy.ganks.MainActivity;
 import com.develop.hy.ganks.R;
 import com.develop.hy.ganks.http.ApiManager;
 import com.develop.hy.ganks.model.GankBean;
+import com.develop.hy.ganks.model.User;
+import com.develop.hy.ganks.model.UserFile;
 import com.develop.hy.ganks.presenter.CommenInterface.IGanHuoView;
 import com.develop.hy.ganks.ui.LoginActivity;
 import com.develop.hy.ganks.ui.UserCenterActivity;
 import com.develop.hy.ganks.utils.Utils;
 
 import java.io.Serializable;
+import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -67,7 +74,6 @@ public class GankPresenter<T> extends BasePresenter<IGanHuoView> implements Seri
                             iView.showNoMoreData();
                         } else {
                             iView.showListView(gankDatas.getResults());
-                           // Log.d("LOG",gankDatas.getResults().get(0).getImages().toString());
                         }
                     }
                 });
@@ -138,20 +144,35 @@ public class GankPresenter<T> extends BasePresenter<IGanHuoView> implements Seri
     public void initUserInfo(final MainActivity activity, TextView userid, ImageView userIcon, RelativeLayout rl) {
         Bitmap bitmap = BitmapFactory.decodeResource(activity.getResources(),R.mipmap.haveno_login);
         Bitmap roundIcon = Utils.GetRoundedCornerBitmap(bitmap, 20);
-        BmobUser bmobUser = BmobUser.getCurrentUser();
-        if (bmobUser!=null){
-            userid.setText(bmobUser.getUsername()+"|已登录");
+        User user = BmobUser.getCurrentUser(User.class);
+        if (user!=null){
+            BmobQuery<UserFile> query = new BmobQuery<>();
+            query.addWhereEqualTo("username",user.getUsername());
+            query.order("-updateAt");
+            query.include("userId");//希望查询头像的同时也把用户背景图也查询出来
+            query.findObjects(new FindListener<UserFile>() {
+                @Override
+                public void done(List<UserFile> list, BmobException e) {
+                    if (list!=null){
+                        iView.initOthers(list);
+                    }else {
+
+                    }
+                }
+            });
+            userid.setText(user.getUsername()+"|已登录");
             userIcon.setImageBitmap(roundIcon);
         }else {
             userid.setText("个人中心|未登录");
 
             userIcon.setImageBitmap(roundIcon);
         }
-        if (bmobUser!=null){
+        if (user!=null){
             rl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     context.startActivity(new Intent(context,UserCenterActivity.class));
+                    ((Activity)context).overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
                 }
             });
         }else {
@@ -159,6 +180,7 @@ public class GankPresenter<T> extends BasePresenter<IGanHuoView> implements Seri
                 @Override
                 public void onClick(View v) {
                     context.startActivity(new Intent(context,LoginActivity.class));
+                    ((Activity)context).overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
                 }
             });
         }

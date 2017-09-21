@@ -73,7 +73,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         initEvent();
     }
     private void Inject() {
-        //dagger演示代码
+
         DaggerLoginActivityComponent component = (DaggerLoginActivityComponent) DaggerLoginActivityComponent.builder()
                 .loginActivityModule(new LoginActivityModule(this))
                 .build();
@@ -93,11 +93,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onClick(View v) {
                 finish();
+                overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
             }
         });
         login.setOnClickListener(this);
         regist.setOnClickListener(this);
         btRegist.setOnClickListener(this);
+
         presenter.SetOnRegistListener(new LoginPresenter.OnRegistListener() {
             @Override
             public void OnFinish() {
@@ -107,6 +109,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             public void onAnimationEnd() {
                                 startActivity(new Intent(LoginActivity.this, UserCenterActivity.class));
                                 finish();
+                                overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
                             }
                         });
             }
@@ -133,7 +136,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 if (s.length()>16){
                     username.setError("请输入少于16个字符");
                 }
-                Log.d("DDDDD",s.toString());
                 userStr = s.toString();
             }
         });
@@ -153,7 +155,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 if (s.length()>16){
                     password.setError("请输入少于16个字符");
                 }
-                Log.d("DDDDD",s.toString());
                 pwdStr = s.toString();
             }
         });
@@ -170,7 +171,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
             @Override
             public void afterTextChanged(Editable s) {
-                Log.d("DDDDD",s.toString());
                 emails = s.toString();
             }
         });
@@ -214,5 +214,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             login.setVisibility(View.INVISIBLE);
             VISBLE=false;
         }
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
     }
 }

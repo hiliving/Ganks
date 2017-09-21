@@ -41,6 +41,7 @@ public class AboutUsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
             }
         });
 
@@ -48,12 +49,14 @@ public class AboutUsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                startActivity(new Intent(AboutUsActivity.this,WebViewActivity.class).putExtra("URL","https://github.com/hiliving"));
+                overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
             }
         });
         mycsdn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                startActivity(new Intent(AboutUsActivity.this,WebViewActivity.class).putExtra("URL","http://blog.csdn.net/huang_yong_"));
+                overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
             }
         });
         suggest.setOnClickListener(new View.OnClickListener() {
@@ -72,5 +75,11 @@ public class AboutUsActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
     }
 }

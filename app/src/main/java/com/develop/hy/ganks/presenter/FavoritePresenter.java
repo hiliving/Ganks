@@ -115,6 +115,7 @@ public class FavoritePresenter extends BasePresenter<IFavoriteView> {
 
 
         File file = new File(path.get(0));
+
         bmobFile = new BmobFile(file);
 
         bmobFile.uploadObservable(new ProgressCallback() {//上传文件操作

@@ -2,9 +2,11 @@ package com.develop.hy.ganks.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -33,9 +35,11 @@ public class CommonListActivity extends BaseActivity implements OnItemClickListe
     @BindView(R.id.favorite_recycleview)
     RecyclerView favoriteRecycleview;
     @BindView(R.id.root_favorite)
-    RelativeLayout rootFavorite;
+    CoordinatorLayout rootFavorite;
     @BindView(R.id.favorite_nodata)
     TextView favoriteNodata;
+    @BindView(R.id.search_toolbar)
+    Toolbar searchToolbar;
     private FavoriteAdapter favoriteAdapter;
     private List<Favorite> favorites;
     private FavoritePresenter presenter;
@@ -44,6 +48,18 @@ public class CommonListActivity extends BaseActivity implements OnItemClickListe
     @Override
     protected void initView() {
         ButterKnife.bind(this);
+        setTitle("");
+        setSupportActionBar(searchToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        searchToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
+            }
+        });
+
+
         presenter = new FavoritePresenter(this,this);
         presenter.init();
         Bundle bundle = getIntent().getBundleExtra("Data");
@@ -65,6 +81,7 @@ public class CommonListActivity extends BaseActivity implements OnItemClickListe
                 .get(position).getUrl()).putExtra("Title",favorites.get(position).getTitle())
                 .putExtra("Imgs",favorites.get(position).getImgs())
         );
+        overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
     }
 
     @Override
@@ -116,5 +133,11 @@ public class CommonListActivity extends BaseActivity implements OnItemClickListe
     @Override
     public void initUserInfo(List<UserFile> favorites) {
 
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
     }
 }

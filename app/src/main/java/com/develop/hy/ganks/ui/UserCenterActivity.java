@@ -50,6 +50,8 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
     private static boolean IS_USER_BG = true;
     @BindView(R.id.bt_logout)
     TextView logout;
+    @BindView(R.id.ucenter_back)
+    ImageView ucenterBack;
     @BindView(R.id.bt_collect)
     TextView collect;
     @BindView(R.id.bt_clear_cache)
@@ -93,8 +95,6 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
                 .isShowCamera(true)                     // 是否现实相机按钮  默认：false
                 .filePath("/Gallery/Pictures")          // 图片存放路径
                 .build();
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
-        gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
     }
 
     @Override
@@ -120,6 +120,7 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
             case R.id.bt_logout:
                 BmobUser.logOut();
                 finish();
+                overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
                 break;
             case R.id.bt_collect:
                 getFavorite();
@@ -134,6 +135,10 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
             case R.id.user_header:
                 IS_USER_BG = false;
                 pushImage();
+                break;
+            case R.id.ucenter_back:
+                finish();
+                overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
                 break;
 
         }
@@ -223,6 +228,7 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
             bundle.putSerializable("Favorite",list);
             startActivity(new Intent(UserCenterActivity.this, CommonListActivity.class)
                     .putExtra("Data",bundle));
+            overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
         }
     }
 
@@ -276,5 +282,10 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
         super.onResume();
         presenter.getFavorite();
     }
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
+    }
 }
