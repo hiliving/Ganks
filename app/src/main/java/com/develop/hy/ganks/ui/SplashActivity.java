@@ -132,6 +132,7 @@ public class SplashActivity extends BaseActivity implements ExoPlayer.EventListe
     private void initSplashRes() {
         sp = new SPUtils(SplashActivity.this, "splash");
         cachePath = this.getCacheDir().getPath() + "/splash";
+        showTimeDelay();
         if (getIntent().getIntExtra("type", 2000) == 1000) {
             startImage();
         } else {
@@ -139,6 +140,7 @@ public class SplashActivity extends BaseActivity implements ExoPlayer.EventListe
         }
     }
     private void startImage() {
+
         ImageView bg = (ImageView) findViewById(R.id.splash_bg);
         File file = new File(cachePath, sp.getString("picName"));
         if (file.exists() && file.isFile()) {
@@ -152,20 +154,6 @@ public class SplashActivity extends BaseActivity implements ExoPlayer.EventListe
             startPlayer();
         }
         mHandler.sendEmptyMessageDelayed(TOMAINPAGE, 5000);
-
-
-
-        if (file.exists() && file.isFile()) {
-            try {
-                FileInputStream is = new FileInputStream(cachePath + "/" + sp.getString("picName"));
-                bg.setImageBitmap(BitmapFactory.decodeStream(is));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            showTimeDelay();
-        } else {
-            startPlayer();
-        }
     }
     private void showTimeDelay() {
         timer.schedule(task, 0, 100);
@@ -224,6 +212,8 @@ public class SplashActivity extends BaseActivity implements ExoPlayer.EventListe
 
         // 6. ready to play
         mPlayer.prepare(videoSource);
+
+        mHandler.sendEmptyMessageDelayed(TOMAINPAGE, 5000);//5秒后停止视频进主页
     }
 
     @Override

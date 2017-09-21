@@ -39,12 +39,20 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="top|center_horizontal"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="120dp"
         android:gravity="center_horizontal"
         android:text="v2.02"
         android:drawableTop="@mipmap/ic_launcher"
         />
-
+    <Button
+        android:layout_gravity="top|center_horizontal"
+        android:layout_width="120dp"
+        android:id="@+id/bt_upgrade"
+        android:layout_marginTop="230dp"
+        android:background="@drawable/bt_bg"
+        android:textColor="@color/editcolorhint"
+        android:text="检查更新"
+        android:layout_height="38dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

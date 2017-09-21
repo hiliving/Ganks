@@ -7,10 +7,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.develop.hy.ganks.R;
 import com.develop.hy.ganks.utils.AlipayZeroSdk;
+import com.develop.hy.ganks.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +29,8 @@ public class AboutUsActivity extends AppCompatActivity {
     TextView mygithub;
     @BindView(R.id.suggest)
     TextView suggest;
+    @BindView(R.id.bt_upgrade)
+    Button bt_upgrade;
     @BindView(R.id.content_root)
     CoordinatorLayout cor_root;
     @Override
@@ -73,6 +77,12 @@ public class AboutUsActivity extends AppCompatActivity {
                 } else {
                     Snackbar.make(cor_root, "谢谢，您没有安装支付宝客户端", Snackbar.LENGTH_LONG).show();
                 }
+            }
+        });
+        bt_upgrade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showShortToast("当前已是最新版本");
             }
         });
     }

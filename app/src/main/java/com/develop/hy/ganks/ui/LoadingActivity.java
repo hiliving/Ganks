@@ -69,7 +69,7 @@ public class LoadingActivity extends BaseActivity {
 
                 if (mInfo.getData().getFileType() == 2) {
                     //启动为视频
-                    downRes(fileUrl, fileName, filePath, MODE_MOVIE);
+                   // downRes(fileUrl, fileName, filePath, MODE_MOVIE);
                     intent.putExtra("type", MODE_MOVIE);
                 } else {
                     //启动为图片
