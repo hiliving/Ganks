@@ -64,7 +64,7 @@ public class SplashActivity extends BaseActivity implements ExoPlayer.EventListe
     private TrackSelector trackSelector;
     private SimpleExoPlayer mPlayer;
     private LoadControl loadControl;
-    private int timeCount = 60;
+    private int timeCount = 110;
     private int count = 1;
     private TextView tv_time_delay;
     private Timer timer;
@@ -75,14 +75,12 @@ public class SplashActivity extends BaseActivity implements ExoPlayer.EventListe
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
-
                 case TOMAINPAGE:
                     tryJumpToMain();
                     break;
-
                 case TIMEUPDATE:
                     tv_time_delay.setText((timeCount - count) / 10 + "S");
-                    if (count <= 50) {
+                    if (count <= 110) {
                         donutProgress.setProgress(count++);
                     } else {
                         mHandler.removeMessages(TIMEUPDATE);
@@ -114,7 +112,7 @@ public class SplashActivity extends BaseActivity implements ExoPlayer.EventListe
     private void initTimer() {
         tv_time_delay = (TextView) findViewById(R.id.time_delay);
         donutProgress = (DonutProgress) findViewById(R.id.donut_progress);
-        donutProgress.setMax(50);
+        donutProgress.setMax(100);
         donutProgress.setStartingDegree(270);
         timer = new Timer();
         task = new TimerTask() {
@@ -153,7 +151,7 @@ public class SplashActivity extends BaseActivity implements ExoPlayer.EventListe
         } else {
             startPlayer();
         }
-        mHandler.sendEmptyMessageDelayed(TOMAINPAGE, 5000);
+        mHandler.sendEmptyMessageDelayed(TOMAINPAGE, 10000);
     }
     private void showTimeDelay() {
         timer.schedule(task, 0, 100);
@@ -213,7 +211,7 @@ public class SplashActivity extends BaseActivity implements ExoPlayer.EventListe
         // 6. ready to play
         mPlayer.prepare(videoSource);
 
-        mHandler.sendEmptyMessageDelayed(TOMAINPAGE, 5000);//5秒后停止视频进主页
+        mHandler.sendEmptyMessageDelayed(TOMAINPAGE, 10000);//5秒后停止视频进主页
     }
 
     @Override

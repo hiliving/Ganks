@@ -1,5 +1,6 @@
 package com.develop.hy.ganks.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.design.widget.FloatingActionButton;

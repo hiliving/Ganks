@@ -2,6 +2,7 @@ package com.develop.hy.ganks.http;
 
 import com.develop.hy.ganks.model.ConfigInfo;
 import com.develop.hy.ganks.model.GankBean;
+import com.develop.hy.ganks.model.VersionBean;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -28,5 +29,8 @@ public interface ApiService {
 
     @GET("gank/stmode.json")
     Call<ConfigInfo> getType();
+
+    @GET("gank/update.json")
+    Call<VersionBean> getUpdate();
 
 }

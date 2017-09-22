@@ -16,7 +16,6 @@ import com.develop.hy.ganks.ui.UserCenterActivity;
 import com.develop.hy.ganks.utils.Utils;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
-import com.yancy.gallerypick.config.GalleryPick;
 
 import java.lang.ref.SoftReference;
 

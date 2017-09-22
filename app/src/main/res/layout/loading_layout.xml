@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:background="@drawable/de_bg"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:id="@+id/app_bar"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="1dp"
+        android:background="@drawable/splash"
+        >
+    </android.support.design.widget.AppBarLayout>
     <TextView
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
@@ -12,4 +23,4 @@
         android:text="版本号：1.0.0"
         android:textColor="#fff"
         />
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

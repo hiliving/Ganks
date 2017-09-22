@@ -8,5 +8,4 @@ package com.develop.hy.ganks.http;
 public class UrlConfig {
     public static String baseUrl = "http://gank.io/api/";
     public static String baseConfig = "http://zanxia.songore.cn/";
-//    public static String baseConfig = "http://10.10.6.152/";
 }
