@@ -6,7 +6,7 @@
 ## 干货集中营的客户端，采用RxJava+Retrofit+Dagger2+MVP开发
 ### 数据来源：[干货集中营](http://gank.io)
 ### 效果图如下：
-<table>
+<table style="border-width: 0px ;">
 			<tr>
 				<td><img src="https://github.com/hiliving/Ganks/blob/master/screenshot/Screenshot_2017-09-25-14-48-20.png" width = "240" height = "400" alt="图片名称" align=center />
 				</td><td><img src="https://github.com/hiliving/Ganks/blob/master/screenshot/Screenshot_2017-09-25-14-48-51.png"  height = "400" alt="图片名称" align=center />
