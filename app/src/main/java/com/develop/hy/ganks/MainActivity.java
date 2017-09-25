@@ -300,6 +300,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                break;
            case R.id.nav_reco:
                switchFragment(CASUAL);
+               break;
            case R.id.nav_setting:
                startActivity(new Intent(this, AboutUsActivity.class));
                overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
