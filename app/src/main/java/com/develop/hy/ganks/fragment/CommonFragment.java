@@ -16,6 +16,7 @@ import com.develop.hy.ganks.R;
 import com.develop.hy.ganks.fragment.adapter.MutiTypeAdapter;
 import com.develop.hy.ganks.http.GankType;
 import com.develop.hy.ganks.model.GankBean;
+import com.develop.hy.ganks.model.NewsInfo;
 import com.develop.hy.ganks.model.UserFile;
 import com.develop.hy.ganks.presenter.CommenInterface.OnItemClickListener;
 import com.develop.hy.ganks.presenter.GankPresenter;
@@ -147,6 +148,11 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
     }
 
     @Override
+    public void showListView(NewsInfo newsInfo) {
+
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         presenter.release();
@@ -183,11 +189,12 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
           ImagePagerActivity.startActivity(getContext(), config);
 
       } else {
-          startActivity(new Intent(getContext(), WebViewActivity.class).putExtra("URL",gankList
+          startActivity(new Intent(getContext(), WebViewActivity.class)
+                  .putExtra("URL",gankList
                   .get(position).getUrl())
                   .putExtra("Title",gankList.get(position).getDesc())
-                    .putExtra("Author",gankList.get(position).getWho())
-                    .putExtra("Imgs",gankList.get(position).
+                  .putExtra("Author",gankList.get(position).getWho())
+                  .putExtra("Imgs",gankList.get(position).
                             getImages()==null?"":gankList.get(position).getImages().get(0).toString())
           );
           getActivity().overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);

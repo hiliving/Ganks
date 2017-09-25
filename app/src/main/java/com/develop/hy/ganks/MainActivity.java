@@ -33,6 +33,7 @@ import com.develop.hy.ganks.fragment.adapter.ViewPageAdapter;
 import com.develop.hy.ganks.http.GankType;
 import com.develop.hy.ganks.model.Favorite;
 import com.develop.hy.ganks.model.GankBean;
+import com.develop.hy.ganks.model.NewsInfo;
 import com.develop.hy.ganks.model.UserFile;
 import com.develop.hy.ganks.presenter.CommenInterface.IFavoriteView;
 import com.develop.hy.ganks.presenter.CommenInterface.IGanHuoView;
@@ -115,7 +116,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private ImageView userIcon;
     private ArrayList<String> imgList;
     private ViewPageAdapter viewPageAdapter;
-    private List<GankBean.ResultsBean> resultList;
+    private List<NewsInfo.NewslistBean> resultList;
     @Override
     protected void initView() {
         ButterKnife.bind(this);
@@ -177,7 +178,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void initViews() {
-        gankPresenter.getRandom(GankType.WELFARE,10);
+//        gankPresenter.getRandom(GankType.WELFARE,10);
+        gankPresenter.getNews(Constants.APP_KEY,10);
         initPagerView();
     }
 
@@ -203,8 +205,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void showListView(List<GankBean.ResultsBean> results) {
-        resultList.addAll(results);
-        viewPageAdapter.notifyDataSetChanged();
+
     }
 
     @Override
@@ -218,6 +219,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         userIcon.setImageBitmap(GetRoundedCornerBitmap(resource,120));
                     }
                 });
+    }
+
+    @Override
+    public void showListView(NewsInfo newsInfo) {
+        resultList.addAll(newsInfo.getNewslist());
+        viewPageAdapter.notifyDataSetChanged();
     }
 
 

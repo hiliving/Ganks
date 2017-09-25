@@ -9,4 +9,7 @@ public interface ILoadingView extends IBaseView{
     void showMustUpdate();
     void showNoUpdate();
     void showErrorData(String error);
+
+
+    void showProgress();
 }

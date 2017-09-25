@@ -16,6 +16,7 @@ import com.develop.hy.ganks.dagger.component.DaggerSearchActivityComponent;
 import com.develop.hy.ganks.dagger.module.SearchActivityModule;
 import com.develop.hy.ganks.fragment.adapter.MutiTypeAdapter;
 import com.develop.hy.ganks.model.GankBean;
+import com.develop.hy.ganks.model.NewsInfo;
 import com.develop.hy.ganks.model.UserFile;
 import com.develop.hy.ganks.presenter.CommenInterface.IGanHuoView;
 import com.develop.hy.ganks.presenter.CommenInterface.OnItemClickListener;
@@ -172,6 +173,11 @@ public class SearchActivity extends BaseActivity implements IGanHuoView, HXRecyc
 
     @Override
     public void initOthers(List<UserFile> list) {
+
+    }
+
+    @Override
+    public void showListView(NewsInfo newsInfo) {
 
     }
 

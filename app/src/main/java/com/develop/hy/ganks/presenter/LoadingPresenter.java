@@ -3,11 +3,15 @@ package com.develop.hy.ganks.presenter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.wifi.WifiManager;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.develop.hy.ganks.App;
 import com.develop.hy.ganks.R;
 import com.develop.hy.ganks.http.ApiService;
 import com.develop.hy.ganks.http.UrlConfig;
@@ -17,10 +21,12 @@ import com.develop.hy.ganks.presenter.CommenInterface.ILoadingView;
 import com.develop.hy.ganks.ui.DownSplashResService;
 import com.develop.hy.ganks.ui.view.DownloadService;
 import com.develop.hy.ganks.ui.view.FullScreenDialog;
+import com.develop.hy.ganks.utils.ToastUtils;
 
 import java.io.File;
 import java.io.Serializable;
 
+import me.xiaopan.android.net.NetworkUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -80,9 +86,9 @@ public class LoadingPresenter<T> extends BasePresenter<ILoadingView> implements 
 
     private void showUpdate(final VersionBean.DataBean data) {
         final Dialog dialog = FullScreenDialog.getInstance(context,R.layout.update_dialog);
-        dialog.setCancelable(false);
+        dialog.setCancelable(true);
         dialog.show();
-        Button confirm = (Button) dialog.findViewById(R.id.confirm);
+        final Button confirm = (Button) dialog.findViewById(R.id.confirm);
         Button nextTime = (Button) dialog.findViewById(R.id.nexttiem);
         TextView updateContent = (TextView) dialog.findViewById(R.id.update_content);
         updateContent.setText(data.getDescription());
@@ -90,10 +96,38 @@ public class LoadingPresenter<T> extends BasePresenter<ILoadingView> implements 
             @Override
             public void onClick(View v) {
                 //开始下载服务
-                dialog.dismiss();
-                Intent intent = new Intent(context,DownloadService.class);
-                intent.putExtra("url", data.getUrl());
-                context.startService(intent);
+                try {
+                    if (NetworkUtils.getWifiState(App.getContext())== WifiManager.WIFI_STATE_DISABLED){
+                       AlertDialog alertDialog = new AlertDialog.Builder(context,R.style.Dialog_Alert)
+                               .setTitle("")
+                               .setMessage("当前是非WIFI网络，确定继续下载？")
+                               .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                                   @Override
+                                   public void onClick(DialogInterface dialogs, int which) {
+                                       Intent intent = new Intent(context,DownloadService.class);
+                                       intent.putExtra("url", data.getUrl());
+                                       context.startService(intent);
+                                       //显示下载进度
+                                   }
+                               })
+                               .setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                                   @Override
+                                   public void onClick(DialogInterface dialogs, int which) {
+                                   }
+                               })
+                               .setCancelable(false)
+                               .show();
+                    }else {
+                        Intent intent = new Intent(context,DownloadService.class);
+                        intent.putExtra("url", data.getUrl());
+                        context.startService(intent);
+                        //显示下载进度
+                        iView.showProgress();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
         });
         nextTime.setOnClickListener(new View.OnClickListener() {

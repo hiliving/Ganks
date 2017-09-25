@@ -1,6 +1,7 @@
 package com.develop.hy.ganks.presenter.CommenInterface;
 
 import com.develop.hy.ganks.model.GankBean;
+import com.develop.hy.ganks.model.NewsInfo;
 import com.develop.hy.ganks.model.UserFile;
 import com.develop.hy.ganks.presenter.CommenInterface.IBaseView;
 
@@ -16,4 +17,6 @@ public interface IGanHuoView extends IBaseView {
 
 
     void initOthers(List<UserFile> list);
+
+    void showListView(NewsInfo newsInfo);
 }

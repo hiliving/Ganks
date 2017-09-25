@@ -1,7 +1,12 @@
 package com.develop.hy.ganks.ui;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.WindowManager;
 
 import com.develop.hy.ganks.BaseActivity;
@@ -13,6 +18,7 @@ import com.develop.hy.ganks.model.ConfigInfo;
 import com.develop.hy.ganks.presenter.CommenInterface.ILoadingView;
 import com.develop.hy.ganks.presenter.LoadingPresenter;
 import com.develop.hy.ganks.utils.ToastUtils;
+import com.yancy.gallerypick.config.GalleryPick;
 
 import java.io.File;
 
@@ -37,7 +43,6 @@ public class LoadingActivity extends BaseActivity implements ILoadingView {
     @Override
     protected void onPreCreate() {
         super.onPreCreate();
-       // getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN , WindowManager.LayoutParams. FLAG_FULLSCREEN);
     }
     @Override
     protected void initView() {
@@ -104,6 +109,12 @@ public class LoadingActivity extends BaseActivity implements ILoadingView {
     public void showErrorData(String error) {
         ToastUtils.showShortToast(error);
     }
+
+    @Override
+    public void showProgress() {
+
+    }
+
     //未有更新时，调用此方法，3秒后进入首页
     public void startAfterDelay() {
         mHandler.postDelayed(new Runnable() {
@@ -119,4 +130,5 @@ public class LoadingActivity extends BaseActivity implements ILoadingView {
         startActivity(intent);
         finish();
     }
+
 }

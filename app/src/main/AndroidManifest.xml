@@ -52,6 +52,7 @@
            />
         <activity android:name="com.develop.hy.ganks.MainActivity"
            />
+
     </application>
 
 </manifest>

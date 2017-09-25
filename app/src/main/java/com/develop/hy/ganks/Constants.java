@@ -22,8 +22,18 @@ public class Constants {
     public static String SMS_BROADCAST_FILTER = "gank.mvpdemo.recevieSMS";
 
     public static final int PAGE_SIZE = 20;
+    public static final String APP_KEY = "d865b89f863b1bf2c62727ef8952efe7";
 
     public static final String BOMB_APPID = "74484ee79ef10cb552ab13235abbcb70";
 
     public static ArrayList<String> searchHistory=new ArrayList<>();//保存最近搜索记录
+
+    /**
+     * 网络类型
+     * @author gonglei
+     *
+     */
+    public static enum ConnectedState {
+        TYPE_MOBLE, TYPE_WIFI
+    }
 }

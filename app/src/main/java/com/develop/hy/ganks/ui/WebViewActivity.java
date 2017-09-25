@@ -154,6 +154,7 @@ public class WebViewActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        mAgentWeb.destroyAndKill();
         finish();
         overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
     }

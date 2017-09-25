@@ -15,9 +15,13 @@ import com.develop.hy.ganks.Constants;
 import com.develop.hy.ganks.MainActivity;
 import com.develop.hy.ganks.R;
 import com.develop.hy.ganks.http.ApiManager;
+import com.develop.hy.ganks.http.ApiService;
+import com.develop.hy.ganks.http.UrlConfig;
 import com.develop.hy.ganks.model.GankBean;
+import com.develop.hy.ganks.model.NewsInfo;
 import com.develop.hy.ganks.model.User;
 import com.develop.hy.ganks.model.UserFile;
+import com.develop.hy.ganks.model.VersionBean;
 import com.develop.hy.ganks.presenter.CommenInterface.IGanHuoView;
 import com.develop.hy.ganks.ui.LoginActivity;
 import com.develop.hy.ganks.ui.UserCenterActivity;
@@ -30,6 +34,11 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -54,7 +63,7 @@ public class GankPresenter<T> extends BasePresenter<IGanHuoView> implements Seri
     //获取数据
     public void loadGank(String type,int PageSize,int page){
         iView.showProgressBar();
-        Subscription subscribe = ApiManager.getGankRetrofitInstance().getGank(type, PageSize, page)
+        Subscription subscribe = ApiManager.getGankRetrofitInstance(context, UrlConfig.baseUrl).getGank(type, PageSize, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GankBean>() {
@@ -82,7 +91,7 @@ public class GankPresenter<T> extends BasePresenter<IGanHuoView> implements Seri
     //搜索
     public void queryGank(String keywords,int page){
         iView.showProgressBar();
-        Subscription subscribe = ApiManager.getGankRetrofitInstance().queryGank(keywords, Constants.PAGE_SIZE, page)
+        Subscription subscribe = ApiManager.getGankRetrofitInstance(context, UrlConfig.baseUrl).queryGank(keywords, Constants.PAGE_SIZE, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GankBean>() {
@@ -110,7 +119,7 @@ public class GankPresenter<T> extends BasePresenter<IGanHuoView> implements Seri
     //随机数据
     public void getRandom(String category,int count){
         iView.showProgressBar();
-        Subscription subscribe = ApiManager.getGankRetrofitInstance().queryRandom(category, count)
+        Subscription subscribe = ApiManager.getGankRetrofitInstance(context, UrlConfig.baseUrl).queryRandom(category, count)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GankBean>() {
@@ -137,7 +146,38 @@ public class GankPresenter<T> extends BasePresenter<IGanHuoView> implements Seri
     }
 
 
+    //新闻
+    public void getNews(String APPKEY,int count){
+        iView.showProgressBar();
+        Retrofit retrofit = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(UrlConfig.baseTianQin)
+                .build();
 
+        final ApiService mApi = retrofit.create(ApiService.class);
+        Call<NewsInfo> request = mApi.queryNews(APPKEY,count+"");
+        //启动即发请求
+        request.enqueue(new Callback<NewsInfo>() {
+            @Override
+            public void onResponse(Call<NewsInfo> call, Response<NewsInfo> response) {
+                iView.hideProgressBar();
+                NewsInfo mInfo = response.body();
+                if (mInfo!=null){
+                    if (mInfo.getCode()==200) {
+                        iView.showListView(mInfo);
+                    } else {
+                        iView.showNoMoreData();
+                    }
+                }
+
+            }
+            @Override
+            public void onFailure(Call<NewsInfo> call, Throwable t) {
+                iView.hideProgressBar();
+                iView.showErrorData();
+            }
+        });
+    }
 
 
 
