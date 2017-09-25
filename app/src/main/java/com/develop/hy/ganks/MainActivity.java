@@ -246,9 +246,31 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 ll_search.setVisibility(View.VISIBLE);
                 ll_search.setAlpha(0.4f);
                 titleText.setAlpha(1);
-                titleText.setText(currentFragmentTag+"专题");
+                titleText.setText(getTitle(currentFragmentTag));
             }
         }
+    }
+
+    private String getTitle(String currentFragmentTag) {
+        switch (currentFragmentTag){
+            case GankType.ANDROID:
+                return "精选文章";
+            case GankType.APP:
+                return "移动开发";
+            case GankType.CASUAL:
+                return "随机推荐";
+            case GankType.EXTRA:
+                return "拓展资源";
+            case GankType.FRONTEND:
+                return "前端那些事";
+            case GankType.IOS:
+                return "IOS专区";
+            case GankType.VIDEO:
+                return "热点视频";
+            case GankType.WELFARE:
+                return "休息养眼";
+        }
+        return null;
     }
 
     @Override

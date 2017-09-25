@@ -61,6 +61,11 @@ public class SearchActivity extends BaseActivity implements IGanHuoView, HXRecyc
 
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.search_layout;
+    }
+
+    @Override
     public void initViews() {
         keyWords = String.valueOf(et_search.getText());//搜索关键词
         gankList = new ArrayList<>();
@@ -99,7 +104,6 @@ public class SearchActivity extends BaseActivity implements IGanHuoView, HXRecyc
             refreshLayout.setRefreshing(true);
         }
     }
-
     @Override
     public void hideProgressBar() {
         if (refreshLayout.isRefreshing()){
@@ -115,6 +119,7 @@ public class SearchActivity extends BaseActivity implements IGanHuoView, HXRecyc
       // 显示或者隐藏输入法
         imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
     }
+
     @Override
     public void showErrorData() {
         if (TextUtils.isEmpty(et_search.getText())){
@@ -142,11 +147,6 @@ public class SearchActivity extends BaseActivity implements IGanHuoView, HXRecyc
         ButterKnife.bind(this);
         initInject();
         presenter.init();
-    }
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.search_layout;
     }
 
     @Override
