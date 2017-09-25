@@ -7,11 +7,13 @@
 ### 数据来源：[干货集中营](http://gank.io)
 ### 效果图如下：
 
-<img src="https://github.com/hiliving/Ganks/blob/master/screenshot/Screenshot_2017-09-17-23-43-04.png" width = "240" height = "400" alt="图片名称" align=center />
-<img src="https://github.com/hiliving/Ganks/blob/master/screenshot/Screenshot_2017-09-17-23-43-16.png" width = "240" height = "400" alt="图片名称" align=center />
-<img src="https://github.com/hiliving/Ganks/blob/master/screenshot/Screenshot_2017-09-17-23-43-34.png" width = "240" height = "400" alt="图片名称" align=center />
-<img src="https://github.com/hiliving/Ganks/blob/master/screenshot/Screenshot_2017-09-17-23-44-08.png" width = "240" height = "400" alt="图片名称" align=center />
-<img src="https://github.com/hiliving/Ganks/blob/master/screenshot/Screenshot_2017-09-17-23-44-40.png" width = "240" height = "400" alt="图片名称" align=center />
+<img src="https://github.com/hiliving/Ganks/blob/master/screenshot/Screenshot_2017-09-25-14-48-20.png" width = "240" height = "400" alt="图片名称" align=center />
+<img src="https://github.com/hiliving/Ganks/blob/master/screenshot/Screenshot_2017-09-25-14-48-51.png" width = "240" height = "400" alt="图片名称" align=center />
+<img src="https://github.com/hiliving/Ganks/blob/master/screenshot/Screenshot_2017-09-25-14-49-17.png" width = "240" height = "400" alt="图片名称" align=center />
+<img src="https://github.com/hiliving/Ganks/blob/master/screenshot/Screenshot_2017-09-25-14-49-27.png" width = "240" height = "400" alt="图片名称" align=center />
+<img src="https://github.com/hiliving/Ganks/blob/master/screenshot/Screenshot_2017-09-25-14-49-43.png" width = "240" height = "400" alt="图片名称" align=center />
+<img src="https://github.com/hiliving/Ganks/blob/master/screenshot/Screenshot_2017-09-25-14-51-29.png" width = "240" height = "400" alt="图片名称" align=center />
+<img src="https://github.com/hiliving/Ganks/blob/master/screenshot/Screenshot_2017-09-25-14-51-43.png" width = "240" height = "400" alt="图片名称" align=center />
 
 # Library
 
@@ -27,11 +29,11 @@
 
 * [gson](https://github.com/google/gson)
 
-* [agentweb](com.just.agentweb:agentweb:2.0.1)
+* [agentweb](https://github.com/Justson/AgentWeb)
 
-* [PictureViewer](com.github.SuperKotlin:PictureViewer:1.0.2)
+* [PictureViewer](https://github.com/SuperKotlin/PictureViewer)
 
-### 登录注册功能用的是bomb后端云
+### 登录注册功能用的是bmob后端云
 
 
 # License
