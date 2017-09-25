@@ -33,7 +33,7 @@
 
 * [PictureViewer](https://github.com/SuperKotlin/PictureViewer)
 
-### 登录注册功能用的是bmob后端云
+### 登录注册收藏功能用的是bmob后端云,部分功能正在完善。
 
 
 # License
