@@ -4,7 +4,19 @@
 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)]()
 # Ganks
 ## 干货集中营的客户端，采用RxJava+Retrofit+Dagger2+MVP开发
-### 数据来源：[干货集中营](http://gank.io)
+### 数据来源：[干货集中营](http://gank.io)，[天行数据](https://www.tianapi.com/)
+###目前完成的功能
+*新闻推荐
+*干货文章阅读
+*收藏、分享喜欢的文章，也可以分享到微信或其他地方，非常实用
+*注册和登录，更换头像，更换个人中心背景（主要用到了bmob的文件管理功能和用户模块）
+*搜索干货文章
+###即将添加的功能
+*积分系统
+*积分商城
+*修改密码，忘记密码
+*第三方登录
+*以及其他一些新鲜的功能
 ### 效果图如下：
 <table style="border-width: 0px ;">
 			<tr>
