@@ -117,6 +117,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private ArrayList<String> imgList;
     private ViewPageAdapter viewPageAdapter;
     private List<NewsInfo.NewslistBean> resultList;
+    private List<GankBean.ResultsBean> randomList;
     @Override
     protected void initView() {
         ButterKnife.bind(this);
@@ -144,7 +145,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void initPagerView() {
         resultList = new ArrayList<>();
-        viewPageAdapter = new ViewPageAdapter(this, resultList);
+        randomList = new ArrayList<>();
+        viewPageAdapter = new ViewPageAdapter(this, resultList,randomList);
         viewpager.setAdapter(viewPageAdapter);
     }
 
@@ -178,7 +180,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void initViews() {
-//        gankPresenter.getRandom(GankType.WELFARE,10);
+        gankPresenter.getRandom(GankType.WELFARE,10);
         gankPresenter.getNews(Constants.APP_KEY,10);
         initPagerView();
     }
@@ -205,7 +207,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void showListView(List<GankBean.ResultsBean> results) {
-
+        randomList.clear();
+        randomList.addAll(results);
+        viewPageAdapter.notifyDataSetChanged();
     }
 
     @Override

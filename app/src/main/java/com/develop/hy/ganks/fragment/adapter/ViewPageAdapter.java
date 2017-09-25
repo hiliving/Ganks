@@ -27,10 +27,12 @@ import java.util.List;
 public class ViewPageAdapter extends PagerAdapter {
     private Context context;
     private  List<NewsInfo.NewslistBean> resultBean;
-
-    public ViewPageAdapter(Context context, List<NewsInfo.NewslistBean> resultBean) {
+    private List<GankBean.ResultsBean> randomList;
+    private int[] img = {R.drawable.a,R.drawable.b,R.drawable.c,R.drawable.d,R.drawable.f};
+    public ViewPageAdapter(Context context, List<NewsInfo.NewslistBean> resultBean, List<GankBean.ResultsBean> randomList) {
         this.context = context;
         this.resultBean = resultBean;
+        this.randomList = randomList;
     }
 
     @Override
@@ -48,7 +50,7 @@ public class ViewPageAdapter extends PagerAdapter {
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.pager_layout,null,false);
         ImageView imageView = (ImageView) view.findViewById(R.id.page_img);
         TextView textView = (TextView) view.findViewById(R.id.pager_title);
-        Glide.with(context).load(resultBean.get(position).getPicUrl())
+        Glide.with(context).load(img[position%5])
                 .placeholder(R.mipmap.e)
                 .into(imageView);
         textView.setText(resultBean.get(position).getTitle()+"\n@"+
