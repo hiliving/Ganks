@@ -101,7 +101,7 @@ public class LoadingActivity extends BaseActivity implements ILoadingView {
 
     @Override
     public void showNoUpdate() {
-        ToastUtils.showShortToast("不用更新");
+//        ToastUtils.showShortToast("不用更新");
         startAfterDelay();
     }
 
@@ -123,7 +123,7 @@ public class LoadingActivity extends BaseActivity implements ILoadingView {
                 startActivity(intent);
                 finish();
             }
-        }, 3000l);
+        }, 1500l);
     }
     //临时代码，用于直接进入首页
     public void startNow() {

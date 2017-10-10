@@ -1,24 +1,19 @@
 package com.develop.hy.ganks;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.develop.hy.ganks.ui.UserCenterActivity;
 import com.develop.hy.ganks.utils.Utils;
 import com.orhanobut.logger.LogLevel;
 import com.orhanobut.logger.Logger;
 
-import java.lang.ref.SoftReference;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 
+import cn.bmob.newim.BmobIM;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobConfig;
 import top.wefor.circularanim.CircularAnim;
@@ -57,6 +52,25 @@ public class App extends Application {
         .build();
         Bmob.initialize(config);
 
+        //initIM();
+
+    }
+//
+    /**
+     * 获取当前运行的进程名
+     * @return
+     */
+    public static String getMyProcessName() {
+        try {
+            File file = new File("/proc/" + android.os.Process.myPid() + "/" + "cmdline");
+            BufferedReader mBufferedReader = new BufferedReader(new FileReader(file));
+            String processName = mBufferedReader.readLine().trim();
+            mBufferedReader.close();
+            return processName;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
     /**
      * 获取全局 context

@@ -80,6 +80,7 @@ public class LoadingPresenter<T> extends BasePresenter<ILoadingView> implements 
             }
             @Override
             public void onFailure(Call<VersionBean> call, Throwable t) {
+
             }
         });
     }
@@ -141,6 +142,7 @@ public class LoadingPresenter<T> extends BasePresenter<ILoadingView> implements 
 
     public void getConfig(final Context context, final Intent intent) {
 
+        iView.showNoUpdate();//临时代码
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(UrlConfig.baseConfig)

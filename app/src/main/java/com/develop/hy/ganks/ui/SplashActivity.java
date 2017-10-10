@@ -80,7 +80,7 @@ public class SplashActivity extends BaseActivity implements ExoPlayer.EventListe
                     break;
                 case TIMEUPDATE:
                     tv_time_delay.setText((timeCount - count) / 10 + "S");
-                    if (count <= 110) {
+                    if (count <= 100) {
                         donutProgress.setProgress(count++);
                     } else {
                         mHandler.removeMessages(TIMEUPDATE);

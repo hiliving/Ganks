@@ -15,6 +15,7 @@ import com.develop.hy.ganks.utils.ToastUtils;
 
 import java.util.logging.Logger;
 
+import cn.bmob.newim.BmobIM;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
@@ -36,11 +37,7 @@ public class LoginPresenter {
         User p3 = new User();
         p3.setUsername(username);
         p3.setPassword(pwd);
-        if (TextUtils.isEmpty(username)||TextUtils.isEmpty(pwd)){
-            ToastUtils.showShortToast("用户名或密码不能为空");
-            return;
-        }
-       p3.login(new SaveListener<User>() {
+        p3.login(new SaveListener<User>() {
            @Override
            public void done(User user, BmobException e) {
                if (user!=null){
@@ -52,6 +49,7 @@ public class LoginPresenter {
                }
            }
        });
+
     }
 
    public void startToUserCenter(Button login, final ProgressBar progressbar){

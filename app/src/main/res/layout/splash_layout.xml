@@ -33,7 +33,7 @@
         custom:donut_finished_color="@color/colorPrimaryDark"
         custom:donut_finished_stroke_width="2dp"
         custom:donut_unfinished_stroke_width="2dp"
-        custom:donut_unfinished_color="#313131"
+        custom:donut_unfinished_color="#e7e7e7"
         android:layout_height="40dp"
         custom:donut_progress="0"
         />

@@ -1,5 +1,7 @@
 package com.develop.hy.ganks;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +33,16 @@ public abstract class BaseActivity extends AppCompatActivity {
         switch (theme) {
 
         }
+    }
+
+    public void startActivity(Class<? extends AppCompatActivity> target, Bundle bundle, boolean finish) {
+        Intent intent = new Intent();
+        intent.setClass(this, target);
+        if (bundle != null)
+            intent.putExtra(getPackageName(), bundle);
+        startActivity(intent);
+        if (finish)
+            finish();
     }
     @Override
     protected void onDestroy() {

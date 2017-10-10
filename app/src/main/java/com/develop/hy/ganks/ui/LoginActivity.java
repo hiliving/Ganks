@@ -5,6 +5,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
@@ -20,6 +21,7 @@ import com.develop.hy.ganks.dagger.component.DaggerLoginActivityComponent;
 import com.develop.hy.ganks.dagger.module.LoginActivityModule;
 import com.develop.hy.ganks.dagger.LoginPresenter;
 import com.develop.hy.ganks.ui.view.WavePageView;
+import com.develop.hy.ganks.utils.ToastUtils;
 
 import javax.inject.Inject;
 
@@ -186,6 +188,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.login:
+                if (TextUtils.isEmpty(userStr)||TextUtils.isEmpty(pwdStr)){
+                    ToastUtils.showShortToast("用户名或密码不能为空");
+                    return;
+                }
                 login.setVisibility(View.INVISIBLE);
                 progressbar.setVisibility(View.VISIBLE);
                 presenter.login(userStr,pwdStr,login,progressbar);
@@ -194,6 +200,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 toggle();
                 break;
             case R.id.bt_regist:
+                if (TextUtils.isEmpty(userStr)||TextUtils.isEmpty(pwdStr)){
+                    ToastUtils.showShortToast("用户名或密码不能为空");
+                    return;
+                }
                 btRegist.setVisibility(View.INVISIBLE);
                 presenter.regist(userStr,pwdStr,emails,progressbar_regist);
                 break;
