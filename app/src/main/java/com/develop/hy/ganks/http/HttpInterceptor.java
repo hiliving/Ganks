@@ -8,7 +8,6 @@ import com.develop.hy.ganks.utils.ToastUtils;
 
 import java.io.IOException;
 
-import me.xiaopan.android.net.NetworkUtils;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;

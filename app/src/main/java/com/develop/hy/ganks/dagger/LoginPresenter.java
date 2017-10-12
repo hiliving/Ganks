@@ -15,7 +15,6 @@ import com.develop.hy.ganks.utils.ToastUtils;
 
 import java.util.logging.Logger;
 
-import cn.bmob.newim.BmobIM;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;

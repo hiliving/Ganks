@@ -53,26 +53,6 @@
         <activity android:name="com.develop.hy.ganks.MainActivity"
            />
 
-         <!--TODO 集成：1.5、配置IM SDK需要的广播和服务-->
-        <receiver android:name="cn.bmob.newim.core.ConnectChangeReceiver">
-            <intent-filter>
-                <action android:name="cn.bmob.action.RECONNECT"/>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.USER_PRESENT"/>
-            </intent-filter>
-        </receiver>
-
-        <service
-            android:name="cn.bmob.newim.core.service.BmobIMService"
-            android:process=":bmobcore"/>
-        <service
-            android:name="cn.bmob.newim.core.service.NotifyService"
-            android:process=":bmobcore"/>
-        <service android:name="cn.bmob.newim.core.service.ReConnectService"/>
-        <service android:name="cn.bmob.newim.core.service.HeartBeatService"/>
-
-
         <!--TODO 集成：1.3、配置Bmob平台的应用密钥-->
         <meta-data
             android:name="Bmob_APP_KEY"

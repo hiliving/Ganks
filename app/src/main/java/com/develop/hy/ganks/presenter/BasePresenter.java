@@ -1,13 +1,10 @@
 package com.develop.hy.ganks.presenter;
 
 import android.content.Context;
-import android.net.wifi.WifiManager;
 
-import com.develop.hy.ganks.App;
 import com.develop.hy.ganks.presenter.CommenInterface.IBaseView;
 import com.develop.hy.ganks.utils.ToastUtils;
 
-import me.xiaopan.android.net.NetworkUtils;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 

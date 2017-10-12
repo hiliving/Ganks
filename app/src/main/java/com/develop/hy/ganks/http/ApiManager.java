@@ -12,7 +12,6 @@ import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 
-import me.xiaopan.android.net.NetworkUtils;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;

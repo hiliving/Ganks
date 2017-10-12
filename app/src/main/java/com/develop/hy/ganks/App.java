@@ -13,7 +13,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
-import cn.bmob.newim.BmobIM;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobConfig;
 import top.wefor.circularanim.CircularAnim;

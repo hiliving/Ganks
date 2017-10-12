@@ -21,12 +21,12 @@ import com.develop.hy.ganks.presenter.CommenInterface.ILoadingView;
 import com.develop.hy.ganks.ui.DownSplashResService;
 import com.develop.hy.ganks.ui.view.DownloadService;
 import com.develop.hy.ganks.ui.view.FullScreenDialog;
+import com.develop.hy.ganks.utils.NetworkUtils;
 import com.develop.hy.ganks.utils.ToastUtils;
 
 import java.io.File;
 import java.io.Serializable;
 
-import me.xiaopan.android.net.NetworkUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -75,7 +75,7 @@ public class LoadingPresenter<T> extends BasePresenter<ILoadingView> implements 
                         iView.showNoUpdate();
                     }
                 }else {
-                    iView.showErrorData();
+                    //iView.showErrorData();
                 }
             }
             @Override
@@ -128,7 +128,7 @@ public class LoadingPresenter<T> extends BasePresenter<ILoadingView> implements 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
+                dialog.dismiss();
             }
         });
         nextTime.setOnClickListener(new View.OnClickListener() {
@@ -142,7 +142,6 @@ public class LoadingPresenter<T> extends BasePresenter<ILoadingView> implements 
 
     public void getConfig(final Context context, final Intent intent) {
 
-        iView.showNoUpdate();//临时代码
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(UrlConfig.baseConfig)
