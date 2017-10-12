@@ -3,9 +3,9 @@
 [![GitHub release](https://img.shields.io/badge/%E4%BD%9C%E8%80%85-Huangyong-ff69b4.svg)]()
 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)]()
 # Ganks
-###干货集中营的客户端，采用RxJava+Retrofit+Dagger2+MVP开发
+### 干货集中营的客户端，采用RxJava+Retrofit+Dagger2+MVP开发
 ### 数据来源：[干货集中营](http://gank.io)，[天行数据](https://www.tianapi.com/)
- ###目前完成的功能
+## 目前完成的功能
 * 新闻推荐
 * 干货文章阅读
 * 收藏、分享喜欢的文章，也可以分享到微信或其他地方，非常实用
