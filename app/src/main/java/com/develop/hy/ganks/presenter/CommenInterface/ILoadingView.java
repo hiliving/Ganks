@@ -11,5 +11,5 @@ public interface ILoadingView extends IBaseView{
     void showErrorData(String error);
 
 
-    void showProgress();
+    void showProgress(String percent);
 }

@@ -1,29 +1,13 @@
 package com.develop.hy.ganks.presenter;
 
 
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.wifi.WifiManager;
-import android.support.v7.app.AlertDialog;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
-import com.develop.hy.ganks.App;
-import com.develop.hy.ganks.R;
 import com.develop.hy.ganks.http.ApiService;
 import com.develop.hy.ganks.http.UrlConfig;
 import com.develop.hy.ganks.model.ConfigInfo;
-import com.develop.hy.ganks.model.VersionBean;
 import com.develop.hy.ganks.presenter.CommenInterface.ILoadingView;
 import com.develop.hy.ganks.ui.DownSplashResService;
-import com.develop.hy.ganks.ui.view.DownloadService;
-import com.develop.hy.ganks.ui.view.FullScreenDialog;
-import com.develop.hy.ganks.utils.NetworkUtils;
-import com.develop.hy.ganks.utils.ToastUtils;
-
 import java.io.File;
 import java.io.Serializable;
 
@@ -42,102 +26,21 @@ import static com.develop.hy.ganks.ui.LoadingActivity.MODE_PICTURE;
 
 public class LoadingPresenter<T> extends BasePresenter<ILoadingView> implements Serializable{
     private Context context;
+    private UpdatePresenter updatePresenter;
+
     public LoadingPresenter(T context, ILoadingView iView) {
         super((Context) context, iView);
         this.context = (Context) context;
     }
-
     @Override
     public void release() {
         unSubcription();
+        updatePresenter= null;
     }
     //获取数据
     public void getUpdate(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(UrlConfig.baseConfig)
-                .build();
-
-        final ApiService mApi = retrofit.create(ApiService.class);
-        Call<VersionBean> request = mApi.getUpdate();
-        //启动即发请求
-        request.enqueue(new Callback<VersionBean>() {
-            @Override
-            public void onResponse(Call<VersionBean> call, Response<VersionBean> response) {
-
-                VersionBean mInfo = response.body();
-                if (mInfo.getCode()==0){
-                    if (mInfo.getData().getUpdateType()==1) {
-                        showUpdate(mInfo.getData());
-                    } else if (mInfo.getData().getUpdateType()==2){
-                        iView.showMustUpdate();
-                    }else {
-                        iView.showNoUpdate();
-                    }
-                }else {
-                    //iView.showErrorData();
-                }
-            }
-            @Override
-            public void onFailure(Call<VersionBean> call, Throwable t) {
-
-            }
-        });
-    }
-
-    private void showUpdate(final VersionBean.DataBean data) {
-        final Dialog dialog = FullScreenDialog.getInstance(context,R.layout.update_dialog);
-        dialog.setCancelable(true);
-        dialog.show();
-        final Button confirm = (Button) dialog.findViewById(R.id.confirm);
-        Button nextTime = (Button) dialog.findViewById(R.id.nexttiem);
-        TextView updateContent = (TextView) dialog.findViewById(R.id.update_content);
-        updateContent.setText(data.getDescription());
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //开始下载服务
-                try {
-                    if (NetworkUtils.getWifiState(App.getContext())== WifiManager.WIFI_STATE_DISABLED){
-                       AlertDialog alertDialog = new AlertDialog.Builder(context,R.style.Dialog_Alert)
-                               .setTitle("")
-                               .setMessage("当前是非WIFI网络，确定继续下载？")
-                               .setNegativeButton("确定", new DialogInterface.OnClickListener() {
-                                   @Override
-                                   public void onClick(DialogInterface dialogs, int which) {
-                                       Intent intent = new Intent(context,DownloadService.class);
-                                       intent.putExtra("url", data.getUrl());
-                                       context.startService(intent);
-                                       //显示下载进度
-                                   }
-                               })
-                               .setPositiveButton("取消", new DialogInterface.OnClickListener() {
-                                   @Override
-                                   public void onClick(DialogInterface dialogs, int which) {
-                                   }
-                               })
-                               .setCancelable(false)
-                               .show();
-                    }else {
-                        Intent intent = new Intent(context,DownloadService.class);
-                        intent.putExtra("url", data.getUrl());
-                        context.startService(intent);
-                        //显示下载进度
-                        iView.showProgress();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                dialog.dismiss();
-            }
-        });
-        nextTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                iView.showErrorData();
-            }
-        });
+        updatePresenter = new UpdatePresenter(context,iView);
+        updatePresenter.getUpdate();
     }
 
     public void getConfig(final Context context, final Intent intent) {

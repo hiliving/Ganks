@@ -8,6 +8,7 @@ import java.util.ArrayList;
  */
 
 public class Constants {
+    public static  boolean IF_DOWNLOAD = true;
     //SecretUtil
     public static String NOSUCHALGORITHM = "不支持此种加密方式";
     public static String UNSUPPENCODING = "不支持的编码格式";

@@ -51,7 +51,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyHold
         });
         String imgs = favorites.get(position).getImgs();
         Glide.with(context).load(imgs)
-                .placeholder(R.mipmap.haveno_login)
+                .placeholder(R.drawable.haveno_login)
                 .into(holder.favorPic);
         holder.favorCard.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

@@ -25,7 +25,10 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.develop.hy.ganks.Constants;
 import com.develop.hy.ganks.R;
+
+import de.greenrobot.event.EventBus;
 
 public class DownloadService extends Service{
 
@@ -108,7 +111,7 @@ public class DownloadService extends Service{
 				conn.setConnectTimeout(3000);
 				conn.setRequestMethod("GET");
 				int length = -1;
-				if(conn.getResponseCode() == HttpStatus.SC_OK){
+				if(conn.getResponseCode() == HttpStatus.SC_OK||conn.getResponseCode() == HttpStatus.SC_PARTIAL_CONTENT){
 					//获得文件长度
 					length = conn.getContentLength();
 				}
@@ -181,7 +184,7 @@ public class DownloadService extends Service{
 					int len = -1;
 					long speed = 0;
 					long time = System.currentTimeMillis();
-					while((len = input.read(buffer)) != -1){
+					while((len = input.read(buffer)) != -1&& Constants.IF_DOWNLOAD){
 						//写入文件
 						raf.write(buffer,0,len);
 						//把下载进度发送广播给Activity
@@ -189,7 +192,7 @@ public class DownloadService extends Service{
 						speed += len;
 						if(System.currentTimeMillis() - time > 1000){
 							time = System.currentTimeMillis();
-							
+
 							notifyNotification(mFinished,length);
 							Log.i(TAG, "mFinished=="+mFinished);
 							Log.i(TAG, "length=="+length);
@@ -197,6 +200,9 @@ public class DownloadService extends Service{
 							speed = 0;
 						}
 					}
+                    if (!Constants.IF_DOWNLOAD){
+                        file.delete();//若取消下载，清除已下载内容。
+                    }
 					mHandler.sendEmptyMessage(DOWNLOAD_SUCCESS);
 					Log.i(TAG, "下载完成了。。。");
 				}else{
@@ -257,11 +263,23 @@ public class DownloadService extends Service{
     }
 	
 	private void notifyNotification(long percent,long length){
-		
+		EventBus.getDefault().post(new MessageEvent((int) percent + "", (int) length + "", (percent * 100 / length) + ""));
 		contentView.setTextViewText(R.id.tv_progress, (percent*100/length)+"%");
         contentView.setProgressBar(R.id.progress, (int)length,(int)percent, false);
         notification.contentView = contentView;
         notificationManager.notify(R.layout.notification_item, notification);
+	}
+
+    public class MessageEvent {
+		public final String percent;
+		public final String length;
+		public final String speed;
+
+		public MessageEvent(String percent, String length, String speed) {
+			this.percent = percent;
+			this.length = length;
+			this.speed = speed;
+		}
 	}
 	/**
      * 安装apk

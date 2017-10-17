@@ -52,7 +52,7 @@
            />
         <activity android:name="com.develop.hy.ganks.MainActivity"
            />
-
+        <service android:name=".ui.view.DownloadService"/>
         <!--TODO 集成：1.3、配置Bmob平台的应用密钥-->
         <meta-data
             android:name="Bmob_APP_KEY"

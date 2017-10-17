@@ -54,7 +54,7 @@
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="30dp"
                 android:scaleType="fitXY"
-                android:background="@mipmap/haveno_login" />
+                android:background="@drawable/haveno_login" />
 
         </FrameLayout>
 

@@ -26,7 +26,7 @@
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/plus"
+        app:srcCompat="@drawable/plus"
         android:layout_alignParentRight="true"
         android:onClick="@{FabHandler::onBaseFabClick}"
         android:layout_alignParentBottom="true"
@@ -111,7 +111,7 @@
                 android:onClick="@{FabHandler::onFavoriteFabClick}"
                 android:tint="@android:color/white"
                 app:fabSize="mini"
-                app:srcCompat="@mipmap/like" />
+                app:srcCompat="@drawable/like" />
 
         </LinearLayout>
     </LinearLayout>

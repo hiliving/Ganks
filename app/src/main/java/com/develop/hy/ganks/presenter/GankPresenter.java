@@ -182,7 +182,7 @@ public class GankPresenter<T> extends BasePresenter<IGanHuoView> implements Seri
 
 
     public void initUserInfo(final MainActivity activity, TextView userid, ImageView userIcon, RelativeLayout rl) {
-        Bitmap bitmap = BitmapFactory.decodeResource(activity.getResources(),R.mipmap.haveno_login);
+        Bitmap bitmap = BitmapFactory.decodeResource(activity.getResources(),R.drawable.haveno_login);
         Bitmap roundIcon = Utils.GetRoundedCornerBitmap(bitmap, 20);
         User user = BmobUser.getCurrentUser(User.class);
         if (user!=null){

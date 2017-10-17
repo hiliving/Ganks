@@ -10,10 +10,10 @@ import com.develop.hy.ganks.theme.Theme;
 import com.develop.hy.ganks.utils.PreUtils;
 
 
+
 /**
  * Created by HY on 2017/9/12.
  */
-
 public abstract class BaseActivity extends AppCompatActivity {
     private static final String TAG = "BaseActivity";
 

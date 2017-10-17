@@ -1,44 +1,33 @@
 package com.develop.hy.ganks.ui;
 
-import android.Manifest;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.WindowManager;
 
 import com.develop.hy.ganks.BaseActivity;
+import com.develop.hy.ganks.Constants;
 import com.develop.hy.ganks.R;
-import com.develop.hy.ganks.cache.DiskCacheManager;
-import com.develop.hy.ganks.http.ApiService;
-import com.develop.hy.ganks.http.UrlConfig;
-import com.develop.hy.ganks.model.ConfigInfo;
 import com.develop.hy.ganks.presenter.CommenInterface.ILoadingView;
 import com.develop.hy.ganks.presenter.LoadingPresenter;
+import com.develop.hy.ganks.ui.view.DownloadService;
 import com.develop.hy.ganks.utils.ToastUtils;
-import com.yancy.gallerypick.config.GalleryPick;
+import com.just.library.LogUtils;
 
-import java.io.File;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import de.greenrobot.event.EventBus;
 
 /**
  * 此页面用于请求启动页类型，检查更新，然后将结果传给下个页面
  * Created by HY on 2017/5/8.
  */
-
 public class LoadingActivity extends BaseActivity implements ILoadingView {
     public static final int MODE_MOVIE = 2000;//视频
     public static final int MODE_PICTURE = 1000;//图片
     private final Handler mHandler = new Handler();
     private LoadingPresenter presenter;
     private Intent intent;
+    private ProgressDialog progressBar;
 
     @Override
     protected void onPreCreate() {
@@ -46,10 +35,36 @@ public class LoadingActivity extends BaseActivity implements ILoadingView {
     }
     @Override
     protected void initView() {
+
         presenter = new LoadingPresenter(this,this);
         presenter.init();
-    }
 
+        EventBus.getDefault().register(this);
+        progressBar = new ProgressDialog(LoadingActivity.this);
+        progressBar.setMax(100);
+        progressBar.setProgress(0);
+        progressBar.setCancelable(false);
+        progressBar.setButton(DialogInterface.BUTTON_NEGATIVE, "取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Constants.IF_DOWNLOAD = false;
+            }
+        });
+    }
+    /**
+     *
+     * @param event
+     */
+    public void onEventMainThread(DownloadService.MessageEvent event) {
+
+        if (event == null) {
+            return;
+        }
+        Log.d("TTTTTT",event.speed+"");
+        if (progressBar!=null)
+        progressBar.setProgress(Integer.parseInt(event.speed));
+
+    }
     private void initCheckUpdate() {
         presenter.getUpdate();
         presenter.getConfig(this,intent);
@@ -68,12 +83,14 @@ public class LoadingActivity extends BaseActivity implements ILoadingView {
 
     @Override
     public void showProgressBar() {
-
+        progressBar.setMessage("正在下载安装包，请稍后……");
+        progressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressBar.show();
     }
 
     @Override
     public void hideProgressBar() {
-
+        progressBar.cancel();
     }
 
     @Override
@@ -111,7 +128,7 @@ public class LoadingActivity extends BaseActivity implements ILoadingView {
     }
 
     @Override
-    public void showProgress() {
+    public void showProgress(String percent) {
 
     }
 
@@ -131,4 +148,14 @@ public class LoadingActivity extends BaseActivity implements ILoadingView {
         finish();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 }

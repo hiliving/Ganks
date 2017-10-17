@@ -51,7 +51,7 @@ public class ViewPageAdapter extends PagerAdapter {
         ImageView imageView = (ImageView) view.findViewById(R.id.page_img);
         TextView textView = (TextView) view.findViewById(R.id.pager_title);
         Glide.with(context).load(img[position%5])
-                .placeholder(R.mipmap.e)
+                .placeholder(R.drawable.e)
                 .into(imageView);
         textView.setText(resultBean.get(position).getTitle()+"\n@"+
                         resultBean.get(position).getDescription()+

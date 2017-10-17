@@ -8,9 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:textColorPrimary">#fff</item>
-
-
+        <item name="android:textColorPrimary">#383838</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

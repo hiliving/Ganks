@@ -216,7 +216,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public void initOthers(List<UserFile> list) {
 
         Glide.with(this).load(list.get(0).getHeadImg()).asBitmap()
-                .placeholder(R.mipmap.haveno_login)
+                .placeholder(R.drawable.haveno_login)
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {

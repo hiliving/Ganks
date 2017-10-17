@@ -274,7 +274,7 @@ public class UserCenterActivity extends BaseActivity implements View.OnClickList
             }
         });
         Log.d(TAG,imgInfo.get(0).getHeadImg());
-        Glide.with(this).load(imgInfo.get(0).getBgimg()).placeholder(R.mipmap.e).into(user_bg);
+        Glide.with(this).load(imgInfo.get(0).getBgimg()).placeholder(R.drawable.e).into(user_bg);
     }
 
     @Override

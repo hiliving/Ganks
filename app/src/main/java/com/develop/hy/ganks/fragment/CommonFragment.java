@@ -184,7 +184,7 @@ public class CommonFragment extends BaseFragment<GankPresenter> implements IGanH
                   .setPosition(0)	//图片下标（从第position张图片开始浏览）
                   .setDownloadPath("pictureviewer")	//图片下载文件夹地址
                   .needDownload(true)	//是否支持图片下载
-                  .setPlacrHolder(R.mipmap.haveno_login)	//占位符图片（图片加载完成前显示的资源图片，来源drawable或者mipmap）
+                  .setPlacrHolder(R.drawable.haveno_login)	//占位符图片（图片加载完成前显示的资源图片，来源drawable或者mipmap）
                   .build();
           ImagePagerActivity.startActivity(getContext(), config);
 

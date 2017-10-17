@@ -49,10 +49,10 @@ public class CommonViewHolder  extends BaseViewHolder<List<GankBean.ResultsBean>
         ArrayList<String> images = resultsBeen.get(position).getImages();
         if (images!=null){
             Glide.with(context).load(images.get(images.size()-1))
-                    .placeholder(R.mipmap.haveno_login)
+                    .placeholder(R.drawable.haveno_login)
                     .into(itemImg);
         }else {
-            Glide.with(context).load(R.mipmap.haveno_login).into(itemImg);
+            Glide.with(context).load(R.drawable.haveno_login).into(itemImg);
         }
 
         carview.setOnClickListener(new View.OnClickListener() {
