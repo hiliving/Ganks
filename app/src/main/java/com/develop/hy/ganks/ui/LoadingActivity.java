@@ -78,7 +78,8 @@ public class LoadingActivity extends BaseActivity implements ILoadingView {
     @Override
     public void initViews() {
         intent = new Intent(LoadingActivity.this, SplashActivity.class);
-        initCheckUpdate();
+//        initCheckUpdate();
+        startAfterDelay();
     }
 
     @Override
